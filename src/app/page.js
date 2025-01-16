@@ -15,18 +15,18 @@ export default function Home() {
           Event Details
         </h3>
 
-        <section className="flex flex-col font-[family-name:var(--chakra)]">
+        <section className="flex flex-col font-[family-name:var(--chakra)] bg-emerald-50 opacity-75 p-10 m-1 rounded">
           <label>
             How long is your event? (hours)
-            <input className="ml-1 mt-1 border border-emerald-500 p-2 rounded" />
+            <input className="ml-1 mt-1 border border-emerald-500 p-2 rounded size-[2rem]" />
           </label>
           <label>
             How many guests will be drinking?
-            <input className="ml-1 mt-1 border border-emerald-500 p-2 rounded" />
+            <input className="ml-1 mt-1 border border-emerald-500 p-2 rounded size-[2rem]" />
           </label>
           <label>
             On average, how many drinks will one guest have per hour?
-            <input className="ml-1 mt-1 border border-emerald-500 p-2 rounded" />
+            <input className="ml-1 mt-1 border border-emerald-500 p-2 rounded size-[2rem]" />
           </label>
         </section>
       </main>
