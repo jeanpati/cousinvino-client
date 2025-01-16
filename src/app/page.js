@@ -5,6 +5,13 @@ export default function Home() {
   const [eventHours, setEventHours] = useState("");
   const [numGuests, setNumGuests] = useState("");
   const [avgNumDrinks, setAvgNumDrinks] = useState("");
+  const [selectedDrinks, setSelectedDrinks] = useState({
+    redWine: false,
+    whiteWine: false,
+    sparklingWine: false,
+    beer: false,
+    seltzer: false,
+  });
 
   const handleEventHoursChange = (e) => {
     if (e.target.value >= 0) {
@@ -25,6 +32,11 @@ export default function Home() {
   const drinksNeeded =
     (numGuests || 0) * (avgNumDrinks || 0) * (eventHours || 0);
 
+  const handleCheckboxChange = (e) => {
+    const { name, checked } = e.target;
+    setSelectedDrinks((prevState) => ({ ...prevState, [name]: checked }));
+  };
+
   return (
     <div className="grid grid-rows-3 items-center justify-items-center min-h-screen">
       <header className="flex flex-col gap-8 items-center sm:items-start">
@@ -41,7 +53,10 @@ export default function Home() {
           Event Details
         </h3>
 
-        <section className="flex flex-col font-[family-name:var(--chakra)] bg-emerald-50 opacity-75 p-10 m-1 rounded">
+        <section
+          id="event-details"
+          className="flex flex-col font-[family-name:var(--chakra)] bg-emerald-50 opacity-75 p-10 m-1 rounded"
+        >
           <label htmlFor="event-hours">
             How long is your event? (hours)
             <input
@@ -76,9 +91,66 @@ export default function Home() {
             />
           </label>
           {drinksNeeded > 0 && (
-            <p className="flex self-center mt-4 text-lg">
-              You&apos;re going to need {drinksNeeded} drinks
-            </p>
+            <div>
+              <p className="flex justify-self-center m-4 text-lg">
+                You&apos;re going to need {drinksNeeded} drinks
+              </p>
+              <section id="drink-details">
+                <h4 className="mb-1">
+                  Which beverages would you like to serve?
+                </h4>
+                <div
+                  id="drink-options"
+                  className="grid grid-rows-3 grid-flow-col gap-2"
+                >
+                  <label>
+                    Red Wine
+                    <input
+                      type="checkbox"
+                      className="ml-1 border border-emerald-500 rounded"
+                      name="redWine"
+                      onChange={handleCheckboxChange}
+                    />
+                  </label>
+                  <label>
+                    White Wine
+                    <input
+                      type="checkbox"
+                      className="ml-1 border border-emerald-500 rounded"
+                      name="redWine"
+                      onChange={handleCheckboxChange}
+                    />
+                  </label>
+                  <label>
+                    Sparkling Wine
+                    <input
+                      type="checkbox"
+                      className="ml-1 border border-emerald-500 rounded"
+                      name="redWine"
+                      onChange={handleCheckboxChange}
+                    />
+                  </label>
+                  <label>
+                    Beer
+                    <input
+                      type="checkbox"
+                      className="ml-1 border border-emerald-500 rounded"
+                      name="redWine"
+                      onChange={handleCheckboxChange}
+                    />
+                  </label>
+                  <label>
+                    Seltzers
+                    <input
+                      type="checkbox"
+                      className="ml-1 border border-emerald-500 rounded"
+                      name="redWine"
+                      onChange={handleCheckboxChange}
+                    />
+                  </label>
+                </div>
+              </section>
+            </div>
           )}
         </section>
       </main>
