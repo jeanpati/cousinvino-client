@@ -38,24 +38,24 @@ export default function Home() {
   };
 
   return (
-    <div className="grid grid-rows-3 items-center justify-items-center min-h-screen">
-      <header className="flex flex-col gap-8 items-center sm:items-start">
-        <h1 className="text-6xl font-[family-name:var(--playwrite)]">
+    <div className="grid items-center justify-items-center min-h-screen">
+      <header className="flex flex-col gap-8 items-center  ">
+        <h1 className="text-5xl/loose font-[family-name:var(--playwrite)]">
           Cousin Vino&apos;s drink calculator
         </h1>
-        <h2 className="text-3xl font-[family-name:var(--chakra)]">
+        <h2 className="text-3xl font-[family-name:var(--chakra)] mr-2 ml-2">
           A handy dandy calculator to help you figure out how much alcohol to
           buy!
         </h2>
       </header>
       <main>
-        <h3 className="text-xl font-[family-name:var(--playwrite)]">
+        <h3 className="text-3xl font-[family-name:var(--playwrite)]">
           Event Details
         </h3>
 
         <section
           id="event-details"
-          className="flex flex-col font-[family-name:var(--chakra)] bg-emerald-50 opacity-75 p-10 m-1 rounded"
+          className="flex flex-col font-[family-name:var(--chakra)] bg-emerald-50 opacity-75 p-10 mt-1 rounded"
         >
           <label htmlFor="event-hours">
             How long is your event? (hours)
