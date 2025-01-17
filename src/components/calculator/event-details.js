@@ -2,6 +2,8 @@
 import { useEffect, useState } from "react";
 import { EventForm } from "./event-form";
 import { DrinkSelections } from "./drink-selection";
+import { RedWineCalculations } from "./red-wine-calc";
+
 export const EventDetails = () => {
   const [eventHours, setEventHours] = useState("");
   const [numGuests, setNumGuests] = useState("");
@@ -60,44 +62,9 @@ export const EventDetails = () => {
           </p>
           <section id="drink-details">
             <h4 className="mb-1">Which beverages would you like to serve?</h4>
-            <DrinkSelections
-              selectedDrinks={selectedDrinks}
-              setSelectedDrinks={setSelectedDrinks}
-            />
+            <DrinkSelections setSelectedDrinks={setSelectedDrinks} />
             <div id="drink-questions" className="mt-5">
-              {selectedDrinks.redWine && (
-                <div className="flex flex-col">
-                  <label>
-                    What percentage of guests will drink red wine?
-                    <input
-                      id="red-wine-percentage"
-                      type="number"
-                      step="any"
-                      value={redWinePercentage}
-                      onChange={handleRedWinePercentageChange}
-                      className="ml-1 mt-1 border border-emerald-500 p-2 rounded size-[2rem] w-[4rem]"
-                    />
-                  </label>
-                  <label>
-                    On average, how many glasses of red wine will a guest have
-                    per hour?
-                    <input
-                      id="red-wine-average"
-                      type="number"
-                      step="any"
-                      value={redWineAverage}
-                      onChange={handleRedWineAverageChange}
-                      className="ml-1 mt-1 border border-emerald-500 p-2 rounded size-[2rem] w-[4rem]"
-                    />
-                  </label>
-                  {redWineNeeded > 0 && (
-                    <p>
-                      You need {redWineNeeded} bottles! (Serves{" "}
-                      {redWineNeeded * 5} glasses.)
-                    </p>
-                  )}
-                </div>
-              )}
+              <RedWineCalculations selectedDrinks={selectedDrinks} />
             </div>
           </section>
         </div>

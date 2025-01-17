@@ -1,4 +1,4 @@
-export const DrinkSelections = ({ selectedDrinks, set }) => {
+export const DrinkSelections = ({ setSelectedDrinks }) => {
   const handleCheckboxChange = (e) => {
     const { name, checked } = e.target;
     setSelectedDrinks((prevState) => ({ ...prevState, [name]: checked }));
