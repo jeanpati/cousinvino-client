@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Home() {
   const [eventHours, setEventHours] = useState("");
@@ -12,6 +12,8 @@ export default function Home() {
     beer: false,
     seltzer: false,
   });
+  const [redWinePercentage, setRedWinePercentage] = useState("");
+  const [redWineAverage, setRedWineAverage] = useState("");
 
   const handleEventHoursChange = (e) => {
     if (e.target.value >= 0) {
@@ -28,6 +30,20 @@ export default function Home() {
       setAvgNumDrinks(Number(e.target.value));
     }
   };
+  const handleRedWinePercentageChange = (e) => {
+    if (e.target.value >= 0) {
+      setRedWinePercentage(Number(e.target.value));
+    }
+  };
+  const handleRedWineAverageChange = (e) => {
+    if (e.target.value >= 0) {
+      setRedWineAverage(Number(e.target.value));
+    }
+  };
+
+  useEffect(() => {
+    setRedWineAverage(avgNumDrinks);
+  }, [avgNumDrinks]);
 
   const drinksNeeded =
     (numGuests || 0) * (avgNumDrinks || 0) * (eventHours || 0);
@@ -36,6 +52,10 @@ export default function Home() {
     const { name, checked } = e.target;
     setSelectedDrinks((prevState) => ({ ...prevState, [name]: checked }));
   };
+
+  const redWineNeeded = Math.ceil(
+    ((redWinePercentage / 100.0) * numGuests * redWineAverage * eventHours) / 5
+  );
 
   return (
     <div className="grid items-center justify-items-center min-h-screen">
@@ -148,6 +168,41 @@ export default function Home() {
                       onChange={handleCheckboxChange}
                     />
                   </label>
+                </div>
+                <div id="drink-questions" className="mt-5">
+                  {selectedDrinks.redWine && (
+                    <div className="flex flex-col">
+                      <label>
+                        What percentage of guests will drink red wine?
+                        <input
+                          id="red-wine-percentage"
+                          type="number"
+                          step="any"
+                          value={redWinePercentage}
+                          onChange={handleRedWinePercentageChange}
+                          className="ml-1 mt-1 border border-emerald-500 p-2 rounded size-[2rem] w-[4rem]"
+                        />
+                      </label>
+                      <label>
+                        On average, how many glasses of red wine will a guest
+                        have per hour?
+                        <input
+                          id="red-wine-average"
+                          type="number"
+                          step="any"
+                          value={redWineAverage}
+                          onChange={handleRedWineAverageChange}
+                          className="ml-1 mt-1 border border-emerald-500 p-2 rounded size-[2rem] w-[4rem]"
+                        />
+                      </label>
+                      {redWineNeeded > 0 && (
+                        <p>
+                          You need {redWineNeeded} bottles! (Serves{" "}
+                          {redWineNeeded * 5} glasses.)
+                        </p>
+                      )}
+                    </div>
+                  )}
                 </div>
               </section>
             </div>
