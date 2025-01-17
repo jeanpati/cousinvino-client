@@ -18,17 +18,6 @@ export const EventDetails = () => {
   const [redWinePercentage, setRedWinePercentage] = useState("");
   const [redWineAverage, setRedWineAverage] = useState("");
 
-  const handleRedWinePercentageChange = (e) => {
-    if (e.target.value >= 0) {
-      setRedWinePercentage(Number(e.target.value));
-    }
-  };
-  const handleRedWineAverageChange = (e) => {
-    if (e.target.value >= 0) {
-      setRedWineAverage(Number(e.target.value));
-    }
-  };
-
   useEffect(() => {
     // if avgNumDrinks has a value and redWineAverage is ""
     if (avgNumDrinks && redWineAverage === "") {
@@ -64,7 +53,11 @@ export const EventDetails = () => {
             <h4 className="mb-1">Which beverages would you like to serve?</h4>
             <DrinkSelections setSelectedDrinks={setSelectedDrinks} />
             <div id="drink-questions" className="mt-5">
-              <RedWineCalculations selectedDrinks={selectedDrinks} />
+              <RedWineCalculations
+                selectedDrinks={selectedDrinks}
+                setRedWineAverage={setRedWineAverage}
+                setRedWinePercentage={setRedWinePercentage}
+              />
             </div>
           </section>
         </div>

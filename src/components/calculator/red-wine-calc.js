@@ -1,4 +1,18 @@
-export const RedWineCalculations = ({ selectedDrinks }) => {
+export const RedWineCalculations = ({
+  selectedDrinks,
+  setRedWineAverage,
+  setRedWinePercentage,
+}) => {
+  const handleRedWinePercentageChange = (e) => {
+    if (e.target.value >= 0) {
+      setRedWinePercentage(Number(e.target.value));
+    }
+  };
+  const handleRedWineAverageChange = (e) => {
+    if (e.target.value >= 0) {
+      setRedWineAverage(Number(e.target.value));
+    }
+  };
   return (
     <section>
       {selectedDrinks.redWine && (
@@ -27,8 +41,8 @@ export const RedWineCalculations = ({ selectedDrinks }) => {
           </label>
           {redWineNeeded > 0 && (
             <p>
-              You need {redWineNeeded} bottles! (Serves {redWineNeeded * 5}{" "}
-              glasses.)
+              You need {redWineNeeded} bottles of red wine! (Serves{" "}
+              {redWineNeeded * 5} glasses)
             </p>
           )}
         </div>
