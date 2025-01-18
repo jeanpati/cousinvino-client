@@ -25,3 +25,17 @@ export const calculateSparklingWine750ml = (
   );
   return bottlesNeeded750;
 };
+
+export const calculateCannedBeverages = (
+  drinkerPercentage,
+  numGuests,
+  drinkAverage,
+  eventHours,
+  packCount
+) => {
+  const drinksNeeded = Math.ceil(
+    (drinkerPercentage / 100.0) * numGuests * drinkAverage * eventHours
+  );
+  const packsNeeded = Math.ceil(drinksNeeded / packCount);
+  return packsNeeded;
+};
