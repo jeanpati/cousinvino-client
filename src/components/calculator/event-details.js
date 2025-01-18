@@ -6,6 +6,7 @@ import { RedWineCalculations } from "./red-wine-calc";
 import { WhiteWineCalculations } from "./white-wine-calc";
 import { SparklingWineCalculations } from "./sparkling-wine-calc";
 import { BeerCalculations } from "./beer-calc";
+import { SeltzerCalculations } from "./seltzer-calc";
 
 export const EventDetails = () => {
   const [eventHours, setEventHours] = useState("");
@@ -16,7 +17,7 @@ export const EventDetails = () => {
     whiteWine: false,
     sparklingWine: false,
     beer: false,
-    seltzer: false,
+    hardSeltzers: false,
   });
   const [redWinePercentage, setRedWinePercentage] = useState("");
   const [redWineAverage, setRedWineAverage] = useState("");
@@ -27,6 +28,9 @@ export const EventDetails = () => {
   const [beerPercentage, setBeerPercentage] = useState("");
   const [beerAverage, setBeerAverage] = useState("");
   const [beerPackSize, setBeerPackSize] = useState("");
+  const [seltzerPercentage, setSeltzerPercentage] = useState("");
+  const [seltzerAverage, setSeltzerAverage] = useState("");
+  const [seltzerPackSize, setSeltzerPackSize] = useState("");
 
   useEffect(() => {
     // if avgNumDrinks has a value and redWineAverage is ""
@@ -97,6 +101,17 @@ export const EventDetails = () => {
                 eventHours={eventHours}
                 beerPackSize={beerPackSize}
                 setBeerPackSize={setBeerPackSize}
+              />
+              <SeltzerCalculations
+                selectedDrinks={selectedDrinks}
+                setSeltzerAverage={setSeltzerAverage}
+                seltzerAverage={seltzerAverage}
+                setSeltzerPercentage={setSeltzerPercentage}
+                seltzerPercentage={seltzerPercentage}
+                numGuests={numGuests}
+                eventHours={eventHours}
+                seltzerPackSize={seltzerPackSize}
+                setSeltzerPackSize={setSeltzerPackSize}
               />
             </div>
           </section>

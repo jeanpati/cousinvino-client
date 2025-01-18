@@ -42,11 +42,11 @@ export const DrinkSelections = ({ setSelectedDrinks }) => {
         />
       </label>
       <label>
-        Seltzers
+        Hard Seltzers
         <input
           type="checkbox"
           className="ml-1 border border-emerald-500 rounded"
-          name="seltzers"
+          name="hardSeltzers"
           onChange={handleCheckboxChange}
         />
       </label>
