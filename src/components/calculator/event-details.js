@@ -4,6 +4,7 @@ import { EventForm } from "./event-form";
 import { DrinkSelections } from "./drink-selection";
 import { RedWineCalculations } from "./red-wine-calc";
 import { WhiteWineCalculations } from "./white-wine-calc";
+import { SparklingWineCalculations } from "./sparkling-wine-calc";
 
 export const EventDetails = () => {
   const [eventHours, setEventHours] = useState("");
@@ -20,13 +21,15 @@ export const EventDetails = () => {
   const [redWineAverage, setRedWineAverage] = useState("");
   const [whiteWinePercentage, setWhiteWinePercentage] = useState("");
   const [whiteWineAverage, setWhiteWineAverage] = useState("");
+  const [sparklingWinePercentage, setSparklingWinePercentage] = useState("");
+  const [sparklingWineAverage, setSparklingWineAverage] = useState("");
 
   useEffect(() => {
     // if avgNumDrinks has a value and redWineAverage is ""
-    if (avgNumDrinks && redWineAverage === "" && whiteWineAverage === "") {
+    if (avgNumDrinks && redWineAverage === "") {
       setRedWineAverage(avgNumDrinks);
     }
-  }, [avgNumDrinks, redWineAverage, whiteWineAverage]);
+  }, [avgNumDrinks, redWineAverage]);
 
   const drinksNeeded =
     (numGuests || 0) * (avgNumDrinks || 0) * (eventHours || 0);
@@ -68,6 +71,15 @@ export const EventDetails = () => {
                 whiteWineAverage={whiteWineAverage}
                 setWhiteWinePercentage={setWhiteWinePercentage}
                 whiteWinePercentage={whiteWinePercentage}
+                numGuests={numGuests}
+                eventHours={eventHours}
+              />
+              <SparklingWineCalculations
+                selectedDrinks={selectedDrinks}
+                setSparklingWineAverage={setSparklingWineAverage}
+                sparklingWineAverage={sparklingWineAverage}
+                setSparklingWinePercentage={setSparklingWinePercentage}
+                sparklingWinePercentage={sparklingWinePercentage}
                 numGuests={numGuests}
                 eventHours={eventHours}
               />
