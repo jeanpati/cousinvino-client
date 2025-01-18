@@ -1,7 +1,13 @@
+import { calculateStillWine750ml } from "../utils/calculations";
+
 export const RedWineCalculations = ({
   selectedDrinks,
   setRedWineAverage,
+  redWineAverage,
   setRedWinePercentage,
+  redWinePercentage,
+  numGuests,
+  eventHours,
 }) => {
   const handleRedWinePercentageChange = (e) => {
     if (e.target.value >= 0) {
@@ -13,6 +19,13 @@ export const RedWineCalculations = ({
       setRedWineAverage(Number(e.target.value));
     }
   };
+  const redWineNeeded = calculateStillWine750ml(
+    redWinePercentage,
+    numGuests,
+    redWineAverage,
+    eventHours
+  );
+
   return (
     <section>
       {selectedDrinks.redWine && (

@@ -28,9 +28,6 @@ export const EventDetails = () => {
   const drinksNeeded =
     (numGuests || 0) * (avgNumDrinks || 0) * (eventHours || 0);
 
-  const redWineNeeded = Math.ceil(
-    ((redWinePercentage / 100.0) * numGuests * redWineAverage * eventHours) / 5
-  );
   return (
     <section
       id="event-details"
@@ -56,7 +53,11 @@ export const EventDetails = () => {
               <RedWineCalculations
                 selectedDrinks={selectedDrinks}
                 setRedWineAverage={setRedWineAverage}
+                redWineAverage={redWineAverage}
                 setRedWinePercentage={setRedWinePercentage}
+                redWinePercentage={redWinePercentage}
+                numGuests={numGuests}
+                eventHours={eventHours}
               />
             </div>
           </section>
