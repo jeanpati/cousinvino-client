@@ -27,9 +27,12 @@ export const WhiteWineCalculations = ({
   );
 
   return (
-    <section>
+    <section id="white-wine-details">
       {selectedDrinks.whiteWine && (
-        <div className="flex flex-col">
+        <div
+          id="white-wine-details-wrapper"
+          className="flex flex-col bg-blue-100 p-5 mb-1"
+        >
           <label>
             What percentage of guests will drink white wine?
             <input

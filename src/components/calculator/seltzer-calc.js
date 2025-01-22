@@ -34,9 +34,12 @@ export const SeltzerCalculations = ({
   );
 
   return (
-    <section>
+    <section id="seltzer-details">
       {selectedDrinks.hardSeltzers && (
-        <div className="flex flex-col">
+        <div
+          id="seltzer-details-wrapper"
+          className=" flex flex-col bg-blue-100 p-5 mb-1"
+        >
           <label>
             What percentage of guests will drink hard seltzer?
             <input
