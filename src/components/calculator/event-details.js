@@ -77,7 +77,7 @@ export const EventDetails = () => {
       </div>
 
       <div>
-        <section id="" className="flex flex-row">
+        <section id="" className="flex flex-col">
           {drinksNeeded > 0 && (
             <div
               id="drink-selection-wrapper"
@@ -95,7 +95,7 @@ export const EventDetails = () => {
             </div>
           )}
 
-          {drinksNeeded > 0 && (
+          {Object.values(selectedDrinks).some((isTrue) => isTrue) && (
             <div
               id="drink-details-wrapper"
               className="flex flex-col bg-yellow-100 opacity-7 p-10 mt-1 rounded"
@@ -104,60 +104,58 @@ export const EventDetails = () => {
                 Beverage Percentages
               </h4>
               <section
-                id="drink-details"
-                className="flex flex-col font-[family-name:var(--chakra)] bg-emerald-50 opacity-75 p-10 mt-1 rounded"
+                id="drink-details-questions"
+                className="flex flex-col font-[family-name:var(--chakra)] bg-emerald-50 opacity-75 p-10 mt-5 rounded"
               >
-                <div id="drink-questions" className="mt-5">
-                  <RedWineCalculations
-                    selectedDrinks={selectedDrinks}
-                    setRedWineAverage={setRedWineAverage}
-                    redWineAverage={redWineAverage}
-                    setRedWinePercentage={setRedWinePercentage}
-                    redWinePercentage={redWinePercentage}
-                    numGuests={numGuests}
-                    eventHours={eventHours}
-                  />
-                  <WhiteWineCalculations
-                    selectedDrinks={selectedDrinks}
-                    setWhiteWineAverage={setWhiteWineAverage}
-                    whiteWineAverage={whiteWineAverage}
-                    setWhiteWinePercentage={setWhiteWinePercentage}
-                    whiteWinePercentage={whiteWinePercentage}
-                    numGuests={numGuests}
-                    eventHours={eventHours}
-                  />
-                  <SparklingWineCalculations
-                    selectedDrinks={selectedDrinks}
-                    setSparklingWineAverage={setSparklingWineAverage}
-                    sparklingWineAverage={sparklingWineAverage}
-                    setSparklingWinePercentage={setSparklingWinePercentage}
-                    sparklingWinePercentage={sparklingWinePercentage}
-                    numGuests={numGuests}
-                    eventHours={eventHours}
-                  />
-                  <BeerCalculations
-                    selectedDrinks={selectedDrinks}
-                    setBeerAverage={setBeerAverage}
-                    beerAverage={beerAverage}
-                    setBeerPercentage={setBeerPercentage}
-                    beerPercentage={beerPercentage}
-                    numGuests={numGuests}
-                    eventHours={eventHours}
-                    beerPackSize={beerPackSize}
-                    setBeerPackSize={setBeerPackSize}
-                  />
-                  <SeltzerCalculations
-                    selectedDrinks={selectedDrinks}
-                    setSeltzerAverage={setSeltzerAverage}
-                    seltzerAverage={seltzerAverage}
-                    setSeltzerPercentage={setSeltzerPercentage}
-                    seltzerPercentage={seltzerPercentage}
-                    numGuests={numGuests}
-                    eventHours={eventHours}
-                    seltzerPackSize={seltzerPackSize}
-                    setSeltzerPackSize={setSeltzerPackSize}
-                  />
-                </div>
+                <RedWineCalculations
+                  selectedDrinks={selectedDrinks}
+                  setRedWineAverage={setRedWineAverage}
+                  redWineAverage={redWineAverage}
+                  setRedWinePercentage={setRedWinePercentage}
+                  redWinePercentage={redWinePercentage}
+                  numGuests={numGuests}
+                  eventHours={eventHours}
+                />
+                <WhiteWineCalculations
+                  selectedDrinks={selectedDrinks}
+                  setWhiteWineAverage={setWhiteWineAverage}
+                  whiteWineAverage={whiteWineAverage}
+                  setWhiteWinePercentage={setWhiteWinePercentage}
+                  whiteWinePercentage={whiteWinePercentage}
+                  numGuests={numGuests}
+                  eventHours={eventHours}
+                />
+                <SparklingWineCalculations
+                  selectedDrinks={selectedDrinks}
+                  setSparklingWineAverage={setSparklingWineAverage}
+                  sparklingWineAverage={sparklingWineAverage}
+                  setSparklingWinePercentage={setSparklingWinePercentage}
+                  sparklingWinePercentage={sparklingWinePercentage}
+                  numGuests={numGuests}
+                  eventHours={eventHours}
+                />
+                <BeerCalculations
+                  selectedDrinks={selectedDrinks}
+                  setBeerAverage={setBeerAverage}
+                  beerAverage={beerAverage}
+                  setBeerPercentage={setBeerPercentage}
+                  beerPercentage={beerPercentage}
+                  numGuests={numGuests}
+                  eventHours={eventHours}
+                  beerPackSize={beerPackSize}
+                  setBeerPackSize={setBeerPackSize}
+                />
+                <SeltzerCalculations
+                  selectedDrinks={selectedDrinks}
+                  setSeltzerAverage={setSeltzerAverage}
+                  seltzerAverage={seltzerAverage}
+                  setSeltzerPercentage={setSeltzerPercentage}
+                  seltzerPercentage={seltzerPercentage}
+                  numGuests={numGuests}
+                  eventHours={eventHours}
+                  seltzerPackSize={seltzerPackSize}
+                  setSeltzerPackSize={setSeltzerPackSize}
+                />
               </section>
             </div>
           )}
