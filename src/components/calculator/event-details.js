@@ -43,80 +43,126 @@ export const EventDetails = () => {
     (numGuests || 0) * (avgNumDrinks || 0) * (eventHours || 0);
 
   return (
-    <section
-      id="event-details"
-      className="flex flex-col font-[family-name:var(--chakra)] bg-emerald-50 opacity-75 p-10 mt-1 rounded"
+    <div
+      id="main-wrapper"
+      className="flex flex-col bg-teal-100 opacity-7 p-10 mt-1 rounded"
     >
-      <EventForm
-        eventHours={eventHours}
-        setEventHours={setEventHours}
-        avgNumDrinks={avgNumDrinks}
-        setAvgNumDrinks={setAvgNumDrinks}
-        numGuests={numGuests}
-        setNumGuests={setNumGuests}
-      />
-      {drinksNeeded > 0 && (
-        <div>
-          <p className="flex justify-self-center m-4 text-lg">
-            You&apos;re going to need {drinksNeeded} drinks
-          </p>
-          <section id="drink-details">
-            <h4 className="mb-1">Which beverages would you like to serve?</h4>
-            <DrinkSelections setSelectedDrinks={setSelectedDrinks} />
-            <div id="drink-questions" className="mt-5">
-              <RedWineCalculations
-                selectedDrinks={selectedDrinks}
-                setRedWineAverage={setRedWineAverage}
-                redWineAverage={redWineAverage}
-                setRedWinePercentage={setRedWinePercentage}
-                redWinePercentage={redWinePercentage}
-                numGuests={numGuests}
-                eventHours={eventHours}
-              />
-              <WhiteWineCalculations
-                selectedDrinks={selectedDrinks}
-                setWhiteWineAverage={setWhiteWineAverage}
-                whiteWineAverage={whiteWineAverage}
-                setWhiteWinePercentage={setWhiteWinePercentage}
-                whiteWinePercentage={whiteWinePercentage}
-                numGuests={numGuests}
-                eventHours={eventHours}
-              />
-              <SparklingWineCalculations
-                selectedDrinks={selectedDrinks}
-                setSparklingWineAverage={setSparklingWineAverage}
-                sparklingWineAverage={sparklingWineAverage}
-                setSparklingWinePercentage={setSparklingWinePercentage}
-                sparklingWinePercentage={sparklingWinePercentage}
-                numGuests={numGuests}
-                eventHours={eventHours}
-              />
-              <BeerCalculations
-                selectedDrinks={selectedDrinks}
-                setBeerAverage={setBeerAverage}
-                beerAverage={beerAverage}
-                setBeerPercentage={setBeerPercentage}
-                beerPercentage={beerPercentage}
-                numGuests={numGuests}
-                eventHours={eventHours}
-                beerPackSize={beerPackSize}
-                setBeerPackSize={setBeerPackSize}
-              />
-              <SeltzerCalculations
-                selectedDrinks={selectedDrinks}
-                setSeltzerAverage={setSeltzerAverage}
-                seltzerAverage={seltzerAverage}
-                setSeltzerPercentage={setSeltzerPercentage}
-                seltzerPercentage={seltzerPercentage}
-                numGuests={numGuests}
-                eventHours={eventHours}
-                seltzerPackSize={seltzerPackSize}
-                setSeltzerPackSize={setSeltzerPackSize}
-              />
+      <div
+        id="event-form-wrapper"
+        className="flex flex-col bg-red-100 opacity-7 p-10 mt-1 rounded"
+      >
+        <h4 className="text-xl font-[family-name:var(--chakra)]">
+          Let&apos;s calculate how many drinks you&apos;ll need
+        </h4>
+        <section
+          id="event-details"
+          className="flex flex-col font-[family-name:var(--chakra)] bg-emerald-50 opacity-75 p-10 mt-1 rounded"
+        >
+          <EventForm
+            eventHours={eventHours}
+            setEventHours={setEventHours}
+            avgNumDrinks={avgNumDrinks}
+            setAvgNumDrinks={setAvgNumDrinks}
+            numGuests={numGuests}
+            setNumGuests={setNumGuests}
+          />
+          {drinksNeeded > 0 && (
+            <div>
+              <p className="flex justify-self-center m-4 text-lg">
+                You&apos;re going to need {drinksNeeded} drinks
+              </p>
             </div>
-          </section>
-        </div>
-      )}
-    </section>
+          )}
+        </section>
+      </div>
+
+      <div>
+        <section id="" className="flex flex-row">
+          {drinksNeeded > 0 && (
+            <div
+              id="drink-selection-wrapper"
+              className="flex flex-col bg-red-100 opacity-7 p-10 mt-1 rounded"
+            >
+              <h4 className="text-xl font-[family-name:var(--chakra)]">
+                Which beverages would you like to serve?
+              </h4>
+              <section
+                id="drink-selection"
+                className="flex flex-col font-[family-name:var(--chakra)] bg-emerald-50 opacity-75 p-10 mt-1 rounded"
+              >
+                <DrinkSelections setSelectedDrinks={setSelectedDrinks} />
+              </section>
+            </div>
+          )}
+
+          {drinksNeeded > 0 && (
+            <div
+              id="drink-details-wrapper"
+              className="flex flex-col bg-yellow-100 opacity-7 p-10 mt-1 rounded"
+            >
+              <h4 className="text-xl font-[family-name:var(--chakra)]">
+                Beverage Percentages
+              </h4>
+              <section
+                id="drink-details"
+                className="flex flex-col font-[family-name:var(--chakra)] bg-emerald-50 opacity-75 p-10 mt-1 rounded"
+              >
+                <div id="drink-questions" className="mt-5">
+                  <RedWineCalculations
+                    selectedDrinks={selectedDrinks}
+                    setRedWineAverage={setRedWineAverage}
+                    redWineAverage={redWineAverage}
+                    setRedWinePercentage={setRedWinePercentage}
+                    redWinePercentage={redWinePercentage}
+                    numGuests={numGuests}
+                    eventHours={eventHours}
+                  />
+                  <WhiteWineCalculations
+                    selectedDrinks={selectedDrinks}
+                    setWhiteWineAverage={setWhiteWineAverage}
+                    whiteWineAverage={whiteWineAverage}
+                    setWhiteWinePercentage={setWhiteWinePercentage}
+                    whiteWinePercentage={whiteWinePercentage}
+                    numGuests={numGuests}
+                    eventHours={eventHours}
+                  />
+                  <SparklingWineCalculations
+                    selectedDrinks={selectedDrinks}
+                    setSparklingWineAverage={setSparklingWineAverage}
+                    sparklingWineAverage={sparklingWineAverage}
+                    setSparklingWinePercentage={setSparklingWinePercentage}
+                    sparklingWinePercentage={sparklingWinePercentage}
+                    numGuests={numGuests}
+                    eventHours={eventHours}
+                  />
+                  <BeerCalculations
+                    selectedDrinks={selectedDrinks}
+                    setBeerAverage={setBeerAverage}
+                    beerAverage={beerAverage}
+                    setBeerPercentage={setBeerPercentage}
+                    beerPercentage={beerPercentage}
+                    numGuests={numGuests}
+                    eventHours={eventHours}
+                    beerPackSize={beerPackSize}
+                    setBeerPackSize={setBeerPackSize}
+                  />
+                  <SeltzerCalculations
+                    selectedDrinks={selectedDrinks}
+                    setSeltzerAverage={setSeltzerAverage}
+                    seltzerAverage={seltzerAverage}
+                    setSeltzerPercentage={setSeltzerPercentage}
+                    seltzerPercentage={seltzerPercentage}
+                    numGuests={numGuests}
+                    eventHours={eventHours}
+                    seltzerPackSize={seltzerPackSize}
+                    setSeltzerPackSize={setSeltzerPackSize}
+                  />
+                </div>
+              </section>
+            </div>
+          )}
+        </section>
+      </div>
+    </div>
   );
 };
