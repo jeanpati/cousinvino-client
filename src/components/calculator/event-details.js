@@ -7,6 +7,7 @@ import { WhiteWineCalculations } from "./white-wine-calc";
 import { SparklingWineCalculations } from "./sparkling-wine-calc";
 import { BeerCalculations } from "./beer-calc";
 import { SeltzerCalculations } from "./seltzer-calc";
+import { Results } from "./results";
 
 export const EventDetails = () => {
   const [eventHours, setEventHours] = useState("");
@@ -77,7 +78,7 @@ export const EventDetails = () => {
       </div>
 
       <div>
-        <section id="" className="flex flex-col">
+        <section id="drink-details" className="flex flex-col">
           {drinksNeeded > 0 && (
             <div
               id="drink-selection-wrapper"
@@ -97,14 +98,14 @@ export const EventDetails = () => {
 
           {Object.values(selectedDrinks).some((isTrue) => isTrue) && (
             <div
-              id="drink-details-wrapper"
+              id="drink-questions-wrapper"
               className="flex flex-col bg-yellow-100 opacity-7 p-10 mt-1 rounded"
             >
               <h4 className="text-xl font-[family-name:var(--chakra)]">
                 Beverage Percentages
               </h4>
               <section
-                id="drink-details-questions"
+                id="drink-questions"
                 className="flex flex-col font-[family-name:var(--chakra)] bg-emerald-50 opacity-75 p-10 mt-5 rounded"
               >
                 <RedWineCalculations
@@ -156,6 +157,27 @@ export const EventDetails = () => {
                   seltzerPackSize={seltzerPackSize}
                   setSeltzerPackSize={setSeltzerPackSize}
                 />
+              </section>
+            </div>
+          )}
+        </section>
+      </div>
+
+      <div>
+        <section id="drink-details" className="flex flex-col">
+          {drinksNeeded > 0 && (
+            <div
+              id="drink-selection-wrapper"
+              className="flex flex-col bg-red-100 opacity-7 p-10 mt-1 rounded"
+            >
+              <h4 className="text-xl font-[family-name:var(--chakra)]">
+                Results
+              </h4>
+              <section
+                id="drink-selection"
+                className="flex flex-col font-[family-name:var(--chakra)] bg-emerald-50 opacity-75 p-10 mt-1 rounded"
+              >
+                <DrinkSelections setSelectedDrinks={setSelectedDrinks} />
               </section>
             </div>
           )}
