@@ -8,7 +8,10 @@ import { SparklingWineCalculations } from "./sparkling-wine-calc";
 import { BeerCalculations } from "./beer-calc";
 import { SeltzerCalculations } from "./seltzer-calc";
 import { Results } from "./results";
-import { calculateStillWine750ml } from "../utils/calculations";
+import {
+  calculateSparklingWine750ml,
+  calculateStillWine750ml,
+} from "../utils/calculations";
 
 export const EventDetails = () => {
   const [eventHours, setEventHours] = useState("");
@@ -35,6 +38,7 @@ export const EventDetails = () => {
   const [seltzerPackSize, setSeltzerPackSize] = useState("");
   const [redWineNeeded, setRedWineNeeded] = useState("");
   const [whiteWineNeeded, setWhiteWineNeeded] = useState("");
+  const [sparklingWineNeeded, setSparklingWineNeeded] = useState("");
 
   useEffect(() => {
     // if avgNumDrinks has a value and redWineAverage is ""
@@ -56,6 +60,7 @@ export const EventDetails = () => {
       )
     );
   }, [redWinePercentage, eventHours, numGuests, redWineAverage]);
+
   useEffect(() => {
     setWhiteWineNeeded(
       calculateStillWine750ml(
@@ -66,6 +71,17 @@ export const EventDetails = () => {
       )
     );
   }, [whiteWineAverage, eventHours, numGuests, whiteWinePercentage]);
+
+  useEffect(() => {
+    setSparklingWineNeeded(
+      calculateSparklingWine750ml(
+        sparklingWinePercentage,
+        numGuests,
+        sparklingWineAverage,
+        eventHours
+      )
+    );
+  }, [sparklingWineAverage, eventHours, numGuests, sparklingWinePercentage]);
 
   return (
     <div
@@ -152,8 +168,6 @@ export const EventDetails = () => {
                   sparklingWineAverage={sparklingWineAverage}
                   setSparklingWinePercentage={setSparklingWinePercentage}
                   sparklingWinePercentage={sparklingWinePercentage}
-                  numGuests={numGuests}
-                  eventHours={eventHours}
                 />
                 <BeerCalculations
                   selectedDrinks={selectedDrinks}
@@ -185,25 +199,28 @@ export const EventDetails = () => {
 
       <div>
         <section id="results" className="flex flex-col">
-          {redWineNeeded > 0 && (
-            <div
-              id="results-wrapper"
-              className="flex flex-col bg-red-100 opacity-7 p-10 mt-1 rounded"
-            >
-              <h4 className="text-xl font-[family-name:var(--chakra)]">
-                Results
-              </h4>
-              <section
-                id="results-list"
-                className="flex flex-col font-[family-name:var(--chakra)] bg-emerald-50 opacity-75 p-10 mt-1 rounded"
+          {redWineNeeded > 0 ||
+            whiteWineNeeded > 0 ||
+            (sparklingWineNeeded > 0 && (
+              <div
+                id="results-wrapper"
+                className="flex flex-col bg-red-100 opacity-7 p-10 mt-1 rounded"
               >
-                <Results
-                  redWineNeeded={redWineNeeded}
-                  whiteWineNeeded={whiteWineNeeded}
-                />
-              </section>
-            </div>
-          )}
+                <h4 className="text-xl font-[family-name:var(--chakra)]">
+                  Results
+                </h4>
+                <section
+                  id="results-list"
+                  className="flex flex-col font-[family-name:var(--chakra)] bg-emerald-50 opacity-75 p-10 mt-1 rounded"
+                >
+                  <Results
+                    redWineNeeded={redWineNeeded}
+                    whiteWineNeeded={whiteWineNeeded}
+                    sparklingWineNeeded={sparklingWineNeeded}
+                  />
+                </section>
+              </div>
+            ))}
         </section>
       </div>
     </div>

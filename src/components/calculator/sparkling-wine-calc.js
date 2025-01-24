@@ -6,8 +6,6 @@ export const SparklingWineCalculations = ({
   sparklingWineAverage,
   setSparklingWinePercentage,
   sparklingWinePercentage,
-  numGuests,
-  eventHours,
 }) => {
   const handleSparklingWinePercentageChange = (e) => {
     if (e.target.value >= 0) {
@@ -19,12 +17,6 @@ export const SparklingWineCalculations = ({
       setSparklingWineAverage(Number(e.target.value));
     }
   };
-  const sparklingWineNeeded = calculateSparklingWine750ml(
-    sparklingWinePercentage,
-    numGuests,
-    sparklingWineAverage,
-    eventHours
-  );
 
   return (
     <section id="sparkling-wine-details">
@@ -56,12 +48,6 @@ export const SparklingWineCalculations = ({
               className="ml-1 mt-1 border border-emerald-500 p-2 rounded size-[2rem] w-[4rem]"
             />
           </label>
-          {sparklingWineNeeded > 0 && (
-            <p>
-              You need {sparklingWineNeeded} bottles of sparkling wine! (Serves{" "}
-              {sparklingWineNeeded * 5} glasses)
-            </p>
-          )}
         </div>
       )}
     </section>
