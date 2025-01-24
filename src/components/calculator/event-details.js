@@ -34,6 +34,7 @@ export const EventDetails = () => {
   const [seltzerAverage, setSeltzerAverage] = useState("");
   const [seltzerPackSize, setSeltzerPackSize] = useState("");
   const [redWineNeeded, setRedWineNeeded] = useState("");
+  const [whiteWineNeeded, setWhiteWineNeeded] = useState("");
 
   useEffect(() => {
     // if avgNumDrinks has a value and redWineAverage is ""
@@ -55,6 +56,16 @@ export const EventDetails = () => {
       )
     );
   }, [redWinePercentage, eventHours, numGuests, redWineAverage]);
+  useEffect(() => {
+    setWhiteWineNeeded(
+      calculateStillWine750ml(
+        whiteWinePercentage,
+        numGuests,
+        whiteWineAverage,
+        eventHours
+      )
+    );
+  }, [whiteWineAverage, eventHours, numGuests, whiteWinePercentage]);
 
   return (
     <div
@@ -127,8 +138,6 @@ export const EventDetails = () => {
                   redWineAverage={redWineAverage}
                   setRedWinePercentage={setRedWinePercentage}
                   redWinePercentage={redWinePercentage}
-                  numGuests={numGuests}
-                  eventHours={eventHours}
                 />
                 <WhiteWineCalculations
                   selectedDrinks={selectedDrinks}
@@ -136,8 +145,6 @@ export const EventDetails = () => {
                   whiteWineAverage={whiteWineAverage}
                   setWhiteWinePercentage={setWhiteWinePercentage}
                   whiteWinePercentage={whiteWinePercentage}
-                  numGuests={numGuests}
-                  eventHours={eventHours}
                 />
                 <SparklingWineCalculations
                   selectedDrinks={selectedDrinks}
@@ -190,7 +197,10 @@ export const EventDetails = () => {
                 id="results-list"
                 className="flex flex-col font-[family-name:var(--chakra)] bg-emerald-50 opacity-75 p-10 mt-1 rounded"
               >
-                <Results redWineNeeded={redWineNeeded} />
+                <Results
+                  redWineNeeded={redWineNeeded}
+                  whiteWineNeeded={whiteWineNeeded}
+                />
               </section>
             </div>
           )}

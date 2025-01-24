@@ -6,8 +6,6 @@ export const WhiteWineCalculations = ({
   whiteWineAverage,
   setWhiteWinePercentage,
   whiteWinePercentage,
-  numGuests,
-  eventHours,
 }) => {
   const handleWhiteWinePercentageChange = (e) => {
     if (e.target.value >= 0) {
@@ -19,12 +17,6 @@ export const WhiteWineCalculations = ({
       setWhiteWineAverage(Number(e.target.value));
     }
   };
-  const whiteWineNeeded = calculateStillWine750ml(
-    whiteWinePercentage,
-    numGuests,
-    whiteWineAverage,
-    eventHours
-  );
 
   return (
     <section id="white-wine-details">
@@ -56,12 +48,6 @@ export const WhiteWineCalculations = ({
               className="ml-1 mt-1 border border-emerald-500 p-2 rounded size-[2rem] w-[4rem]"
             />
           </label>
-          {whiteWineNeeded > 0 && (
-            <p>
-              You need {whiteWineNeeded} bottles of white wine! (Serves{" "}
-              {whiteWineNeeded * 5} glasses)
-            </p>
-          )}
         </div>
       )}
     </section>
