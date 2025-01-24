@@ -9,6 +9,7 @@ import { BeerCalculations } from "./beer-calc";
 import { SeltzerCalculations } from "./seltzer-calc";
 import { Results } from "./results";
 import {
+  calculateCannedBeverages,
   calculateSparklingWine750ml,
   calculateStillWine750ml,
 } from "../utils/calculations";
@@ -39,6 +40,8 @@ export const EventDetails = () => {
   const [redWineNeeded, setRedWineNeeded] = useState("");
   const [whiteWineNeeded, setWhiteWineNeeded] = useState("");
   const [sparklingWineNeeded, setSparklingWineNeeded] = useState("");
+  const [beerNeeded, setBeerNeeded] = useState("");
+  const [seltzerNeeded, setSeltzerNeeded] = useState("");
 
   useEffect(() => {
     // if avgNumDrinks has a value and redWineAverage is ""
@@ -82,6 +85,36 @@ export const EventDetails = () => {
       )
     );
   }, [sparklingWineAverage, eventHours, numGuests, sparklingWinePercentage]);
+
+  useEffect(() => {
+    setBeerNeeded(
+      calculateCannedBeverages(
+        beerPercentage,
+        numGuests,
+        beerAverage,
+        eventHours,
+        beerPackSize
+      )
+    );
+  }, [beerPercentage, eventHours, numGuests, beerAverage, beerPackSize]);
+
+  useEffect(() => {
+    setSeltzerNeeded(
+      calculateCannedBeverages(
+        seltzerPercentage,
+        numGuests,
+        seltzerAverage,
+        eventHours,
+        seltzerPackSize
+      )
+    );
+  }, [
+    seltzerPercentage,
+    eventHours,
+    numGuests,
+    seltzerAverage,
+    seltzerPackSize,
+  ]);
 
   return (
     <div
@@ -175,9 +208,6 @@ export const EventDetails = () => {
                   beerAverage={beerAverage}
                   setBeerPercentage={setBeerPercentage}
                   beerPercentage={beerPercentage}
-                  numGuests={numGuests}
-                  eventHours={eventHours}
-                  beerPackSize={beerPackSize}
                   setBeerPackSize={setBeerPackSize}
                 />
                 <SeltzerCalculations
@@ -186,9 +216,6 @@ export const EventDetails = () => {
                   seltzerAverage={seltzerAverage}
                   setSeltzerPercentage={setSeltzerPercentage}
                   seltzerPercentage={seltzerPercentage}
-                  numGuests={numGuests}
-                  eventHours={eventHours}
-                  seltzerPackSize={seltzerPackSize}
                   setSeltzerPackSize={setSeltzerPackSize}
                 />
               </section>
@@ -199,28 +226,34 @@ export const EventDetails = () => {
 
       <div>
         <section id="results" className="flex flex-col">
-          {redWineNeeded > 0 ||
+          {(redWineNeeded > 0 ||
             whiteWineNeeded > 0 ||
-            (sparklingWineNeeded > 0 && (
-              <div
-                id="results-wrapper"
-                className="flex flex-col bg-red-100 opacity-7 p-10 mt-1 rounded"
+            sparklingWineNeeded > 0 ||
+            beerNeeded > 0 ||
+            seltzerNeeded > 0) && (
+            <div
+              id="results-wrapper"
+              className="flex flex-col bg-red-100 opacity-7 p-10 mt-1 rounded"
+            >
+              <h4 className="text-xl font-[family-name:var(--chakra)]">
+                Results
+              </h4>
+              <section
+                id="results-list"
+                className="flex flex-col font-[family-name:var(--chakra)] bg-emerald-50 opacity-75 p-10 mt-1 rounded"
               >
-                <h4 className="text-xl font-[family-name:var(--chakra)]">
-                  Results
-                </h4>
-                <section
-                  id="results-list"
-                  className="flex flex-col font-[family-name:var(--chakra)] bg-emerald-50 opacity-75 p-10 mt-1 rounded"
-                >
-                  <Results
-                    redWineNeeded={redWineNeeded}
-                    whiteWineNeeded={whiteWineNeeded}
-                    sparklingWineNeeded={sparklingWineNeeded}
-                  />
-                </section>
-              </div>
-            ))}
+                <Results
+                  redWineNeeded={redWineNeeded}
+                  whiteWineNeeded={whiteWineNeeded}
+                  sparklingWineNeeded={sparklingWineNeeded}
+                  beerNeeded={beerNeeded}
+                  beerPackSize={beerPackSize}
+                  seltzerNeeded={seltzerNeeded}
+                  seltzerPackSize={seltzerPackSize}
+                />
+              </section>
+            </div>
+          )}
         </section>
       </div>
     </div>

@@ -1,14 +1,9 @@
-import { calculateCannedBeverages } from "../utils/calculations";
-
 export const BeerCalculations = ({
   selectedDrinks,
   setBeerAverage,
   beerAverage,
   setBeerPercentage,
   beerPercentage,
-  numGuests,
-  eventHours,
-  beerPackSize,
   setBeerPackSize,
 }) => {
   const handleBeerPercentageChange = (e) => {
@@ -24,14 +19,6 @@ export const BeerCalculations = ({
   const handleRadioChange = (e) => {
     setBeerPackSize(e.target.value);
   };
-
-  const beerNeeded = calculateCannedBeverages(
-    beerPercentage,
-    numGuests,
-    beerAverage,
-    eventHours,
-    beerPackSize
-  );
 
   return (
     <section id="beer-details">
@@ -110,12 +97,6 @@ export const BeerCalculations = ({
               </label>
             </div>
           </label>
-          {beerPackSize > 0 && (
-            <p>
-              You need {beerNeeded} - {beerPackSize}pks of beer! (That&apos;s{" "}
-              {beerNeeded * beerPackSize} cans)
-            </p>
-          )}
         </div>
       )}
     </section>

@@ -2,6 +2,10 @@ export const Results = ({
   redWineNeeded,
   whiteWineNeeded,
   sparklingWineNeeded,
+  beerNeeded,
+  beerPackSize,
+  seltzerNeeded,
+  seltzerPackSize,
 }) => {
   return (
     <div>
@@ -24,6 +28,18 @@ export const Results = ({
           <p>
             You need {sparklingWineNeeded} bottles of sparkling wine! (Serves{" "}
             {sparklingWineNeeded * 6} glasses)
+          </p>
+        )}
+        {beerPackSize > 0 && (
+          <p>
+            You need {beerNeeded} - {beerPackSize}pks of beer! (That&apos;s{" "}
+            {beerNeeded * beerPackSize} cans)
+          </p>
+        )}
+        {seltzerPackSize > 0 && (
+          <p>
+            You need {seltzerNeeded} - {seltzerPackSize}pks of hard seltzer!
+            (That&apos;s {seltzerNeeded * seltzerPackSize} cans)
           </p>
         )}
       </section>

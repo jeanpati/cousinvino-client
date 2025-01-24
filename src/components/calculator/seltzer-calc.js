@@ -1,14 +1,9 @@
-import { calculateCannedBeverages } from "../utils/calculations";
-
 export const SeltzerCalculations = ({
   selectedDrinks,
   setSeltzerAverage,
   seltzerAverage,
   setSeltzerPercentage,
   seltzerPercentage,
-  numGuests,
-  eventHours,
-  seltzerPackSize,
   setSeltzerPackSize,
 }) => {
   const handleSeltzerPercentageChange = (e) => {
@@ -24,14 +19,6 @@ export const SeltzerCalculations = ({
   const handleRadioChange = (e) => {
     setSeltzerPackSize(e.target.value);
   };
-
-  const seltzersNeeded = calculateCannedBeverages(
-    seltzerPercentage,
-    numGuests,
-    seltzerAverage,
-    eventHours,
-    seltzerPackSize
-  );
 
   return (
     <section id="seltzer-details">
@@ -111,12 +98,6 @@ export const SeltzerCalculations = ({
               </label>
             </div>
           </label>
-          {seltzerPackSize > 0 && (
-            <p>
-              You need {seltzersNeeded} - {seltzerPackSize}pks of hard seltzer!
-              (That&apos;s {seltzersNeeded * seltzerPackSize} cans)
-            </p>
-          )}
         </div>
       )}
     </section>
