@@ -7,6 +7,12 @@ import { WhiteWineCalculations } from "./white-wine-calc";
 import { SparklingWineCalculations } from "./sparkling-wine-calc";
 import { BeerCalculations } from "./beer-calc";
 import { SeltzerCalculations } from "./seltzer-calc";
+import { Results } from "./results";
+import {
+  calculateCannedBeverages,
+  calculateSparklingWine750ml,
+  calculateStillWine750ml,
+} from "../utils/calculations";
 
 export const EventDetails = () => {
   const [eventHours, setEventHours] = useState("");
@@ -31,6 +37,11 @@ export const EventDetails = () => {
   const [seltzerPercentage, setSeltzerPercentage] = useState("");
   const [seltzerAverage, setSeltzerAverage] = useState("");
   const [seltzerPackSize, setSeltzerPackSize] = useState("");
+  const [redWineNeeded, setRedWineNeeded] = useState("");
+  const [whiteWineNeeded, setWhiteWineNeeded] = useState("");
+  const [sparklingWineNeeded, setSparklingWineNeeded] = useState("");
+  const [beerNeeded, setBeerNeeded] = useState("");
+  const [seltzerNeeded, setSeltzerNeeded] = useState("");
 
   useEffect(() => {
     // if avgNumDrinks has a value and redWineAverage is ""
@@ -42,81 +53,209 @@ export const EventDetails = () => {
   const drinksNeeded =
     (numGuests || 0) * (avgNumDrinks || 0) * (eventHours || 0);
 
+  useEffect(() => {
+    setRedWineNeeded(
+      calculateStillWine750ml(
+        redWinePercentage,
+        numGuests,
+        redWineAverage,
+        eventHours
+      )
+    );
+  }, [redWinePercentage, eventHours, numGuests, redWineAverage]);
+
+  useEffect(() => {
+    setWhiteWineNeeded(
+      calculateStillWine750ml(
+        whiteWinePercentage,
+        numGuests,
+        whiteWineAverage,
+        eventHours
+      )
+    );
+  }, [whiteWineAverage, eventHours, numGuests, whiteWinePercentage]);
+
+  useEffect(() => {
+    setSparklingWineNeeded(
+      calculateSparklingWine750ml(
+        sparklingWinePercentage,
+        numGuests,
+        sparklingWineAverage,
+        eventHours
+      )
+    );
+  }, [sparklingWineAverage, eventHours, numGuests, sparklingWinePercentage]);
+
+  useEffect(() => {
+    setBeerNeeded(
+      calculateCannedBeverages(
+        beerPercentage,
+        numGuests,
+        beerAverage,
+        eventHours,
+        beerPackSize
+      )
+    );
+  }, [beerPercentage, eventHours, numGuests, beerAverage, beerPackSize]);
+
+  useEffect(() => {
+    setSeltzerNeeded(
+      calculateCannedBeverages(
+        seltzerPercentage,
+        numGuests,
+        seltzerAverage,
+        eventHours,
+        seltzerPackSize
+      )
+    );
+  }, [
+    seltzerPercentage,
+    eventHours,
+    numGuests,
+    seltzerAverage,
+    seltzerPackSize,
+  ]);
+
   return (
-    <section
-      id="event-details"
-      className="flex flex-col font-[family-name:var(--chakra)] bg-emerald-50 opacity-75 p-10 mt-1 rounded"
+    <div
+      id="main-wrapper"
+      className="flex flex-col bg-teal-100 opacity-7 p-10 mt-1 rounded"
     >
-      <EventForm
-        eventHours={eventHours}
-        setEventHours={setEventHours}
-        avgNumDrinks={avgNumDrinks}
-        setAvgNumDrinks={setAvgNumDrinks}
-        numGuests={numGuests}
-        setNumGuests={setNumGuests}
-      />
-      {drinksNeeded > 0 && (
-        <div>
-          <p className="flex justify-self-center m-4 text-lg">
-            You&apos;re going to need {drinksNeeded} drinks
-          </p>
-          <section id="drink-details">
-            <h4 className="mb-1">Which beverages would you like to serve?</h4>
-            <DrinkSelections setSelectedDrinks={setSelectedDrinks} />
-            <div id="drink-questions" className="mt-5">
-              <RedWineCalculations
-                selectedDrinks={selectedDrinks}
-                setRedWineAverage={setRedWineAverage}
-                redWineAverage={redWineAverage}
-                setRedWinePercentage={setRedWinePercentage}
-                redWinePercentage={redWinePercentage}
-                numGuests={numGuests}
-                eventHours={eventHours}
-              />
-              <WhiteWineCalculations
-                selectedDrinks={selectedDrinks}
-                setWhiteWineAverage={setWhiteWineAverage}
-                whiteWineAverage={whiteWineAverage}
-                setWhiteWinePercentage={setWhiteWinePercentage}
-                whiteWinePercentage={whiteWinePercentage}
-                numGuests={numGuests}
-                eventHours={eventHours}
-              />
-              <SparklingWineCalculations
-                selectedDrinks={selectedDrinks}
-                setSparklingWineAverage={setSparklingWineAverage}
-                sparklingWineAverage={sparklingWineAverage}
-                setSparklingWinePercentage={setSparklingWinePercentage}
-                sparklingWinePercentage={sparklingWinePercentage}
-                numGuests={numGuests}
-                eventHours={eventHours}
-              />
-              <BeerCalculations
-                selectedDrinks={selectedDrinks}
-                setBeerAverage={setBeerAverage}
-                beerAverage={beerAverage}
-                setBeerPercentage={setBeerPercentage}
-                beerPercentage={beerPercentage}
-                numGuests={numGuests}
-                eventHours={eventHours}
-                beerPackSize={beerPackSize}
-                setBeerPackSize={setBeerPackSize}
-              />
-              <SeltzerCalculations
-                selectedDrinks={selectedDrinks}
-                setSeltzerAverage={setSeltzerAverage}
-                seltzerAverage={seltzerAverage}
-                setSeltzerPercentage={setSeltzerPercentage}
-                seltzerPercentage={seltzerPercentage}
-                numGuests={numGuests}
-                eventHours={eventHours}
-                seltzerPackSize={seltzerPackSize}
-                setSeltzerPackSize={setSeltzerPackSize}
-              />
+      <div
+        id="event-form-wrapper"
+        className="flex flex-col bg-red-100 opacity-7 p-10 mt-1 rounded"
+      >
+        <h4 className="text-xl font-[family-name:var(--chakra)]">
+          Let&apos;s calculate how many drinks you&apos;ll need
+        </h4>
+        <section
+          id="event-details"
+          className="flex flex-col font-[family-name:var(--chakra)] bg-emerald-50 opacity-75 p-10 mt-1 rounded"
+        >
+          <EventForm
+            eventHours={eventHours}
+            setEventHours={setEventHours}
+            avgNumDrinks={avgNumDrinks}
+            setAvgNumDrinks={setAvgNumDrinks}
+            numGuests={numGuests}
+            setNumGuests={setNumGuests}
+          />
+          {drinksNeeded > 0 && (
+            <div>
+              <p className="flex justify-self-center m-4 text-lg">
+                You&apos;re going to need {drinksNeeded} drinks
+              </p>
             </div>
-          </section>
-        </div>
-      )}
-    </section>
+          )}
+        </section>
+      </div>
+
+      <div>
+        <section id="drink-details" className="flex flex-col">
+          {drinksNeeded > 0 && (
+            <div
+              id="drink-selection-wrapper"
+              className="flex flex-col bg-red-100 opacity-7 p-10 mt-1 rounded"
+            >
+              <h4 className="text-xl font-[family-name:var(--chakra)]">
+                Which beverages would you like to serve?
+              </h4>
+              <section
+                id="drink-selection"
+                className="flex flex-col font-[family-name:var(--chakra)] bg-emerald-50 opacity-75 p-10 mt-1 rounded"
+              >
+                <DrinkSelections setSelectedDrinks={setSelectedDrinks} />
+              </section>
+            </div>
+          )}
+
+          {Object.values(selectedDrinks).some((isTrue) => isTrue) && (
+            <div
+              id="drink-questions-wrapper"
+              className="flex flex-col bg-yellow-100 opacity-7 p-10 mt-1 rounded"
+            >
+              <h4 className="text-xl font-[family-name:var(--chakra)]">
+                Beverage Percentages
+              </h4>
+              <section
+                id="drink-questions"
+                className="flex flex-col font-[family-name:var(--chakra)] bg-emerald-50 opacity-75 p-10 mt-5 rounded"
+              >
+                <RedWineCalculations
+                  selectedDrinks={selectedDrinks}
+                  setRedWineAverage={setRedWineAverage}
+                  redWineAverage={redWineAverage}
+                  setRedWinePercentage={setRedWinePercentage}
+                  redWinePercentage={redWinePercentage}
+                />
+                <WhiteWineCalculations
+                  selectedDrinks={selectedDrinks}
+                  setWhiteWineAverage={setWhiteWineAverage}
+                  whiteWineAverage={whiteWineAverage}
+                  setWhiteWinePercentage={setWhiteWinePercentage}
+                  whiteWinePercentage={whiteWinePercentage}
+                />
+                <SparklingWineCalculations
+                  selectedDrinks={selectedDrinks}
+                  setSparklingWineAverage={setSparklingWineAverage}
+                  sparklingWineAverage={sparklingWineAverage}
+                  setSparklingWinePercentage={setSparklingWinePercentage}
+                  sparklingWinePercentage={sparklingWinePercentage}
+                />
+                <BeerCalculations
+                  selectedDrinks={selectedDrinks}
+                  setBeerAverage={setBeerAverage}
+                  beerAverage={beerAverage}
+                  setBeerPercentage={setBeerPercentage}
+                  beerPercentage={beerPercentage}
+                  setBeerPackSize={setBeerPackSize}
+                />
+                <SeltzerCalculations
+                  selectedDrinks={selectedDrinks}
+                  setSeltzerAverage={setSeltzerAverage}
+                  seltzerAverage={seltzerAverage}
+                  setSeltzerPercentage={setSeltzerPercentage}
+                  seltzerPercentage={seltzerPercentage}
+                  setSeltzerPackSize={setSeltzerPackSize}
+                />
+              </section>
+            </div>
+          )}
+        </section>
+      </div>
+
+      <div>
+        <section id="results" className="flex flex-col">
+          {(redWineNeeded > 0 ||
+            whiteWineNeeded > 0 ||
+            sparklingWineNeeded > 0 ||
+            beerNeeded > 0 ||
+            seltzerNeeded > 0) && (
+            <div
+              id="results-wrapper"
+              className="flex flex-col bg-red-100 opacity-7 p-10 mt-1 rounded"
+            >
+              <h4 className="text-xl font-[family-name:var(--chakra)]">
+                Results
+              </h4>
+              <section
+                id="results-list"
+                className="flex flex-col font-[family-name:var(--chakra)] bg-emerald-50 opacity-75 p-10 mt-1 rounded"
+              >
+                <Results
+                  redWineNeeded={redWineNeeded}
+                  whiteWineNeeded={whiteWineNeeded}
+                  sparklingWineNeeded={sparklingWineNeeded}
+                  beerNeeded={beerNeeded}
+                  beerPackSize={beerPackSize}
+                  seltzerNeeded={seltzerNeeded}
+                  seltzerPackSize={seltzerPackSize}
+                />
+              </section>
+            </div>
+          )}
+        </section>
+      </div>
+    </div>
   );
 };

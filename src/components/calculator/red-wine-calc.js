@@ -1,13 +1,9 @@
-import { calculateStillWine750ml } from "../utils/calculations";
-
 export const RedWineCalculations = ({
   selectedDrinks,
   setRedWineAverage,
   redWineAverage,
   setRedWinePercentage,
   redWinePercentage,
-  numGuests,
-  eventHours,
 }) => {
   const handleRedWinePercentageChange = (e) => {
     if (e.target.value >= 0) {
@@ -19,17 +15,15 @@ export const RedWineCalculations = ({
       setRedWineAverage(Number(e.target.value));
     }
   };
-  const redWineNeeded = calculateStillWine750ml(
-    redWinePercentage,
-    numGuests,
-    redWineAverage,
-    eventHours
-  );
 
   return (
-    <section>
+    <section id="red-wine-details">
       {selectedDrinks.redWine && (
-        <div className="flex flex-col">
+        <div
+          id="red-wine-details-wrapper"
+          className=" flex flex-col bg-blue-100 p-5 mb-1"
+        >
+          <h6>Red Wine</h6>
           <label>
             What percentage of guests will drink red wine?
             <input
@@ -52,12 +46,6 @@ export const RedWineCalculations = ({
               className="ml-1 mt-1 border border-emerald-500 p-2 rounded size-[2rem] w-[4rem]"
             />
           </label>
-          {redWineNeeded > 0 && (
-            <p>
-              You need {redWineNeeded} bottles of red wine! (Serves{" "}
-              {redWineNeeded * 5} glasses)
-            </p>
-          )}
         </div>
       )}
     </section>

@@ -1,14 +1,9 @@
-import { calculateCannedBeverages } from "../utils/calculations";
-
 export const BeerCalculations = ({
   selectedDrinks,
   setBeerAverage,
   beerAverage,
   setBeerPercentage,
   beerPercentage,
-  numGuests,
-  eventHours,
-  beerPackSize,
   setBeerPackSize,
 }) => {
   const handleBeerPercentageChange = (e) => {
@@ -25,18 +20,13 @@ export const BeerCalculations = ({
     setBeerPackSize(e.target.value);
   };
 
-  const beerNeeded = calculateCannedBeverages(
-    beerPercentage,
-    numGuests,
-    beerAverage,
-    eventHours,
-    beerPackSize
-  );
-
   return (
-    <section>
+    <section id="beer-details">
       {selectedDrinks.beer && (
-        <div className="flex flex-col">
+        <div
+          id="beer-details-wrapper"
+          className=" flex flex-col bg-blue-100 p-5 mb-1"
+        >
           <label>
             What percentage of guests will drink beer?
             <input
@@ -107,12 +97,6 @@ export const BeerCalculations = ({
               </label>
             </div>
           </label>
-          {beerPackSize > 0 && (
-            <p>
-              You need {beerNeeded} - {beerPackSize}pks of beer! (That&apos;s{" "}
-              {beerNeeded * beerPackSize} cans)
-            </p>
-          )}
         </div>
       )}
     </section>
