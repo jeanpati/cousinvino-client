@@ -8,6 +8,7 @@ import { SparklingWineCalculations } from "./sparkling-wine-calc";
 import { BeerCalculations } from "./beer-calc";
 import { SeltzerCalculations } from "./seltzer-calc";
 import { Results } from "./results";
+import { calculateStillWine750ml } from "../utils/calculations";
 
 export const EventDetails = () => {
   const [eventHours, setEventHours] = useState("");
@@ -32,6 +33,7 @@ export const EventDetails = () => {
   const [seltzerPercentage, setSeltzerPercentage] = useState("");
   const [seltzerAverage, setSeltzerAverage] = useState("");
   const [seltzerPackSize, setSeltzerPackSize] = useState("");
+  const [redWineNeeded, setRedWineNeeded] = useState("");
 
   useEffect(() => {
     // if avgNumDrinks has a value and redWineAverage is ""
@@ -42,6 +44,17 @@ export const EventDetails = () => {
 
   const drinksNeeded =
     (numGuests || 0) * (avgNumDrinks || 0) * (eventHours || 0);
+
+  useEffect(() => {
+    setRedWineNeeded(
+      calculateStillWine750ml(
+        redWinePercentage,
+        numGuests,
+        redWineAverage,
+        eventHours
+      )
+    );
+  }, [redWinePercentage, eventHours, numGuests, redWineAverage]);
 
   return (
     <div
@@ -164,20 +177,20 @@ export const EventDetails = () => {
       </div>
 
       <div>
-        <section id="drink-details" className="flex flex-col">
-          {drinksNeeded > 0 && (
+        <section id="results" className="flex flex-col">
+          {redWineNeeded > 0 && (
             <div
-              id="drink-selection-wrapper"
+              id="results-wrapper"
               className="flex flex-col bg-red-100 opacity-7 p-10 mt-1 rounded"
             >
               <h4 className="text-xl font-[family-name:var(--chakra)]">
                 Results
               </h4>
               <section
-                id="drink-selection"
+                id="results-list"
                 className="flex flex-col font-[family-name:var(--chakra)] bg-emerald-50 opacity-75 p-10 mt-1 rounded"
               >
-                <DrinkSelections setSelectedDrinks={setSelectedDrinks} />
+                <Results redWineNeeded={redWineNeeded} />
               </section>
             </div>
           )}
