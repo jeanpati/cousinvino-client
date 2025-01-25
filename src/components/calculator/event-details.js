@@ -119,32 +119,43 @@ export const EventDetails = () => {
   return (
     <div
       id="main-wrapper"
-      className="flex flex-col bg-teal-100 opacity-7 p-10 mt-1 rounded"
+      className="grid grid-cols-1  md:grid-rows-2 gap-6 bg-teal-100 opacity-7 p-10 mt-2 rounded font-[family-name:var(--chakra)]"
     >
       <div
         id="event-form-wrapper"
-        className="flex flex-col bg-red-100 opacity-7 p-10 mt-1 rounded"
+        className="grid grid-cols-1  md:grid-cols-2 justify-between items-baseline place-content-center bg-red-100 opacity-7 rounded p-10"
       >
-        <h4 className="text-xl font-[family-name:var(--chakra)]">
-          Let&apos;s calculate how many drinks you&apos;ll need
-        </h4>
-        <section
-          id="event-details"
-          className="flex flex-col font-[family-name:var(--chakra)] bg-emerald-50 opacity-75 p-10 mt-1 rounded"
-        >
-          <EventForm
-            eventHours={eventHours}
-            setEventHours={setEventHours}
-            avgNumDrinks={avgNumDrinks}
-            setAvgNumDrinks={setAvgNumDrinks}
-            numGuests={numGuests}
-            setNumGuests={setNumGuests}
-          />
+        <section id="event-details">
+          <h4 className="text-xl">
+            Let&apos;s calculate how many drinks you&apos;ll need
+          </h4>
+          <div className="flex flex-col bg-emerald-50  p-3 mr-5 rounded">
+            <EventForm
+              eventHours={eventHours}
+              setEventHours={setEventHours}
+              avgNumDrinks={avgNumDrinks}
+              setAvgNumDrinks={setAvgNumDrinks}
+              numGuests={numGuests}
+              setNumGuests={setNumGuests}
+            />
+            {drinksNeeded > 0 && (
+              <div>
+                <p className="flex justify-self-center m-4 text-xl">
+                  You&apos;re going to need {drinksNeeded} drinks
+                </p>
+              </div>
+            )}
+          </div>
+        </section>
+        <section id="drink-selection" className="mt-3">
           {drinksNeeded > 0 && (
-            <div>
-              <p className="flex justify-self-center m-4 text-lg">
-                You&apos;re going to need {drinksNeeded} drinks
-              </p>
+            <div id="drink-selection-wrapper">
+              <h4 className="text-xl">
+                Which beverages would you like to serve?
+              </h4>
+              <div className="flex flex-col bg-emerald-50 p-3 rounded">
+                <DrinkSelections setSelectedDrinks={setSelectedDrinks} />
+              </div>
             </div>
           )}
         </section>
@@ -152,34 +163,15 @@ export const EventDetails = () => {
 
       <div>
         <section id="drink-details" className="flex flex-col">
-          {drinksNeeded > 0 && (
-            <div
-              id="drink-selection-wrapper"
-              className="flex flex-col bg-red-100 opacity-7 p-10 mt-1 rounded"
-            >
-              <h4 className="text-xl font-[family-name:var(--chakra)]">
-                Which beverages would you like to serve?
-              </h4>
-              <section
-                id="drink-selection"
-                className="flex flex-col font-[family-name:var(--chakra)] bg-emerald-50 opacity-75 p-10 mt-1 rounded"
-              >
-                <DrinkSelections setSelectedDrinks={setSelectedDrinks} />
-              </section>
-            </div>
-          )}
-
           {Object.values(selectedDrinks).some((isTrue) => isTrue) && (
             <div
               id="drink-questions-wrapper"
-              className="flex flex-col bg-yellow-100 opacity-7 p-10 mt-1 rounded"
+              className="flex flex-col bg-yellow-100 p-10 mt-1 rounded"
             >
-              <h4 className="text-xl font-[family-name:var(--chakra)]">
-                Beverage Percentages
-              </h4>
+              <h4 className="text-xl">Beverage Percentages</h4>
               <section
                 id="drink-questions"
-                className="flex flex-col font-[family-name:var(--chakra)] bg-emerald-50 opacity-75 p-10 mt-5 rounded"
+                className="flex flex-col bg-emerald-50 p-10 mt-5 rounded"
               >
                 <RedWineCalculations
                   selectedDrinks={selectedDrinks}
@@ -222,39 +214,38 @@ export const EventDetails = () => {
             </div>
           )}
         </section>
-      </div>
-
-      <div>
-        <section id="results" className="flex flex-col">
-          {(redWineNeeded > 0 ||
-            whiteWineNeeded > 0 ||
-            sparklingWineNeeded > 0 ||
-            beerNeeded > 0 ||
-            seltzerNeeded > 0) && (
-            <div
-              id="results-wrapper"
-              className="flex flex-col bg-red-100 opacity-7 p-10 mt-1 rounded"
-            >
-              <h4 className="text-xl font-[family-name:var(--chakra)]">
-                Results
-              </h4>
-              <section
-                id="results-list"
-                className="flex flex-col font-[family-name:var(--chakra)] bg-emerald-50 opacity-75 p-10 mt-1 rounded"
+        {Object.values(selectedDrinks).some((isTrue) => isTrue) && (
+          <section id="results" className="flex flex-col">
+            {(redWineNeeded > 0 ||
+              whiteWineNeeded > 0 ||
+              sparklingWineNeeded > 0 ||
+              beerNeeded > 0 ||
+              seltzerNeeded > 0) && (
+              <div
+                id="results-wrapper"
+                className="flex flex-col bg-red-100  p-10 mt-1 rounded"
               >
-                <Results
-                  redWineNeeded={redWineNeeded}
-                  whiteWineNeeded={whiteWineNeeded}
-                  sparklingWineNeeded={sparklingWineNeeded}
-                  beerNeeded={beerNeeded}
-                  beerPackSize={beerPackSize}
-                  seltzerNeeded={seltzerNeeded}
-                  seltzerPackSize={seltzerPackSize}
-                />
-              </section>
-            </div>
-          )}
-        </section>
+                <h4 className="text-xl">Results</h4>
+
+                <section
+                  id="results-list"
+                  className="flex flex-col bg-emerald-50  p-10 mt-1 rounded"
+                >
+                  <Results
+                    redWineNeeded={redWineNeeded}
+                    whiteWineNeeded={whiteWineNeeded}
+                    sparklingWineNeeded={sparklingWineNeeded}
+                    beerNeeded={beerNeeded}
+                    beerPackSize={beerPackSize}
+                    seltzerNeeded={seltzerNeeded}
+                    seltzerPackSize={seltzerPackSize}
+                    selectedDrinks={selectedDrinks}
+                  />
+                </section>
+              </div>
+            )}
+          </section>
+        )}
       </div>
     </div>
   );

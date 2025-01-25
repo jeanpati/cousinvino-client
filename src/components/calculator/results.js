@@ -6,11 +6,12 @@ export const Results = ({
   beerPackSize,
   seltzerNeeded,
   seltzerPackSize,
+  selectedDrinks,
 }) => {
   return (
     <div>
       <section id="results">
-        {redWineNeeded > 0 && (
+        {selectedDrinks.redWine && redWineNeeded > 0 && (
           <p>
             You need {redWineNeeded} bottles of red wine! (Serves{" "}
             {redWineNeeded * 5} glasses)
