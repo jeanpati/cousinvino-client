@@ -24,7 +24,7 @@ export const SeltzerCalculations = ({
     <section id="seltzer-details">
       {selectedDrinks.hardSeltzers && (
         <div
-          id="seltzer-details-wrapper"
+          id="seltzer-details-container"
           className=" flex flex-col bg-blue-100 p-5 mb-1"
         >
           <label>

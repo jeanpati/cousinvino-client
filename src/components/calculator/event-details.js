@@ -13,6 +13,7 @@ import {
   calculateSparklingWine750ml,
   calculateStillWine750ml,
 } from "../utils/calculations";
+import { PercentageScale } from "./percentage-scale";
 
 export const EventDetails = () => {
   const [eventHours, setEventHours] = useState("");
@@ -173,6 +174,7 @@ export const EventDetails = () => {
                 id="drink-questions"
                 className="flex flex-col bg-emerald-50 p-10 mt-5 rounded"
               >
+                <PercentageScale />
                 <RedWineCalculations
                   selectedDrinks={selectedDrinks}
                   setRedWineAverage={setRedWineAverage}

@@ -22,7 +22,7 @@ export const WhiteWineCalculations = ({
     <section id="white-wine-details">
       {selectedDrinks.whiteWine && (
         <div
-          id="white-wine-details-wrapper"
+          id="white-wine-details-container"
           className="flex flex-col bg-blue-100 p-5 mb-1"
         >
           <label>

@@ -22,7 +22,7 @@ export const SparklingWineCalculations = ({
     <section id="sparkling-wine-details">
       {selectedDrinks.sparklingWine && (
         <div
-          id="sparkling-wine-details-wrapper"
+          id="sparkling-wine-details-container"
           className="flex flex-col bg-blue-100 p-5 mb-1"
         >
           <label>

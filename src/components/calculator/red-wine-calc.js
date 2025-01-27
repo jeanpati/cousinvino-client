@@ -20,7 +20,7 @@ export const RedWineCalculations = ({
     <section id="red-wine-details">
       {selectedDrinks.redWine && (
         <div
-          id="red-wine-details-wrapper"
+          id="red-wine-details-container"
           className=" flex flex-col bg-blue-100 p-5 mb-1"
         >
           <h6>Red Wine</h6>

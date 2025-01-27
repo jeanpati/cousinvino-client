@@ -24,7 +24,7 @@ export const BeerCalculations = ({
     <section id="beer-details">
       {selectedDrinks.beer && (
         <div
-          id="beer-details-wrapper"
+          id="beer-details-container"
           className=" flex flex-col bg-blue-100 p-5 mb-1"
         >
           <label>
