@@ -7,7 +7,7 @@ import { WhiteWineCalculations } from "./white-wine-calc";
 import { SparklingWineCalculations } from "./sparkling-wine-calc";
 import { BeerCalculations } from "./beer-calc";
 import { SeltzerCalculations } from "./seltzer-calc";
-import { Results } from "./results";
+import { Results } from "../results/results";
 import {
   calculateCannedBeverages,
   calculateSparklingWine750ml,
