@@ -174,7 +174,14 @@ export const EventDetails = () => {
                 id="drink-questions"
                 className="flex flex-col bg-emerald-50 p-10 mt-5 rounded"
               >
-                <PercentageScale />
+                <PercentageScale
+                  selectedDrinks={selectedDrinks}
+                  setRedWinePercentage={setRedWinePercentage}
+                  setWhiteWinePercentage={setWhiteWinePercentage}
+                  setSparklingWinePercentage={setSparklingWinePercentage}
+                  setBeerPercentage={setBeerPercentage}
+                  setSeltzerPercentage={setSeltzerPercentage}
+                />
                 <RedWineCalculations
                   selectedDrinks={selectedDrinks}
                   setRedWineAverage={setRedWineAverage}
