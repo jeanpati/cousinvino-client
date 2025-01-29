@@ -1,9 +1,27 @@
+import { calculateStillWine750ml } from "../utils/calculations";
+
 export const WhiteWineCalculations = ({
   selectedDrinks,
-
   drinks,
   updateDrink,
+  numGuests,
+  eventHours,
 }) => {
+  useEffect(() => {
+    const whiteWineNeeded = calculateStillWine750ml(
+      drinks.whiteWine.percentage,
+      numGuests,
+      drinks.whiteWine.average,
+      eventHours
+    );
+    updateDrink("whiteWine", "needed", whiteWineNeeded);
+  }, [
+    numGuests,
+    eventHours,
+    drinks.whiteWine.percentage,
+    drinks.whiteWine.average,
+    updateDrink,
+  ]);
   const handleWhiteWinePercentageChange = (e) => {
     if (e.target.value >= 0) {
       updateDrink("whiteWine", "percentage", Number(e.target.value));

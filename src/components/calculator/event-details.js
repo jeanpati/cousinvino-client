@@ -8,11 +8,7 @@ import { SparklingWineCalculations } from "./sparkling-wine-calc";
 import { BeerCalculations } from "./beer-calc";
 import { SeltzerCalculations } from "./seltzer-calc";
 import { Results } from "../results/results";
-import {
-  calculateCannedBeverages,
-  calculateSparklingWine750ml,
-  calculateStillWine750ml,
-} from "../utils/calculations";
+
 import { PercentageScale } from "./percentage-scale";
 
 export const EventDetails = () => {
@@ -61,82 +57,6 @@ export const EventDetails = () => {
 
   const drinksNeeded =
     (numGuests || 0) * (avgNumDrinks || 0) * (eventHours || 0);
-
-  useEffect(() => {
-    const redWineNeeded = calculateStillWine750ml(
-      drinks.redWine.percentage,
-      numGuests,
-      drinks.redWine.average,
-      eventHours
-    );
-    updateDrink("redWine", "needed", redWineNeeded);
-  }, [
-    numGuests,
-    eventHours,
-    drinks.redWine.percentage,
-    drinks.redWine.average,
-  ]);
-  useEffect(() => {
-    const whiteWineNeeded = calculateStillWine750ml(
-      drinks.whiteWine.percentage,
-      numGuests,
-      drinks.whiteWine.average,
-      eventHours
-    );
-    updateDrink("whiteWine", "needed", whiteWineNeeded);
-  }, [
-    numGuests,
-    eventHours,
-    drinks.whiteWine.percentage,
-    drinks.whiteWine.average,
-  ]);
-  useEffect(() => {
-    const sparklingWineNeeded = calculateSparklingWine750ml(
-      drinks.sparklingWine.percentage,
-      numGuests,
-      drinks.sparklingWine.average,
-      eventHours
-    );
-    updateDrink("sparklingWine", "needed", sparklingWineNeeded);
-  }, [
-    numGuests,
-    eventHours,
-    drinks.sparklingWine.percentage,
-    drinks.sparklingWine.average,
-  ]);
-  useEffect(() => {
-    const beerNeeded = calculateCannedBeverages(
-      drinks.beer.percentage,
-      numGuests,
-      drinks.beer.average,
-      eventHours,
-      drinks.beer.packSize
-    );
-    updateDrink("beer", "needed", beerNeeded);
-  }, [
-    numGuests,
-    eventHours,
-    drinks.beer.percentage,
-    drinks.beer.average,
-    drinks.beer.packSize,
-  ]);
-
-  useEffect(() => {
-    const hardSeltzerNeeded = calculateCannedBeverages(
-      drinks.hardSeltzers.percentage,
-      numGuests,
-      drinks.hardSeltzers.average,
-      eventHours,
-      drinks.hardSeltzers.packSize
-    );
-    updateDrink("hardSeltzers", "needed", hardSeltzerNeeded);
-  }, [
-    numGuests,
-    eventHours,
-    drinks.hardSeltzers.percentage,
-    drinks.hardSeltzers.average,
-    drinks.hardSeltzers.packSize,
-  ]);
 
   const updateDrink = (drinkType, key, value) => {
     setDrinks((prev) => ({
@@ -214,26 +134,36 @@ export const EventDetails = () => {
                   selectedDrinks={selectedDrinks}
                   drinks={drinks}
                   updateDrink={updateDrink}
+                  numGuests={numGuests}
+                  eventHours={eventHours}
                 />
                 <WhiteWineCalculations
                   selectedDrinks={selectedDrinks}
                   drinks={drinks}
                   updateDrink={updateDrink}
+                  numGuests={numGuests}
+                  eventHours={eventHours}
                 />
                 <SparklingWineCalculations
                   selectedDrinks={selectedDrinks}
                   drinks={drinks}
                   updateDrink={updateDrink}
+                  numGuests={numGuests}
+                  eventHours={eventHours}
                 />
                 <BeerCalculations
                   selectedDrinks={selectedDrinks}
                   drinks={drinks}
                   updateDrink={updateDrink}
+                  numGuests={numGuests}
+                  eventHours={eventHours}
                 />
                 <SeltzerCalculations
                   selectedDrinks={selectedDrinks}
                   drinks={drinks}
                   updateDrink={updateDrink}
+                  numGuests={numGuests}
+                  eventHours={eventHours}
                 />
               </section>
             </div>

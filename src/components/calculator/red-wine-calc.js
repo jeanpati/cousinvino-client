@@ -1,8 +1,28 @@
+import { calculateStillWine750ml } from "../utils/calculations";
+
 export const RedWineCalculations = ({
   selectedDrinks,
   drinks,
   updateDrink,
+  numGuests,
+  eventHours,
 }) => {
+  useEffect(() => {
+    const redWineNeeded = calculateStillWine750ml(
+      drinks.redWine.percentage,
+      numGuests,
+      drinks.redWine.average,
+      eventHours
+    );
+    updateDrink("redWine", "needed", redWineNeeded);
+  }, [
+    numGuests,
+    eventHours,
+    drinks.redWine.percentage,
+    drinks.redWine.average,
+    updateDrink,
+  ]);
+
   const handleRedWinePercentageChange = (e) => {
     if (e.target.value >= 0) {
       updateDrink("redWine", "percentage", Number(e.target.value));

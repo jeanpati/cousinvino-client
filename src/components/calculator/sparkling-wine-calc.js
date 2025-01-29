@@ -1,8 +1,28 @@
+import { calculateSparklingWine750ml } from "../utils/calculations";
+
 export const SparklingWineCalculations = ({
   selectedDrinks,
   drinks,
   updateDrink,
+  numGuests,
+  eventHours,
 }) => {
+  useEffect(() => {
+    const sparklingWineNeeded = calculateSparklingWine750ml(
+      drinks.sparklingWine.percentage,
+      numGuests,
+      drinks.sparklingWine.average,
+      eventHours
+    );
+    updateDrink("sparklingWine", "needed", sparklingWineNeeded);
+  }, [
+    numGuests,
+    eventHours,
+    drinks.sparklingWine.percentage,
+    drinks.sparklingWine.average,
+    updateDrink,
+  ]);
+
   const handleSparklingWinePercentageChange = (e) => {
     if (e.target.value >= 0) {
       updateDrink("sparklingWine", "percentage", Number(e.target.value));

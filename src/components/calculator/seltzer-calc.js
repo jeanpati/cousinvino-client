@@ -1,8 +1,30 @@
+import { calculateCannedBeverages } from "../utils/calculations";
+
 export const SeltzerCalculations = ({
   selectedDrinks,
   drinks,
   updateDrink,
+  numGuests,
+  eventHours,
 }) => {
+  useEffect(() => {
+    const hardSeltzerNeeded = calculateCannedBeverages(
+      drinks.hardSeltzers.percentage,
+      numGuests,
+      drinks.hardSeltzers.average,
+      eventHours,
+      drinks.hardSeltzers.packSize
+    );
+    updateDrink("hardSeltzers", "needed", hardSeltzerNeeded);
+  }, [
+    numGuests,
+    eventHours,
+    drinks.hardSeltzers.percentage,
+    drinks.hardSeltzers.average,
+    drinks.hardSeltzers.packSize,
+    updateDrink,
+  ]);
+
   const handleSeltzerPercentageChange = (e) => {
     if (e.target.value >= 0) {
       updateDrink("hardSeltzers", "percentage", Number(e.target.value));

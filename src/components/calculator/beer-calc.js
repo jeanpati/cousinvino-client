@@ -1,9 +1,30 @@
+import { calculateCannedBeverages } from "../utils/calculations";
+
 export const BeerCalculations = ({
   selectedDrinks,
-
   drinks,
   updateDrink,
+  numGuests,
+  eventHours,
 }) => {
+  useEffect(() => {
+    const beerNeeded = calculateCannedBeverages(
+      drinks.beer.percentage,
+      numGuests,
+      drinks.beer.average,
+      eventHours,
+      drinks.beer.packSize
+    );
+    updateDrink("beer", "needed", beerNeeded);
+  }, [
+    numGuests,
+    eventHours,
+    drinks.beer.percentage,
+    drinks.beer.average,
+    drinks.beer.packSize,
+    updateDrink,
+  ]);
+
   const handleBeerPercentageChange = (e) => {
     if (e.target.value >= 0) {
       updateDrink("beer", "percentage", Number(e.target.value));
