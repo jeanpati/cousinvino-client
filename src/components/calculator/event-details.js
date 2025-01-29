@@ -196,7 +196,11 @@ export const EventDetails = () => {
                   id="results-list"
                   className="flex flex-col bg-emerald-50  p-10 mt-1 rounded"
                 >
-                  <Results drinks={drinks} selectedDrinks={selectedDrinks} />
+                  <Results
+                    drinks={drinks}
+                    selectedDrinks={selectedDrinks}
+                    drinksNeeded={drinksNeeded}
+                  />
                 </section>
               </div>
             )}
