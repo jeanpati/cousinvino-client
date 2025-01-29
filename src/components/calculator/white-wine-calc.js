@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { calculateStillWine750ml } from "../utils/calculations";
 
 export const WhiteWineCalculations = ({
@@ -20,7 +21,6 @@ export const WhiteWineCalculations = ({
     eventHours,
     drinks.whiteWine.percentage,
     drinks.whiteWine.average,
-    updateDrink,
   ]);
   const handleWhiteWinePercentageChange = (e) => {
     if (e.target.value >= 0) {

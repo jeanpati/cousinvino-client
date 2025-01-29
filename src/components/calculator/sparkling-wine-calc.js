@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { calculateSparklingWine750ml } from "../utils/calculations";
 
 export const SparklingWineCalculations = ({
@@ -20,7 +21,6 @@ export const SparklingWineCalculations = ({
     eventHours,
     drinks.sparklingWine.percentage,
     drinks.sparklingWine.average,
-    updateDrink,
   ]);
 
   const handleSparklingWinePercentageChange = (e) => {

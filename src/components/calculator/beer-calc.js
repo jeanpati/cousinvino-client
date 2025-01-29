@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { calculateCannedBeverages } from "../utils/calculations";
 
 export const BeerCalculations = ({
@@ -22,7 +23,6 @@ export const BeerCalculations = ({
     drinks.beer.percentage,
     drinks.beer.average,
     drinks.beer.packSize,
-    updateDrink,
   ]);
 
   const handleBeerPercentageChange = (e) => {

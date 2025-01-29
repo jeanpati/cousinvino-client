@@ -8,7 +8,6 @@ import { SparklingWineCalculations } from "./sparkling-wine-calc";
 import { BeerCalculations } from "./beer-calc";
 import { SeltzerCalculations } from "./seltzer-calc";
 import { Results } from "../results/results";
-
 import { PercentageScale } from "./percentage-scale";
 
 export const EventDetails = () => {
@@ -49,11 +48,22 @@ export const EventDetails = () => {
   });
 
   useEffect(() => {
-    // if avgNumDrinks has a value and redWineAverage is ""
-    if (avgNumDrinks && drinks.redWine.average === "") {
-      updateDrink("redWine", "average", avgNumDrinks);
+    if (avgNumDrinks) {
+      setDrinks((prevDrinks) => {
+        const updatedDrinks = { ...prevDrinks };
+
+        // Set the average for all beverages to avgNumDrinks
+        Object.keys(updatedDrinks).forEach((drinkType) => {
+          updatedDrinks[drinkType] = {
+            ...updatedDrinks[drinkType],
+            average: avgNumDrinks,
+          };
+        });
+
+        return updatedDrinks;
+      });
     }
-  }, [avgNumDrinks, drinks]);
+  }, [avgNumDrinks]);
 
   const drinksNeeded =
     (numGuests || 0) * (avgNumDrinks || 0) * (eventHours || 0);
