@@ -19,6 +19,7 @@ export const calculateSparklingWine750ml = (
   eventHours
 ) => {
   const glassesPer750 = 6;
+
   const bottlesNeeded750 = Math.ceil(
     ((drinkerPercentage / 100.0) * numGuests * drinkAverage * eventHours) /
       glassesPer750

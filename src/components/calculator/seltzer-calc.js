@@ -1,23 +1,20 @@
 export const SeltzerCalculations = ({
   selectedDrinks,
-  setSeltzerAverage,
-  seltzerAverage,
-  setSeltzerPercentage,
-  seltzerPercentage,
-  setSeltzerPackSize,
+  drinks,
+  updateDrink,
 }) => {
   const handleSeltzerPercentageChange = (e) => {
     if (e.target.value >= 0) {
-      setSeltzerPercentage(Number(e.target.value));
+      updateDrink("hardSeltzers", "percentage", Number(e.target.value));
     }
   };
   const handleSeltzerAverageChange = (e) => {
     if (e.target.value >= 0) {
-      setSeltzerAverage(Number(e.target.value));
+      updateDrink("hardSeltzers", "average", Number(e.target.value));
     }
   };
   const handleRadioChange = (e) => {
-    setSeltzerPackSize(e.target.value);
+    updateDrink("hardSeltzers", "packSize", Number(e.target.value));
   };
 
   return (
@@ -33,7 +30,7 @@ export const SeltzerCalculations = ({
               id="seltzer-percentage"
               type="number"
               step="any"
-              value={seltzerPercentage}
+              value={drinks.hardSeltzers.percentage}
               onChange={handleSeltzerPercentageChange}
               className="ml-1 mt-1 border border-emerald-500 p-2 rounded size-[2rem] w-[4rem]"
             />
@@ -45,7 +42,7 @@ export const SeltzerCalculations = ({
               id="seltzer-average"
               type="number"
               step="any"
-              value={seltzerAverage}
+              value={drinks.hardSeltzers.average}
               onChange={handleSeltzerAverageChange}
               className="ml-1 mt-1 border border-emerald-500 p-2 rounded size-[2rem] w-[4rem]"
             />

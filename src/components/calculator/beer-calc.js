@@ -1,23 +1,21 @@
 export const BeerCalculations = ({
   selectedDrinks,
-  setBeerAverage,
-  beerAverage,
-  setBeerPercentage,
-  beerPercentage,
-  setBeerPackSize,
+
+  drinks,
+  updateDrink,
 }) => {
   const handleBeerPercentageChange = (e) => {
     if (e.target.value >= 0) {
-      setBeerPercentage(Number(e.target.value));
+      updateDrink("beer", "percentage", Number(e.target.value));
     }
   };
   const handleBeerAverageChange = (e) => {
     if (e.target.value >= 0) {
-      setBeerAverage(Number(e.target.value));
+      updateDrink("beer", "average", Number(e.target.value));
     }
   };
   const handleRadioChange = (e) => {
-    setBeerPackSize(e.target.value);
+    updateDrink("beer", "packSize", Number(e.target.value));
   };
 
   return (
@@ -33,7 +31,7 @@ export const BeerCalculations = ({
               id="beer-percentage"
               type="number"
               step="any"
-              value={beerPercentage}
+              value={drinks.beer.percentage}
               onChange={handleBeerPercentageChange}
               className="ml-1 mt-1 border border-emerald-500 p-2 rounded size-[2rem] w-[4rem]"
             />
@@ -44,7 +42,7 @@ export const BeerCalculations = ({
               id="beer-average"
               type="number"
               step="any"
-              value={beerAverage}
+              value={drinks.beer.average}
               onChange={handleBeerAverageChange}
               className="ml-1 mt-1 border border-emerald-500 p-2 rounded size-[2rem] w-[4rem]"
             />

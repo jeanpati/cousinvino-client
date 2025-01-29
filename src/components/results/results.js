@@ -1,46 +1,38 @@
-export const Results = ({
-  redWineNeeded,
-  whiteWineNeeded,
-  sparklingWineNeeded,
-  beerNeeded,
-  beerPackSize,
-  seltzerNeeded,
-  seltzerPackSize,
-  selectedDrinks,
-}) => {
+export const Results = ({ selectedDrinks, drinks }) => {
   return (
     <div>
       <section id="results">
-        {selectedDrinks.redWine && redWineNeeded > 0 && (
+        {selectedDrinks.redWine && drinks.redWine.needed > 0 && (
           <p>
-            You need {redWineNeeded} bottles of red wine! (Serves{" "}
-            {redWineNeeded * 5} glasses)
+            You need {drinks.redWine.needed} bottles of red wine! (Serves{" "}
+            {drinks.redWine.needed * 5} glasses)
           </p>
         )}
 
-        {whiteWineNeeded > 0 && (
+        {drinks.whiteWine.needed > 0 && (
           <p>
-            You need {whiteWineNeeded} bottles of white wine! (Serves{" "}
-            {whiteWineNeeded * 5} glasses)
+            You need {drinks.whiteWine.needed} bottles of white wine! (Serves{" "}
+            {drinks.whiteWine.needed * 5} glasses)
           </p>
         )}
 
-        {sparklingWineNeeded > 0 && (
+        {drinks.sparklingWine.needed > 0 && (
           <p>
-            You need {sparklingWineNeeded} bottles of sparkling wine! (Serves{" "}
-            {sparklingWineNeeded * 6} glasses)
+            You need {drinks.sparklingWine.needed} bottles of sparkling wine!
+            (Serves {drinks.sparklingWine.needed * 6} glasses)
           </p>
         )}
-        {beerPackSize > 0 && (
+        {drinks.beer.packSize > 0 && (
           <p>
-            You need {beerNeeded} - {beerPackSize}pks of beer! (That&apos;s{" "}
-            {beerNeeded * beerPackSize} cans)
+            You need {drinks.beer.needed} - {drinks.beer.packSize}pks of beer!
+            (That&apos;s {drinks.beer.needed * drinks.beer.packSize} cans)
           </p>
         )}
-        {seltzerPackSize > 0 && (
+        {drinks.hardSeltzers.packSize > 0 && (
           <p>
-            You need {seltzerNeeded} - {seltzerPackSize}pks of hard seltzer!
-            (That&apos;s {seltzerNeeded * seltzerPackSize} cans)
+            You need {drinks.hardSeltzers.needed} -{" "}
+            {drinks.hardSeltzers.packSize}pks of hard seltzer! (That&apos;s{" "}
+            {drinks.hardSeltzers.needed * drinks.hardSeltzers.packSize} cans)
           </p>
         )}
       </section>

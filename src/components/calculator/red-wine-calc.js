@@ -1,18 +1,16 @@
 export const RedWineCalculations = ({
   selectedDrinks,
-  setRedWineAverage,
-  redWineAverage,
-  setRedWinePercentage,
-  redWinePercentage,
+  drinks,
+  updateDrink,
 }) => {
   const handleRedWinePercentageChange = (e) => {
     if (e.target.value >= 0) {
-      setRedWinePercentage(Number(e.target.value));
+      updateDrink("redWine", "percentage", Number(e.target.value));
     }
   };
   const handleRedWineAverageChange = (e) => {
     if (e.target.value >= 0) {
-      setRedWineAverage(Number(e.target.value));
+      updateDrink("redWine", "average", Number(e.target.value));
     }
   };
 
@@ -30,7 +28,7 @@ export const RedWineCalculations = ({
               id="red-wine-percentage"
               type="number"
               step="any"
-              value={redWinePercentage}
+              value={drinks.redWine.percentage}
               onChange={handleRedWinePercentageChange}
               className="ml-1 mt-1 border border-emerald-500 p-2 rounded size-[2rem] w-[4rem]"
             />
@@ -41,7 +39,7 @@ export const RedWineCalculations = ({
               id="red-wine-average"
               type="number"
               step="any"
-              value={redWineAverage}
+              value={drinks.redWine.average}
               onChange={handleRedWineAverageChange}
               className="ml-1 mt-1 border border-emerald-500 p-2 rounded size-[2rem] w-[4rem]"
             />

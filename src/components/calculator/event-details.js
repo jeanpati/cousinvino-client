@@ -26,96 +26,127 @@ export const EventDetails = () => {
     beer: false,
     hardSeltzers: false,
   });
-  const [redWinePercentage, setRedWinePercentage] = useState("");
-  const [redWineAverage, setRedWineAverage] = useState("");
-  const [whiteWinePercentage, setWhiteWinePercentage] = useState("");
-  const [whiteWineAverage, setWhiteWineAverage] = useState("");
-  const [sparklingWinePercentage, setSparklingWinePercentage] = useState("");
-  const [sparklingWineAverage, setSparklingWineAverage] = useState("");
-  const [beerPercentage, setBeerPercentage] = useState("");
-  const [beerAverage, setBeerAverage] = useState("");
-  const [beerPackSize, setBeerPackSize] = useState("");
-  const [seltzerPercentage, setSeltzerPercentage] = useState("");
-  const [seltzerAverage, setSeltzerAverage] = useState("");
-  const [seltzerPackSize, setSeltzerPackSize] = useState("");
-  const [redWineNeeded, setRedWineNeeded] = useState("");
-  const [whiteWineNeeded, setWhiteWineNeeded] = useState("");
-  const [sparklingWineNeeded, setSparklingWineNeeded] = useState("");
-  const [beerNeeded, setBeerNeeded] = useState("");
-  const [seltzerNeeded, setSeltzerNeeded] = useState("");
+
+  const [drinks, setDrinks] = useState({
+    redWine: { name: "Red Wine", percentage: "", average: "", needed: "" },
+    whiteWine: { name: "White Wine", percentage: "", average: "", needed: "" },
+    sparklingWine: {
+      name: "Sparkling Wine",
+      percentage: "",
+      average: "",
+      needed: "",
+    },
+    beer: {
+      name: "Beer",
+      percentage: "",
+      average: "",
+      needed: "",
+      packSize: "",
+    },
+    hardSeltzers: {
+      name: "Hard Seltzers",
+      percentage: "",
+      average: "",
+      needed: "",
+      packSize: "",
+    },
+  });
 
   useEffect(() => {
     // if avgNumDrinks has a value and redWineAverage is ""
-    if (avgNumDrinks && redWineAverage === "") {
-      setRedWineAverage(avgNumDrinks);
+    if (avgNumDrinks && drinks.redWine.average === "") {
+      updateDrink("redWine", "average", avgNumDrinks);
     }
-  }, [avgNumDrinks, redWineAverage]);
+  }, [avgNumDrinks, drinks]);
 
   const drinksNeeded =
     (numGuests || 0) * (avgNumDrinks || 0) * (eventHours || 0);
 
   useEffect(() => {
-    setRedWineNeeded(
-      calculateStillWine750ml(
-        redWinePercentage,
-        numGuests,
-        redWineAverage,
-        eventHours
-      )
+    const redWineNeeded = calculateStillWine750ml(
+      drinks.redWine.percentage,
+      numGuests,
+      drinks.redWine.average,
+      eventHours
     );
-  }, [redWinePercentage, eventHours, numGuests, redWineAverage]);
-
-  useEffect(() => {
-    setWhiteWineNeeded(
-      calculateStillWine750ml(
-        whiteWinePercentage,
-        numGuests,
-        whiteWineAverage,
-        eventHours
-      )
-    );
-  }, [whiteWineAverage, eventHours, numGuests, whiteWinePercentage]);
-
-  useEffect(() => {
-    setSparklingWineNeeded(
-      calculateSparklingWine750ml(
-        sparklingWinePercentage,
-        numGuests,
-        sparklingWineAverage,
-        eventHours
-      )
-    );
-  }, [sparklingWineAverage, eventHours, numGuests, sparklingWinePercentage]);
-
-  useEffect(() => {
-    setBeerNeeded(
-      calculateCannedBeverages(
-        beerPercentage,
-        numGuests,
-        beerAverage,
-        eventHours,
-        beerPackSize
-      )
-    );
-  }, [beerPercentage, eventHours, numGuests, beerAverage, beerPackSize]);
-
-  useEffect(() => {
-    setSeltzerNeeded(
-      calculateCannedBeverages(
-        seltzerPercentage,
-        numGuests,
-        seltzerAverage,
-        eventHours,
-        seltzerPackSize
-      )
-    );
+    updateDrink("redWine", "needed", redWineNeeded);
   }, [
-    seltzerPercentage,
-    eventHours,
     numGuests,
-    seltzerAverage,
-    seltzerPackSize,
+    eventHours,
+    drinks.redWine.percentage,
+    drinks.redWine.average,
   ]);
+  useEffect(() => {
+    const whiteWineNeeded = calculateStillWine750ml(
+      drinks.whiteWine.percentage,
+      numGuests,
+      drinks.whiteWine.average,
+      eventHours
+    );
+    updateDrink("whiteWine", "needed", whiteWineNeeded);
+  }, [
+    numGuests,
+    eventHours,
+    drinks.whiteWine.percentage,
+    drinks.whiteWine.average,
+  ]);
+  useEffect(() => {
+    const sparklingWineNeeded = calculateSparklingWine750ml(
+      drinks.sparklingWine.percentage,
+      numGuests,
+      drinks.sparklingWine.average,
+      eventHours
+    );
+    updateDrink("sparklingWine", "needed", sparklingWineNeeded);
+  }, [
+    numGuests,
+    eventHours,
+    drinks.sparklingWine.percentage,
+    drinks.sparklingWine.average,
+  ]);
+  useEffect(() => {
+    const beerNeeded = calculateCannedBeverages(
+      drinks.beer.percentage,
+      numGuests,
+      drinks.beer.average,
+      eventHours,
+      drinks.beer.packSize
+    );
+    updateDrink("beer", "needed", beerNeeded);
+  }, [
+    numGuests,
+    eventHours,
+    drinks.beer.percentage,
+    drinks.beer.average,
+    drinks.beer.packSize,
+  ]);
+
+  useEffect(() => {
+    const hardSeltzerNeeded = calculateCannedBeverages(
+      drinks.hardSeltzers.percentage,
+      numGuests,
+      drinks.hardSeltzers.average,
+      eventHours,
+      drinks.hardSeltzers.packSize
+    );
+    updateDrink("hardSeltzers", "needed", hardSeltzerNeeded);
+  }, [
+    numGuests,
+    eventHours,
+    drinks.hardSeltzers.percentage,
+    drinks.hardSeltzers.average,
+    drinks.hardSeltzers.packSize,
+  ]);
+
+  const updateDrink = (drinkType, key, value) => {
+    setDrinks((prev) => ({
+      ...prev,
+      [drinkType]: {
+        ...prev[drinkType],
+        [key]: value,
+      },
+    }));
+  };
 
   return (
     <div
@@ -176,48 +207,33 @@ export const EventDetails = () => {
               >
                 <PercentageScale
                   selectedDrinks={selectedDrinks}
-                  setRedWinePercentage={setRedWinePercentage}
-                  setWhiteWinePercentage={setWhiteWinePercentage}
-                  setSparklingWinePercentage={setSparklingWinePercentage}
-                  setBeerPercentage={setBeerPercentage}
-                  setSeltzerPercentage={setSeltzerPercentage}
+                  setDrinks={setDrinks}
+                  drinks={drinks}
                 />
                 <RedWineCalculations
                   selectedDrinks={selectedDrinks}
-                  setRedWineAverage={setRedWineAverage}
-                  redWineAverage={redWineAverage}
-                  setRedWinePercentage={setRedWinePercentage}
-                  redWinePercentage={redWinePercentage}
+                  drinks={drinks}
+                  updateDrink={updateDrink}
                 />
                 <WhiteWineCalculations
                   selectedDrinks={selectedDrinks}
-                  setWhiteWineAverage={setWhiteWineAverage}
-                  whiteWineAverage={whiteWineAverage}
-                  setWhiteWinePercentage={setWhiteWinePercentage}
-                  whiteWinePercentage={whiteWinePercentage}
+                  drinks={drinks}
+                  updateDrink={updateDrink}
                 />
                 <SparklingWineCalculations
                   selectedDrinks={selectedDrinks}
-                  setSparklingWineAverage={setSparklingWineAverage}
-                  sparklingWineAverage={sparklingWineAverage}
-                  setSparklingWinePercentage={setSparklingWinePercentage}
-                  sparklingWinePercentage={sparklingWinePercentage}
+                  drinks={drinks}
+                  updateDrink={updateDrink}
                 />
                 <BeerCalculations
                   selectedDrinks={selectedDrinks}
-                  setBeerAverage={setBeerAverage}
-                  beerAverage={beerAverage}
-                  setBeerPercentage={setBeerPercentage}
-                  beerPercentage={beerPercentage}
-                  setBeerPackSize={setBeerPackSize}
+                  drinks={drinks}
+                  updateDrink={updateDrink}
                 />
                 <SeltzerCalculations
                   selectedDrinks={selectedDrinks}
-                  setSeltzerAverage={setSeltzerAverage}
-                  seltzerAverage={seltzerAverage}
-                  setSeltzerPercentage={setSeltzerPercentage}
-                  seltzerPercentage={seltzerPercentage}
-                  setSeltzerPackSize={setSeltzerPackSize}
+                  drinks={drinks}
+                  updateDrink={updateDrink}
                 />
               </section>
             </div>
@@ -225,11 +241,11 @@ export const EventDetails = () => {
         </section>
         {Object.values(selectedDrinks).some((isTrue) => isTrue) && (
           <section id="results" className="flex flex-col">
-            {(redWineNeeded > 0 ||
-              whiteWineNeeded > 0 ||
-              sparklingWineNeeded > 0 ||
-              beerNeeded > 0 ||
-              seltzerNeeded > 0) && (
+            {(drinks.redWine.needed > 0 ||
+              drinks.whiteWine.needed > 0 ||
+              drinks.sparklingWine.needed > 0 ||
+              drinks.beer.needed > 0 ||
+              drinks.hardSeltzers.needed > 0) && (
               <div
                 id="results-wrapper"
                 className="flex flex-col bg-red-100  p-10 mt-1 rounded"
@@ -240,16 +256,7 @@ export const EventDetails = () => {
                   id="results-list"
                   className="flex flex-col bg-emerald-50  p-10 mt-1 rounded"
                 >
-                  <Results
-                    redWineNeeded={redWineNeeded}
-                    whiteWineNeeded={whiteWineNeeded}
-                    sparklingWineNeeded={sparklingWineNeeded}
-                    beerNeeded={beerNeeded}
-                    beerPackSize={beerPackSize}
-                    seltzerNeeded={seltzerNeeded}
-                    seltzerPackSize={seltzerPackSize}
-                    selectedDrinks={selectedDrinks}
-                  />
+                  <Results drinks={drinks} selectedDrinks={selectedDrinks} />
                 </section>
               </div>
             )}

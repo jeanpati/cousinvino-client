@@ -1,20 +1,17 @@
-import { calculateStillWine750ml } from "../utils/calculations";
-
 export const WhiteWineCalculations = ({
   selectedDrinks,
-  setWhiteWineAverage,
-  whiteWineAverage,
-  setWhiteWinePercentage,
-  whiteWinePercentage,
+
+  drinks,
+  updateDrink,
 }) => {
   const handleWhiteWinePercentageChange = (e) => {
     if (e.target.value >= 0) {
-      setWhiteWinePercentage(Number(e.target.value));
+      updateDrink("whiteWine", "percentage", Number(e.target.value));
     }
   };
   const handleWhiteWineAverageChange = (e) => {
     if (e.target.value >= 0) {
-      setWhiteWineAverage(Number(e.target.value));
+      updateDrink("whiteWine", "average", Number(e.target.value));
     }
   };
 
@@ -31,7 +28,7 @@ export const WhiteWineCalculations = ({
               id="white-wine-percentage"
               type="number"
               step="any"
-              value={whiteWinePercentage}
+              value={drinks.whiteWine.percentage}
               onChange={handleWhiteWinePercentageChange}
               className="ml-1 mt-1 border border-emerald-500 p-2 rounded size-[2rem] w-[4rem]"
             />
@@ -43,7 +40,7 @@ export const WhiteWineCalculations = ({
               id="white-wine-average"
               type="number"
               step="any"
-              value={whiteWineAverage}
+              value={drinks.whiteWine.average}
               onChange={handleWhiteWineAverageChange}
               className="ml-1 mt-1 border border-emerald-500 p-2 rounded size-[2rem] w-[4rem]"
             />
