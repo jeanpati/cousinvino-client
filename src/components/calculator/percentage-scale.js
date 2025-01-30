@@ -1,32 +1,36 @@
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { getTrackBackground, Range } from "react-range";
 
 export const PercentageScale = ({ selectedDrinks, setDrinks, drinks }) => {
-  const selectedBeverages = Object.keys(selectedDrinks).filter(
-    (drink) => selectedDrinks[drink]
+  const selectedBeverageKeys = useMemo(
+    () => Object.keys(selectedDrinks).filter((drink) => selectedDrinks[drink]),
+    [selectedDrinks]
   );
 
   useEffect(() => {
-    if (selectedBeverages.length < 2) return;
+    if (selectedBeverageKeys.length === 0) return;
 
-    const equalPercentage = 100 / selectedBeverages.length;
+    const equalPercentage =
+      selectedBeverageKeys.length === 1
+        ? 100 // if only 1 beverage is selected, give it 100%
+        : 100 / selectedBeverageKeys.length; // otherwise, divide equally
 
-    setDrinks((prevDrinks) => {
-      let updatedDrinks = { ...prevDrinks };
+    setDrinks((drinksCopy) => {
+      let updatedDrinks = { ...drinksCopy };
 
-      selectedBeverages.forEach((bev) => {
-        if (selectedDrinks[bev]) {
-          updatedDrinks[bev] = {
-            ...updatedDrinks[bev],
-            percentage: equalPercentage || 0,
+      selectedBeverageKeys.forEach((drink) => {
+        if (selectedDrinks[drink]) {
+          updatedDrinks[drink] = {
+            ...updatedDrinks[drink],
+            percentage: equalPercentage,
           };
         }
       });
 
-      Object.keys(prevDrinks).forEach((bev) => {
-        if (!selectedDrinks[bev]) {
-          updatedDrinks[bev] = {
-            ...updatedDrinks[bev],
+      Object.keys(drinksCopy).forEach((drink) => {
+        if (!selectedDrinks[drink]) {
+          updatedDrinks[drink] = {
+            ...updatedDrinks[drink],
             percentage: 0,
           };
         }
@@ -34,24 +38,24 @@ export const PercentageScale = ({ selectedDrinks, setDrinks, drinks }) => {
 
       return updatedDrinks;
     });
-  }, [selectedBeverages.length]);
+  }, [selectedBeverageKeys.length]);
 
-  if (selectedBeverages.length < 2) return null;
+  if (selectedBeverageKeys.length === 0) return null;
 
-  let sumOfBevPercentages = 0;
-  const thumbValues = selectedBeverages.map((drink) => {
-    sumOfBevPercentages += drinks[drink]?.percentage || 0;
-    return sumOfBevPercentages;
+  let sumOfPercentages = 0;
+  const calculateThumbValues = selectedBeverageKeys.map((drink) => {
+    sumOfPercentages += drinks[drink]?.percentage || 0;
+    return sumOfPercentages;
   });
 
   const handleThumbChange = (newThumbValues) => {
-    setDrinks((prevDrinks) => {
-      let updatedDrinks = { ...prevDrinks };
+    setDrinks((drinksCopy) => {
+      let updatedDrinks = { ...drinksCopy };
       let previousPercentage = 0;
 
       newThumbValues.forEach((value, index) => {
-        const bev1 = selectedBeverages[index];
-        const bev2 = selectedBeverages[index + 1];
+        const bev1 = selectedBeverageKeys[index];
+        const bev2 = selectedBeverageKeys[index + 1];
 
         updatedDrinks[bev1] = {
           ...updatedDrinks[bev1],
@@ -75,14 +79,14 @@ export const PercentageScale = ({ selectedDrinks, setDrinks, drinks }) => {
   const STEP = 1;
   const MIN = 0;
   const MAX = 100;
-  const COLORS = ["blue", "yellow", "red", "purple", "green"];
+  const COLORS = ["blue", "yellow", "red", "purple", "green", "pink", "silver"];
 
   return (
     <div id="scale-container" className="flex flex-center">
       <Range
-        key={selectedBeverages.join(",")}
+        key={`${selectedBeverageKeys.join("-")}-track`} //re-renders the track when new thumbs are generated
         draggableTrack
-        values={thumbValues}
+        values={calculateThumbValues}
         step={STEP}
         min={MIN}
         max={MAX}
@@ -105,7 +109,7 @@ export const PercentageScale = ({ selectedDrinks, setDrinks, drinks }) => {
                 width: "100%",
                 borderRadius: "4px",
                 background: getTrackBackground({
-                  values: thumbValues,
+                  values: calculateThumbValues,
                   colors: COLORS,
                   min: MIN,
                   max: MAX,
@@ -118,10 +122,10 @@ export const PercentageScale = ({ selectedDrinks, setDrinks, drinks }) => {
           </div>
         )}
         renderThumb={({ props, isDragged, index }) => {
-          const beverage = selectedBeverages[index];
+          const beverage = selectedBeverageKeys[index];
           const beverageName = drinks[beverage]?.name || "";
           const percentage = Math.round(drinks[beverage]?.percentage, 2) || 0;
-          const isLastThumb = index === selectedBeverages.length - 1;
+          const isLastThumb = index === selectedBeverageKeys.length - 1;
           return (
             <div
               {...props}
@@ -141,7 +145,7 @@ export const PercentageScale = ({ selectedDrinks, setDrinks, drinks }) => {
                   bottom: "2rem",
                   textAlign: "center",
                   fontSize: "12px",
-                  color: isDragged ? COLORS[index] : "#AAA",
+                  color: "#000000",
                   width: "100%",
                 }}
               >

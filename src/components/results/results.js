@@ -1,10 +1,15 @@
+import { useMemo } from "react";
+
 export const Results = ({ selectedDrinks, drinks, drinksNeeded }) => {
-  const totalDrinks =
-    (drinks?.redWine?.needed * 5 || 0) +
-    (drinks?.whiteWine?.needed * 5 || 0) +
-    (drinks?.sparklingWine?.needed * 6 || 0) +
-    (drinks?.beer?.needed * drinks.beer.packSize || 0) +
-    (drinks?.hardSeltzers?.needed * drinks.hardSeltzers.packSize || 0);
+  const totalDrinks = useMemo(() => {
+    return (
+      (drinks?.redWine?.needed * 5 || 0) +
+      (drinks?.whiteWine?.needed * 5 || 0) +
+      (drinks?.sparklingWine?.needed * 6 || 0) +
+      (drinks?.beer?.needed * drinks.beer.packSize || 0) +
+      (drinks?.hardSeltzers?.needed * drinks.hardSeltzers.packSize || 0)
+    );
+  }, [drinks]);
 
   return (
     <div>
@@ -42,7 +47,7 @@ export const Results = ({ selectedDrinks, drinks, drinksNeeded }) => {
             {drinks.hardSeltzers.needed * drinks.hardSeltzers.packSize} cans)
           </p>
         )}
-        {totalDrinks >= drinksNeeded && (
+        {totalDrinks > drinksNeeded && (
           <p>
             You&apos;re in good shape! You have more than enough drinks!{" "}
             {`You can serve ${totalDrinks} glasses`}
