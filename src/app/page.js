@@ -13,7 +13,7 @@ export default function Home() {
         </h2>
       </header>
       <main>
-        <h3 className="text-3xl font-[family-name:var(--playwrite)]">
+        <h3 className="text-3xl mt-10 font-[family-name:var(--playwrite)]">
           Event Details
         </h3>
         <EventDetails />

@@ -1,30 +1,49 @@
+import { useEffect } from "react";
+import { calculateCannedBeverages } from "../utils/calculations";
+
 export const SeltzerCalculations = ({
   selectedDrinks,
-  setSeltzerAverage,
-  seltzerAverage,
-  setSeltzerPercentage,
-  seltzerPercentage,
-  setSeltzerPackSize,
+  drinks,
+  updateDrink,
+  numGuests,
+  eventHours,
 }) => {
+  useEffect(() => {
+    const hardSeltzerNeeded = calculateCannedBeverages(
+      drinks.hardSeltzers.percentage,
+      numGuests,
+      drinks.hardSeltzers.average,
+      eventHours,
+      drinks.hardSeltzers.packSize
+    );
+    updateDrink("hardSeltzers", "needed", hardSeltzerNeeded);
+  }, [
+    numGuests,
+    eventHours,
+    drinks.hardSeltzers.percentage,
+    drinks.hardSeltzers.average,
+    drinks.hardSeltzers.packSize,
+  ]);
+
   const handleSeltzerPercentageChange = (e) => {
     if (e.target.value >= 0) {
-      setSeltzerPercentage(Number(e.target.value));
+      updateDrink("hardSeltzers", "percentage", Number(e.target.value));
     }
   };
   const handleSeltzerAverageChange = (e) => {
     if (e.target.value >= 0) {
-      setSeltzerAverage(Number(e.target.value));
+      updateDrink("hardSeltzers", "average", Number(e.target.value));
     }
   };
   const handleRadioChange = (e) => {
-    setSeltzerPackSize(e.target.value);
+    updateDrink("hardSeltzers", "packSize", Number(e.target.value));
   };
 
   return (
     <section id="seltzer-details">
       {selectedDrinks.hardSeltzers && (
         <div
-          id="seltzer-details-wrapper"
+          id="seltzer-details-container"
           className=" flex flex-col bg-blue-100 p-5 mb-1"
         >
           <label>
@@ -33,7 +52,7 @@ export const SeltzerCalculations = ({
               id="seltzer-percentage"
               type="number"
               step="any"
-              value={seltzerPercentage}
+              value={drinks.hardSeltzers.percentage}
               onChange={handleSeltzerPercentageChange}
               className="ml-1 mt-1 border border-emerald-500 p-2 rounded size-[2rem] w-[4rem]"
             />
@@ -45,7 +64,7 @@ export const SeltzerCalculations = ({
               id="seltzer-average"
               type="number"
               step="any"
-              value={seltzerAverage}
+              value={drinks.hardSeltzers.average}
               onChange={handleSeltzerAverageChange}
               className="ml-1 mt-1 border border-emerald-500 p-2 rounded size-[2rem] w-[4rem]"
             />

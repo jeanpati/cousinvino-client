@@ -1,20 +1,35 @@
+import { useEffect } from "react";
 import { calculateStillWine750ml } from "../utils/calculations";
 
 export const WhiteWineCalculations = ({
   selectedDrinks,
-  setWhiteWineAverage,
-  whiteWineAverage,
-  setWhiteWinePercentage,
-  whiteWinePercentage,
+  drinks,
+  updateDrink,
+  numGuests,
+  eventHours,
 }) => {
+  useEffect(() => {
+    const whiteWineNeeded = calculateStillWine750ml(
+      drinks.whiteWine.percentage,
+      numGuests,
+      drinks.whiteWine.average,
+      eventHours
+    );
+    updateDrink("whiteWine", "needed", whiteWineNeeded);
+  }, [
+    numGuests,
+    eventHours,
+    drinks.whiteWine.percentage,
+    drinks.whiteWine.average,
+  ]);
   const handleWhiteWinePercentageChange = (e) => {
     if (e.target.value >= 0) {
-      setWhiteWinePercentage(Number(e.target.value));
+      updateDrink("whiteWine", "percentage", Number(e.target.value));
     }
   };
   const handleWhiteWineAverageChange = (e) => {
     if (e.target.value >= 0) {
-      setWhiteWineAverage(Number(e.target.value));
+      updateDrink("whiteWine", "average", Number(e.target.value));
     }
   };
 
@@ -22,7 +37,7 @@ export const WhiteWineCalculations = ({
     <section id="white-wine-details">
       {selectedDrinks.whiteWine && (
         <div
-          id="white-wine-details-wrapper"
+          id="white-wine-details-container"
           className="flex flex-col bg-blue-100 p-5 mb-1"
         >
           <label>
@@ -31,7 +46,7 @@ export const WhiteWineCalculations = ({
               id="white-wine-percentage"
               type="number"
               step="any"
-              value={whiteWinePercentage}
+              value={drinks.whiteWine.percentage}
               onChange={handleWhiteWinePercentageChange}
               className="ml-1 mt-1 border border-emerald-500 p-2 rounded size-[2rem] w-[4rem]"
             />
@@ -43,7 +58,7 @@ export const WhiteWineCalculations = ({
               id="white-wine-average"
               type="number"
               step="any"
-              value={whiteWineAverage}
+              value={drinks.whiteWine.average}
               onChange={handleWhiteWineAverageChange}
               className="ml-1 mt-1 border border-emerald-500 p-2 rounded size-[2rem] w-[4rem]"
             />

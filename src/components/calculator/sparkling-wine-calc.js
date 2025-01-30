@@ -1,20 +1,36 @@
+import { useEffect } from "react";
 import { calculateSparklingWine750ml } from "../utils/calculations";
 
 export const SparklingWineCalculations = ({
   selectedDrinks,
-  setSparklingWineAverage,
-  sparklingWineAverage,
-  setSparklingWinePercentage,
-  sparklingWinePercentage,
+  drinks,
+  updateDrink,
+  numGuests,
+  eventHours,
 }) => {
+  useEffect(() => {
+    const sparklingWineNeeded = calculateSparklingWine750ml(
+      drinks.sparklingWine.percentage,
+      numGuests,
+      drinks.sparklingWine.average,
+      eventHours
+    );
+    updateDrink("sparklingWine", "needed", sparklingWineNeeded);
+  }, [
+    numGuests,
+    eventHours,
+    drinks.sparklingWine.percentage,
+    drinks.sparklingWine.average,
+  ]);
+
   const handleSparklingWinePercentageChange = (e) => {
     if (e.target.value >= 0) {
-      setSparklingWinePercentage(Number(e.target.value));
+      updateDrink("sparklingWine", "percentage", Number(e.target.value));
     }
   };
   const handleSparklingWineAverageChange = (e) => {
     if (e.target.value >= 0) {
-      setSparklingWineAverage(Number(e.target.value));
+      updateDrink("sparklingWine", "average", Number(e.target.value));
     }
   };
 
@@ -22,7 +38,7 @@ export const SparklingWineCalculations = ({
     <section id="sparkling-wine-details">
       {selectedDrinks.sparklingWine && (
         <div
-          id="sparkling-wine-details-wrapper"
+          id="sparkling-wine-details-container"
           className="flex flex-col bg-blue-100 p-5 mb-1"
         >
           <label>
@@ -31,7 +47,7 @@ export const SparklingWineCalculations = ({
               id="sparkling-wine-percentage"
               type="number"
               step="any"
-              value={sparklingWinePercentage}
+              value={drinks.sparklingWine.percentage}
               onChange={handleSparklingWinePercentageChange}
               className="ml-1 mt-1 border border-emerald-500 p-2 rounded size-[2rem] w-[4rem]"
             />
@@ -43,7 +59,7 @@ export const SparklingWineCalculations = ({
               id="sparkling-wine-average"
               type="number"
               step="any"
-              value={sparklingWineAverage}
+              value={drinks.sparklingWine.average}
               onChange={handleSparklingWineAverageChange}
               className="ml-1 mt-1 border border-emerald-500 p-2 rounded size-[2rem] w-[4rem]"
             />
