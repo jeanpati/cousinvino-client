@@ -12,3 +12,11 @@ body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.dot {
+  height: 20rem;
+  width: 30rem;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+}

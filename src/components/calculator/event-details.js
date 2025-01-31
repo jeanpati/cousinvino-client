@@ -84,12 +84,9 @@ export const EventDetails = () => {
       className="grid grid-cols-1  md:grid-rows-2 gap-6 bg-teal-100 opacity-7 p-10 mt-2 rounded font-[family-name:var(--chakra)]"
     >
       <div>
-        <div
-          id="event-form-wrapper"
-          className="grid grid-cols-1  md:grid-cols-2 justify-between items-baseline  bg-red-100 opacity-7 rounded p-10"
-        >
-          <section id="event-details">
-            <div className="flex flex-col bg-emerald-50  p-3 mr-5 rounded">
+        <div id="event-details-wrapper" className="dot flex content-center">
+          <section id="event-details" className="flex justify-center">
+            <div className="flex flex-col">
               <EventForm
                 eventHours={eventHours}
                 setEventHours={setEventHours}
@@ -100,20 +97,23 @@ export const EventDetails = () => {
               />
               {drinksNeeded > 0 && (
                 <div>
-                  <p className="flex justify-self-center m-4 text-xl">
+                  <p className="flex justify-self-center mt-5 text-xl">
                     You&apos;re going to need {drinksNeeded} drinks
                   </p>
                 </div>
               )}
             </div>
           </section>
-          <section id="drink-selection" className="mt-3">
+        </div>
+
+        <div id="drink-selection-wrapper" className="dot flex content-center">
+          <section id="drink-selection" className="flex justify-center">
             {drinksNeeded > 0 && (
-              <div id="drink-selection-wrapper">
-                <h4 className="text-xl">
+              <div>
+                <h4 className="text-xl mb-3">
                   Which beverages would you like to serve?
                 </h4>
-                <div className="flex flex-col bg-emerald-50 p-3 rounded">
+                <div>
                   <DrinkSelections setSelectedDrinks={setSelectedDrinks} />
                 </div>
               </div>
