@@ -40,8 +40,8 @@ export const WhiteWineCalculations = ({
           id="white-wine-details-container"
           className="flex flex-col bg-blue-100 p-5 mb-1"
         >
+          <h6>White Wine</h6>
           <label>
-            What percentage of guests will drink white wine?
             <input
               id="white-wine-percentage"
               type="number"
@@ -50,10 +50,9 @@ export const WhiteWineCalculations = ({
               onChange={handleWhiteWinePercentageChange}
               className="ml-1 mt-1 border border-emerald-500 p-2 rounded size-[2rem] w-[4rem]"
             />
+            % guests
           </label>
           <label>
-            On average, how many glasses of white wine will a guest have per
-            hour?
             <input
               id="white-wine-average"
               type="number"
@@ -62,6 +61,7 @@ export const WhiteWineCalculations = ({
               onChange={handleWhiteWineAverageChange}
               className="ml-1 mt-1 border border-emerald-500 p-2 rounded size-[2rem] w-[4rem]"
             />
+            drinks/hour
           </label>
         </div>
       )}

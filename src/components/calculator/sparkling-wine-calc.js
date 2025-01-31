@@ -41,8 +41,8 @@ export const SparklingWineCalculations = ({
           id="sparkling-wine-details-container"
           className="flex flex-col bg-blue-100 p-5 mb-1"
         >
+          <h6>Sparkling Wine</h6>
           <label>
-            What percentage of guests will drink sparkling wine?
             <input
               id="sparkling-wine-percentage"
               type="number"
@@ -51,10 +51,9 @@ export const SparklingWineCalculations = ({
               onChange={handleSparklingWinePercentageChange}
               className="ml-1 mt-1 border border-emerald-500 p-2 rounded size-[2rem] w-[4rem]"
             />
+            % guests
           </label>
           <label>
-            On average, how many glasses of sparkling wine will a guest have per
-            hour?
             <input
               id="sparkling-wine-average"
               type="number"
@@ -63,6 +62,7 @@ export const SparklingWineCalculations = ({
               onChange={handleSparklingWineAverageChange}
               className="ml-1 mt-1 border border-emerald-500 p-2 rounded size-[2rem] w-[4rem]"
             />
+            drinks/hour
           </label>
         </div>
       )}

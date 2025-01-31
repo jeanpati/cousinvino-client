@@ -43,7 +43,6 @@ export const RedWineCalculations = ({
         >
           <h6>Red Wine</h6>
           <label>
-            What percentage of guests will drink red wine?
             <input
               id="red-wine-percentage"
               type="number"
@@ -52,9 +51,9 @@ export const RedWineCalculations = ({
               onChange={handleRedWinePercentageChange}
               className="ml-1 mt-1 border border-emerald-500 p-2 rounded size-[2rem] w-[4rem]"
             />
+            % guests
           </label>
           <label>
-            On average, how many glasses of red wine will a guest have per hour?
             <input
               id="red-wine-average"
               type="number"
@@ -63,6 +62,7 @@ export const RedWineCalculations = ({
               onChange={handleRedWineAverageChange}
               className="ml-1 mt-1 border border-emerald-500 p-2 rounded size-[2rem] w-[4rem]"
             />
+            drinks/hour
           </label>
         </div>
       )}

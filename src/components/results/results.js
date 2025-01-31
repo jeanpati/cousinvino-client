@@ -34,19 +34,27 @@ export const Results = ({ selectedDrinks, drinks, drinksNeeded }) => {
             (Serves {drinks.sparklingWine.needed * 6} glasses)
           </p>
         )}
-        {selectedDrinks.beer && drinks.beer.packSize > 0 && (
+
+        {selectedDrinks.beer && drinks.beer?.packSize > 0 ? (
           <p>
             You need {drinks.beer.needed} - {drinks.beer.packSize}pks of beer!
             (That&apos;s {drinks.beer.needed * drinks.beer.packSize} cans)
           </p>
-        )}
-        {selectedDrinks.hardSeltzers && drinks.hardSeltzers.packSize > 0 && (
+        ) : selectedDrinks.beer && drinks.beer?.packSize === 0 ? (
+          <p>Please select beer pack size</p>
+        ) : null}
+
+        {selectedDrinks.hardSeltzers && drinks.hardSeltzers?.packSize > 0 ? (
           <p>
             You need {drinks.hardSeltzers.needed} -{" "}
-            {drinks.hardSeltzers.packSize}pks of hard seltzer! (That&apos;s{" "}
+            {drinks.hardSeltzers.packSize}pks of hard seltzers! (That&apos;s{" "}
             {drinks.hardSeltzers.needed * drinks.hardSeltzers.packSize} cans)
           </p>
-        )}
+        ) : selectedDrinks.hardSeltzers &&
+          drinks.hardSeltzers?.packSize === 0 ? (
+          <p>Please select hard seltzers pack size</p>
+        ) : null}
+
         {totalDrinks > drinksNeeded && (
           <p>
             You&apos;re in good shape! You have more than enough drinks!{" "}
