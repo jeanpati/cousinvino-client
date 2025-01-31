@@ -84,41 +84,52 @@ export const EventDetails = () => {
       className="grid grid-cols-1  md:grid-rows-2 gap-6 bg-teal-100 opacity-7 p-10 mt-2 rounded font-[family-name:var(--chakra)]"
     >
       <div>
-        <div id="event-details-wrapper" className="dot flex content-center">
-          <section id="event-details" className="flex justify-center">
-            <div className="flex flex-col">
-              <EventForm
-                eventHours={eventHours}
-                setEventHours={setEventHours}
-                avgNumDrinks={avgNumDrinks}
-                setAvgNumDrinks={setAvgNumDrinks}
-                numGuests={numGuests}
-                setNumGuests={setNumGuests}
-              />
+        <div
+          id="details-selection-wrapper"
+          className="flex flex-col md:flex-row "
+        >
+          <div
+            id="event-details-wrapper"
+            className="dot flex content-center p-8"
+          >
+            <section id="event-details" className="flex justify-center">
+              <div className="flex flex-col ">
+                <EventForm
+                  eventHours={eventHours}
+                  setEventHours={setEventHours}
+                  avgNumDrinks={avgNumDrinks}
+                  setAvgNumDrinks={setAvgNumDrinks}
+                  numGuests={numGuests}
+                  setNumGuests={setNumGuests}
+                />
+                {drinksNeeded > 0 && (
+                  <div>
+                    <p className="flex justify-self-center mt-5 text-xl">
+                      You&apos;re going to need {drinksNeeded} drinks
+                    </p>
+                  </div>
+                )}
+              </div>
+            </section>
+          </div>
+
+          <div
+            id="drink-selection-wrapper"
+            className="dot flex content-center "
+          >
+            <section id="drink-selection" className="flex justify-center p-8">
               {drinksNeeded > 0 && (
                 <div>
-                  <p className="flex justify-self-center mt-5 text-xl">
-                    You&apos;re going to need {drinksNeeded} drinks
-                  </p>
+                  <h4 className="text-xl mb-3">
+                    Which beverages would you like to serve?
+                  </h4>
+                  <div>
+                    <DrinkSelections setSelectedDrinks={setSelectedDrinks} />
+                  </div>
                 </div>
               )}
-            </div>
-          </section>
-        </div>
-
-        <div id="drink-selection-wrapper" className="dot flex content-center">
-          <section id="drink-selection" className="flex justify-center">
-            {drinksNeeded > 0 && (
-              <div>
-                <h4 className="text-xl mb-3">
-                  Which beverages would you like to serve?
-                </h4>
-                <div>
-                  <DrinkSelections setSelectedDrinks={setSelectedDrinks} />
-                </div>
-              </div>
-            )}
-          </section>
+            </section>
+          </div>
         </div>
         <section id="drink-details" className="flex flex-col">
           {Object.values(selectedDrinks).some((isTrue) => isTrue) && (
