@@ -86,12 +86,9 @@ export const EventDetails = () => {
       <div>
         <div
           id="event-form-wrapper"
-          className="grid grid-cols-1  md:grid-cols-2 justify-between items-baseline place-content-center bg-red-100 opacity-7 rounded p-10"
+          className="grid grid-cols-1  md:grid-cols-2 justify-between items-baseline  bg-red-100 opacity-7 rounded p-10"
         >
           <section id="event-details">
-            <h4 className="text-xl">
-              Let&apos;s calculate how many drinks you&apos;ll need
-            </h4>
             <div className="flex flex-col bg-emerald-50  p-3 mr-5 rounded">
               <EventForm
                 eventHours={eventHours}
@@ -136,7 +133,7 @@ export const EventDetails = () => {
               >
                 <div
                   id="percentage-scale-wrapper"
-                  className=" my-10 h-20 align-center max-w-auto"
+                  className=" mt-12 mr-4 h-20 align-center max-w-auto"
                 >
                   <PercentageScale
                     selectedDrinks={selectedDrinks}
@@ -144,7 +141,7 @@ export const EventDetails = () => {
                     drinks={drinks}
                   />
                 </div>
-                <div className="grid  grid grid-cols-1  md:grid-cols-5">
+                <div className="flex flex-wrap basis-full justify-center md:justify-start ">
                   <RedWineCalculations
                     selectedDrinks={selectedDrinks}
                     drinks={drinks}

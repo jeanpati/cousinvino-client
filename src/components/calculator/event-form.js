@@ -22,9 +22,9 @@ export const EventForm = ({
     }
   };
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col flex-space-between">
       <label htmlFor="event-hours">
-        How long is your event? (hours)
+        Event length (hours):
         <input
           id="event-hours"
           type="number"
@@ -35,7 +35,7 @@ export const EventForm = ({
         />
       </label>
       <label htmlFor="num-of-guests">
-        How many guests will be drinking?
+        Number of guests drinking:
         <input
           id="num-of-guests"
           type="number"
@@ -46,7 +46,7 @@ export const EventForm = ({
         />
       </label>
       <label htmlFor="avg-drinks">
-        On average, how many drinks will one guest have per hour?
+        Average # of drinks per hour (1 guest):
         <input
           id="avg-drinks"
           type="number"
