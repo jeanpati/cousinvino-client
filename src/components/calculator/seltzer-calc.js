@@ -9,14 +9,16 @@ export const SeltzerCalculations = ({
   eventHours,
 }) => {
   useEffect(() => {
-    const hardSeltzerNeeded = calculateCannedBeverages(
-      drinks.hardSeltzers.percentage,
-      numGuests,
-      drinks.hardSeltzers.average,
-      eventHours,
-      drinks.hardSeltzers.packSize
-    );
-    updateDrink("hardSeltzers", "needed", hardSeltzerNeeded);
+    if (selectedDrinks.hardSeltzers) {
+      const hardSeltzerNeeded = calculateCannedBeverages(
+        drinks.hardSeltzers.percentage,
+        numGuests,
+        drinks.hardSeltzers.average,
+        eventHours,
+        drinks.hardSeltzers.packSize
+      );
+      updateDrink("hardSeltzers", "needed", hardSeltzerNeeded);
+    }
   }, [
     numGuests,
     eventHours,
@@ -44,33 +46,24 @@ export const SeltzerCalculations = ({
       {selectedDrinks.hardSeltzers && (
         <div
           id="seltzer-details-container"
-          className=" flex flex-col bg-blue-100 p-5 mb-1"
+          className=" flex flex-col bg-blue-100 p-5 mb-1 rounded-2xl"
         >
+          {" "}
+          <h6>Hard Seltzers</h6>
+          <label>{Math.round(drinks.hardSeltzers.percentage, 2)}% guests</label>
           <label>
-            What percentage of guests will drink hard seltzer?
-            <input
-              id="seltzer-percentage"
-              type="number"
-              step="any"
-              value={drinks.hardSeltzers.percentage}
-              onChange={handleSeltzerPercentageChange}
-              className="ml-1 mt-1 border border-emerald-500 p-2 rounded size-[2rem] w-[4rem]"
-            />
-          </label>
-          <label>
-            On average, how many cans of hard seltzer will a guest have per
-            hour?
             <input
               id="seltzer-average"
               type="number"
               step="any"
               value={drinks.hardSeltzers.average}
               onChange={handleSeltzerAverageChange}
-              className="ml-1 mt-1 border border-emerald-500 p-2 rounded size-[2rem] w-[4rem]"
+              className="ml-1 mt-1 border border-emerald-500 p-2 rounded size-[2rem] w-[3rem]"
             />
+            drinks/hour
           </label>
-          <label>
-            What size hard seltzer packs will you purchase?
+          <label className="mt-3">
+            Pack size:
             <div
               id="pack-options"
               className="grid grid-rows-2 grid-flow-col gap-2"

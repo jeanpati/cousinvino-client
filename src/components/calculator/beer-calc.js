@@ -9,14 +9,16 @@ export const BeerCalculations = ({
   eventHours,
 }) => {
   useEffect(() => {
-    const beerNeeded = calculateCannedBeverages(
-      drinks.beer.percentage,
-      numGuests,
-      drinks.beer.average,
-      eventHours,
-      drinks.beer.packSize
-    );
-    updateDrink("beer", "needed", beerNeeded);
+    if (selectedDrinks.beer) {
+      const beerNeeded = calculateCannedBeverages(
+        drinks.beer.percentage,
+        numGuests,
+        drinks.beer.average,
+        eventHours,
+        drinks.beer.packSize
+      );
+      updateDrink("beer", "needed", beerNeeded);
+    }
   }, [
     numGuests,
     eventHours,
@@ -44,32 +46,23 @@ export const BeerCalculations = ({
       {selectedDrinks.beer && (
         <div
           id="beer-details-container"
-          className=" flex flex-col bg-blue-100 p-5 mb-1"
+          className=" flex flex-col bg-blue-100 p-5 mb-1 rounded-2xl"
         >
+          <h6>Beer</h6>
+          <label>{Math.round(drinks.beer.percentage, 2)}% guests</label>
           <label>
-            What percentage of guests will drink beer?
-            <input
-              id="beer-percentage"
-              type="number"
-              step="any"
-              value={drinks.beer.percentage}
-              onChange={handleBeerPercentageChange}
-              className="ml-1 mt-1 border border-emerald-500 p-2 rounded size-[2rem] w-[4rem]"
-            />
-          </label>
-          <label>
-            On average, how many cans of beer will a guest have per hour?
             <input
               id="beer-average"
               type="number"
               step="any"
               value={drinks.beer.average}
               onChange={handleBeerAverageChange}
-              className="ml-1 mt-1 border border-emerald-500 p-2 rounded size-[2rem] w-[4rem]"
+              className="ml-1 mt-1 border border-emerald-500 p-2 rounded size-[2rem] w-[3rem]"
             />
+            drinks/hour
           </label>
-          <label>
-            What size beer packs will you purchase?
+          <label className="mt-3">
+            Pack size:
             <div
               id="pack-options"
               className="grid grid-rows-2 grid-flow-col gap-2"

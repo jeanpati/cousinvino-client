@@ -9,13 +9,15 @@ export const RedWineCalculations = ({
   eventHours,
 }) => {
   useEffect(() => {
-    const redWineNeeded = calculateStillWine750ml(
-      drinks.redWine.percentage,
-      numGuests,
-      drinks.redWine.average,
-      eventHours
-    );
-    updateDrink("redWine", "needed", redWineNeeded);
+    if (selectedDrinks.redWine) {
+      const redWineNeeded = calculateStillWine750ml(
+        drinks.redWine.percentage,
+        numGuests,
+        drinks.redWine.average,
+        eventHours
+      );
+      updateDrink("redWine", "needed", redWineNeeded);
+    }
   }, [
     numGuests,
     eventHours,
@@ -39,30 +41,20 @@ export const RedWineCalculations = ({
       {selectedDrinks.redWine && (
         <div
           id="red-wine-details-container"
-          className=" flex flex-col bg-blue-100 p-5 mb-1"
+          className=" flex flex-col bg-blue-100 p-5 mb-1 rounded-2xl"
         >
           <h6>Red Wine</h6>
+          <label>{Math.round(drinks.redWine.percentage, 2)}% guests</label>
           <label>
-            What percentage of guests will drink red wine?
-            <input
-              id="red-wine-percentage"
-              type="number"
-              step="any"
-              value={drinks.redWine.percentage}
-              onChange={handleRedWinePercentageChange}
-              className="ml-1 mt-1 border border-emerald-500 p-2 rounded size-[2rem] w-[4rem]"
-            />
-          </label>
-          <label>
-            On average, how many glasses of red wine will a guest have per hour?
             <input
               id="red-wine-average"
               type="number"
               step="any"
               value={drinks.redWine.average}
               onChange={handleRedWineAverageChange}
-              className="ml-1 mt-1 border border-emerald-500 p-2 rounded size-[2rem] w-[4rem]"
+              className="ml-1 mt-1 border border-emerald-500 p-2 rounded size-[2rem] w-[3rem]"
             />
+            drinks/hour
           </label>
         </div>
       )}

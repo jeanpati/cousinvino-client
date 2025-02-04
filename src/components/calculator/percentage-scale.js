@@ -43,6 +43,7 @@ export const PercentageScale = ({ selectedDrinks, setDrinks, drinks }) => {
   if (selectedBeverageKeys.length === 0) return null;
 
   let sumOfPercentages = 0;
+
   const calculateThumbValues = selectedBeverageKeys.map((drink) => {
     sumOfPercentages += drinks[drink]?.percentage || 0;
     return sumOfPercentages;
@@ -79,10 +80,18 @@ export const PercentageScale = ({ selectedDrinks, setDrinks, drinks }) => {
   const STEP = 1;
   const MIN = 0;
   const MAX = 100;
-  const COLORS = ["blue", "yellow", "red", "purple", "green", "pink", "silver"];
+  const COLORS = [
+    "red",
+    "yellow",
+    "orange",
+    "purple",
+    "green",
+    "pink",
+    "silver",
+  ];
 
   return (
-    <div id="scale-container" className="flex flex-center">
+    <div id="scale-container" className="flex flex-wrap justify-center text-xs">
       <Range
         key={`${selectedBeverageKeys.join("-")}-track`} //re-renders the track when new thumbs are generated
         draggableTrack
@@ -141,12 +150,14 @@ export const PercentageScale = ({ selectedDrinks, setDrinks, drinks }) => {
               <div
                 key={`${index}-label`}
                 style={{
+                  display: "flex",
+                  justifyContent: "center",
                   position: "absolute",
-                  bottom: "2rem",
+                  bottom: "1.5rem",
                   textAlign: "center",
                   fontSize: "12px",
                   color: "#000000",
-                  width: "100%",
+                  width: "full",
                 }}
               >
                 {beverageName} ({percentage}%)
@@ -157,9 +168,9 @@ export const PercentageScale = ({ selectedDrinks, setDrinks, drinks }) => {
                   position: "relative",
                   width: 0,
                   height: 0,
-                  borderLeft: "10px solid transparent",
-                  borderRight: "10px solid transparent",
-                  borderTop: `15px solid ${isDragged ? COLORS[index] : "#AAA"}`,
+                  borderLeft: "5px solid transparent",
+                  borderRight: "5px solid transparent",
+                  borderTop: `8px solid ${isDragged ? COLORS[index] : "#AAA"}`,
                   transform: "translateY(-1rem)",
                 }}
               />
@@ -167,6 +178,9 @@ export const PercentageScale = ({ selectedDrinks, setDrinks, drinks }) => {
           );
         }}
       />
+      <div className="bg-blue-50 backdrop-blur-md rounded-full px-4 py-2">
+        <p>drag to adjust percentages</p>
+      </div>
     </div>
   );
 };
