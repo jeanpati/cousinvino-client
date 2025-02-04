@@ -2,11 +2,6 @@
 import { useEffect, useState } from "react";
 import { EventForm } from "./event-form";
 import { DrinkSelections } from "./drink-selection";
-import { RedWineCalculations } from "./red-wine-calc";
-import { WhiteWineCalculations } from "./white-wine-calc";
-import { SparklingWineCalculations } from "./sparkling-wine-calc";
-import { BeerCalculations } from "./beer-calc";
-import { SeltzerCalculations } from "./seltzer-calc";
 import { Results } from "../results/results";
 import { PercentageScale } from "./percentage-scale";
 
@@ -149,41 +144,6 @@ export const EventDetails = () => {
                   <PercentageScale
                     selectedDrinks={selectedDrinks}
                     setDrinks={setDrinks}
-                    drinks={drinks}
-                  />
-                </div>
-                <div className="flex flex-col flex-wrap justify-between basis-full justify-center gap-1 md:flex-row">
-                  <RedWineCalculations
-                    selectedDrinks={selectedDrinks}
-                    drinks={drinks}
-                    updateDrink={updateDrink}
-                    numGuests={numGuests}
-                    eventHours={eventHours}
-                  />
-                  <WhiteWineCalculations
-                    selectedDrinks={selectedDrinks}
-                    drinks={drinks}
-                    updateDrink={updateDrink}
-                    numGuests={numGuests}
-                    eventHours={eventHours}
-                    className="mr-4"
-                  />
-                  <SparklingWineCalculations
-                    selectedDrinks={selectedDrinks}
-                    drinks={drinks}
-                    updateDrink={updateDrink}
-                    numGuests={numGuests}
-                    eventHours={eventHours}
-                  />
-                  <BeerCalculations
-                    selectedDrinks={selectedDrinks}
-                    drinks={drinks}
-                    updateDrink={updateDrink}
-                    numGuests={numGuests}
-                    eventHours={eventHours}
-                  />
-                  <SeltzerCalculations
-                    selectedDrinks={selectedDrinks}
                     drinks={drinks}
                     updateDrink={updateDrink}
                     numGuests={numGuests}

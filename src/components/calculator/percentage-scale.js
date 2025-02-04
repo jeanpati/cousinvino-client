@@ -1,9 +1,21 @@
 import { useEffect, useMemo, useState } from "react";
 import { getTrackBackground, Range } from "react-range";
+import { RedWineCalculations } from "./red-wine-calc";
+import { WhiteWineCalculations } from "./white-wine-calc";
+import { SparklingWineCalculations } from "./sparkling-wine-calc";
+import { BeerCalculations } from "./beer-calc";
+import { SeltzerCalculations } from "./seltzer-calc";
+import { SliderSelection } from "./slider-selection";
 
-export const PercentageScale = ({ selectedDrinks, setDrinks, drinks }) => {
-  const [checked, setChecked] = useState("split");
-
+export const PercentageScale = ({
+  selectedDrinks,
+  setDrinks,
+  drinks,
+  updateDrink,
+  numGuests,
+  eventHours,
+}) => {
+  const [sliderChecked, setSliderChecked] = useState("split");
   const selectedBeverageKeys = useMemo(
     () => Object.keys(selectedDrinks).filter((drink) => selectedDrinks[drink]),
     [selectedDrinks]
@@ -92,46 +104,50 @@ export const PercentageScale = ({ selectedDrinks, setDrinks, drinks }) => {
     "silver",
   ];
 
-  const handleRadioChange = (e) => {
-    setChecked(e.target.value);
-  };
   return (
     <div id="scale-container" className="flex flex-col content-around">
-      <section
-        id="slider-selection"
-        className=" flex flex-col items-start p-2 bg-white rounded-xl max-w-[10rem] min-w-[8rem] mb-5 text-xs"
-      >
-        <fieldset>
-          <div>
-            <input
-              type="radio"
-              id="split"
-              value="split"
-              name="slider-view"
-              className="ml-1 mb-2 border border-emerald-500 rounded"
-              onChange={handleRadioChange}
-              defaultChecked
-            />
-            <label htmlFor="split" className="mr-5">
-              Split view{" "}
-            </label>
-          </div>
-          <div>
-            <input
-              type="radio"
-              id="combined"
-              value="combined"
-              name="slider-view"
-              className="ml-1 border border-emerald-500 rounded"
-              onChange={handleRadioChange}
-            />
-            <label htmlFor="combined" className="mr-5">
-              Combined view{" "}
-            </label>
-          </div>
-        </fieldset>
-      </section>
-      {checked === "combined" && (
+      <SliderSelection setSliderChecked={setSliderChecked} />
+      {sliderChecked === "split" && (
+        <section
+          id="split-view"
+          className="flex flex-col justify-center text-md mt-10"
+        >
+          {selectedBeverageKeys.map((beverage) => {
+            const beverageName = drinks[beverage]?.name || "";
+            const percentage = Math.round(drinks[beverage]?.percentage, 2) || 0;
+            return (
+              <fieldset key={beverage} className="flex flex-col h-16">
+                <label htmlFor={beverage} className="mr-5">
+                  {beverageName}
+                </label>
+                <label>
+                  <input
+                    id={`${beverage}-average`}
+                    type="number"
+                    step="any"
+                    value={drinks[beverage].average}
+                    className="ml-1 mt-1 border border-emerald-500 p-2 rounded size-[2rem] w-[3rem]"
+                  />
+                  drinks/hour
+                </label>
+                <label>
+                  <input
+                    id={`${beverage}-percentage`}
+                    type="number"
+                    step="any"
+                    value={drinks[beverage].percentage}
+                    className="ml-1 mt-1 border border-emerald-500 p-2 rounded size-[2rem] w-[3rem]"
+                  />
+                  %
+                </label>
+                <input type="range" />
+              </fieldset>
+            );
+          })}
+        </section>
+      )}
+
+      {sliderChecked === "combined" && (
         <section
           id="combined-view"
           className="flex flex-wrap justify-center text-xs mt-10"
@@ -200,7 +216,7 @@ export const PercentageScale = ({ selectedDrinks, setDrinks, drinks }) => {
                       position: "absolute",
                       bottom: "1.5rem",
                       textAlign: "center",
-                      fontSize: "12px",
+                      fontSize: "1rem",
                       color: "#000000",
                       width: "full",
                     }}
@@ -225,6 +241,44 @@ export const PercentageScale = ({ selectedDrinks, setDrinks, drinks }) => {
           />
           <div className="bg-blue-50 backdrop-blur-md rounded-full px-4 py-2">
             <p>drag to adjust percentages</p>
+          </div>
+          <div className="flex flex-col flex-wrap justify-between basis-full justify-center gap-1 md:flex-row">
+            <RedWineCalculations
+              selectedDrinks={selectedDrinks}
+              drinks={drinks}
+              updateDrink={updateDrink}
+              numGuests={numGuests}
+              eventHours={eventHours}
+            />
+            <WhiteWineCalculations
+              selectedDrinks={selectedDrinks}
+              drinks={drinks}
+              updateDrink={updateDrink}
+              numGuests={numGuests}
+              eventHours={eventHours}
+              className="mr-4"
+            />
+            <SparklingWineCalculations
+              selectedDrinks={selectedDrinks}
+              drinks={drinks}
+              updateDrink={updateDrink}
+              numGuests={numGuests}
+              eventHours={eventHours}
+            />
+            <BeerCalculations
+              selectedDrinks={selectedDrinks}
+              drinks={drinks}
+              updateDrink={updateDrink}
+              numGuests={numGuests}
+              eventHours={eventHours}
+            />
+            <SeltzerCalculations
+              selectedDrinks={selectedDrinks}
+              drinks={drinks}
+              updateDrink={updateDrink}
+              numGuests={numGuests}
+              eventHours={eventHours}
+            />
           </div>
         </section>
       )}
