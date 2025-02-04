@@ -43,6 +43,7 @@ export const PercentageScale = ({ selectedDrinks, setDrinks, drinks }) => {
   if (selectedBeverageKeys.length === 0) return null;
 
   let sumOfPercentages = 0;
+
   const calculateThumbValues = selectedBeverageKeys.map((drink) => {
     sumOfPercentages += drinks[drink]?.percentage || 0;
     return sumOfPercentages;
@@ -90,7 +91,7 @@ export const PercentageScale = ({ selectedDrinks, setDrinks, drinks }) => {
   ];
 
   return (
-    <div id="scale-container" className="flex flex-center">
+    <div id="scale-container" className="flex flex-wrap justify-center text-xs">
       <Range
         key={`${selectedBeverageKeys.join("-")}-track`} //re-renders the track when new thumbs are generated
         draggableTrack
@@ -177,6 +178,9 @@ export const PercentageScale = ({ selectedDrinks, setDrinks, drinks }) => {
           );
         }}
       />
+      <div className="bg-blue-50 backdrop-blur-md rounded-full px-4 py-2">
+        <p>drag to adjust percentages</p>
+      </div>
     </div>
   );
 };

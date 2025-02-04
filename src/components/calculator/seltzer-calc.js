@@ -9,14 +9,16 @@ export const SeltzerCalculations = ({
   eventHours,
 }) => {
   useEffect(() => {
-    const hardSeltzerNeeded = calculateCannedBeverages(
-      drinks.hardSeltzers.percentage,
-      numGuests,
-      drinks.hardSeltzers.average,
-      eventHours,
-      drinks.hardSeltzers.packSize
-    );
-    updateDrink("hardSeltzers", "needed", hardSeltzerNeeded);
+    if (selectedDrinks.hardSeltzers) {
+      const hardSeltzerNeeded = calculateCannedBeverages(
+        drinks.hardSeltzers.percentage,
+        numGuests,
+        drinks.hardSeltzers.average,
+        eventHours,
+        drinks.hardSeltzers.packSize
+      );
+      updateDrink("hardSeltzers", "needed", hardSeltzerNeeded);
+    }
   }, [
     numGuests,
     eventHours,
@@ -44,21 +46,11 @@ export const SeltzerCalculations = ({
       {selectedDrinks.hardSeltzers && (
         <div
           id="seltzer-details-container"
-          className=" flex flex-col bg-blue-100 p-5 mb-1"
+          className=" flex flex-col bg-blue-100 p-5 mb-1 rounded-2xl"
         >
           {" "}
           <h6>Hard Seltzers</h6>
-          <label>
-            <input
-              id="seltzer-percentage"
-              type="number"
-              step="any"
-              value={drinks.hardSeltzers.percentage}
-              onChange={handleSeltzerPercentageChange}
-              className="ml-1 mt-1 border border-emerald-500 p-2 rounded size-[2rem] w-[4rem]"
-            />
-            % guests
-          </label>
+          <label>{Math.round(drinks.hardSeltzers.percentage, 2)}% guests</label>
           <label>
             <input
               id="seltzer-average"
@@ -66,11 +58,11 @@ export const SeltzerCalculations = ({
               step="any"
               value={drinks.hardSeltzers.average}
               onChange={handleSeltzerAverageChange}
-              className="ml-1 mt-1 border border-emerald-500 p-2 rounded size-[2rem] w-[4rem]"
+              className="ml-1 mt-1 border border-emerald-500 p-2 rounded size-[2rem] w-[3rem]"
             />
             drinks/hour
           </label>
-          <label>
+          <label className="mt-3">
             Pack size:
             <div
               id="pack-options"

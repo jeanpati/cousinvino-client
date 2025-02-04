@@ -9,13 +9,15 @@ export const SparklingWineCalculations = ({
   eventHours,
 }) => {
   useEffect(() => {
-    const sparklingWineNeeded = calculateSparklingWine750ml(
-      drinks.sparklingWine.percentage,
-      numGuests,
-      drinks.sparklingWine.average,
-      eventHours
-    );
-    updateDrink("sparklingWine", "needed", sparklingWineNeeded);
+    if (selectedDrinks.sparklingWine) {
+      const sparklingWineNeeded = calculateSparklingWine750ml(
+        drinks.sparklingWine.percentage,
+        numGuests,
+        drinks.sparklingWine.average,
+        eventHours
+      );
+      updateDrink("sparklingWine", "needed", sparklingWineNeeded);
+    }
   }, [
     numGuests,
     eventHours,
@@ -39,19 +41,11 @@ export const SparklingWineCalculations = ({
       {selectedDrinks.sparklingWine && (
         <div
           id="sparkling-wine-details-container"
-          className="flex flex-col bg-blue-100 p-5 mb-1"
+          className="flex flex-col bg-blue-100 p-5 mb-1 rounded-2xl"
         >
           <h6>Sparkling Wine</h6>
           <label>
-            <input
-              id="sparkling-wine-percentage"
-              type="number"
-              step="any"
-              value={drinks.sparklingWine.percentage}
-              onChange={handleSparklingWinePercentageChange}
-              className="ml-1 mt-1 border border-emerald-500 p-2 rounded size-[2rem] w-[4rem]"
-            />
-            % guests
+            {Math.round(drinks.sparklingWine.percentage, 2)}% guests
           </label>
           <label>
             <input
@@ -60,7 +54,7 @@ export const SparklingWineCalculations = ({
               step="any"
               value={drinks.sparklingWine.average}
               onChange={handleSparklingWineAverageChange}
-              className="ml-1 mt-1 border border-emerald-500 p-2 rounded size-[2rem] w-[4rem]"
+              className="ml-1 mt-1 border border-emerald-500 p-2 rounded size-[2rem] w-[3rem]"
             />
             drinks/hour
           </label>

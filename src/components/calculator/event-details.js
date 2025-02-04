@@ -69,10 +69,10 @@ export const EventDetails = () => {
     (numGuests || 0) * (avgNumDrinks || 0) * (eventHours || 0);
 
   const updateDrink = (drinkType, key, value) => {
-    setDrinks((prev) => ({
-      ...prev,
+    setDrinks((drinksCopy) => ({
+      ...drinksCopy,
       [drinkType]: {
-        ...prev[drinkType],
+        ...drinksCopy[drinkType],
         [key]: value,
       },
     }));
@@ -135,12 +135,12 @@ export const EventDetails = () => {
           {Object.values(selectedDrinks).some((isTrue) => isTrue) && (
             <div
               id="drink-questions-wrapper"
-              className="flex flex-col bg-yellow-100 p-10 mt-1 rounded"
+              className="flex flex-col bg-yellow-100 p-10 mt-1 rounded content-center "
             >
               <h4 className="text-xl">Beverage Percentages</h4>
               <section
                 id="drink-questions"
-                className="flex flex-col bg-emerald-50 p-10 mt-5 rounded"
+                className="flex flex-col bg-emerald-50 p-10 mt-5 rounded-lg"
               >
                 <div
                   id="percentage-scale-wrapper"
@@ -152,7 +152,7 @@ export const EventDetails = () => {
                     drinks={drinks}
                   />
                 </div>
-                <div className="flex flex-wrap basis-full justify-center md:justify-start ">
+                <div className="flex flex-col flex-wrap justify-between basis-full justify-center gap-1 md:flex-row">
                   <RedWineCalculations
                     selectedDrinks={selectedDrinks}
                     drinks={drinks}

@@ -9,13 +9,15 @@ export const WhiteWineCalculations = ({
   eventHours,
 }) => {
   useEffect(() => {
-    const whiteWineNeeded = calculateStillWine750ml(
-      drinks.whiteWine.percentage,
-      numGuests,
-      drinks.whiteWine.average,
-      eventHours
-    );
-    updateDrink("whiteWine", "needed", whiteWineNeeded);
+    if (selectedDrinks.whiteWine) {
+      const whiteWineNeeded = calculateStillWine750ml(
+        drinks.whiteWine.percentage,
+        numGuests,
+        drinks.whiteWine.average,
+        eventHours
+      );
+      updateDrink("whiteWine", "needed", whiteWineNeeded);
+    }
   }, [
     numGuests,
     eventHours,
@@ -38,20 +40,10 @@ export const WhiteWineCalculations = ({
       {selectedDrinks.whiteWine && (
         <div
           id="white-wine-details-container"
-          className="flex flex-col bg-blue-100 p-5 mb-1"
+          className="flex flex-col bg-blue-100 p-5 mb-1 rounded-2xl"
         >
           <h6>White Wine</h6>
-          <label>
-            <input
-              id="white-wine-percentage"
-              type="number"
-              step="any"
-              value={drinks.whiteWine.percentage}
-              onChange={handleWhiteWinePercentageChange}
-              className="ml-1 mt-1 border border-emerald-500 p-2 rounded size-[2rem] w-[4rem]"
-            />
-            % guests
-          </label>
+          <label>{Math.round(drinks.whiteWine.percentage, 2)}% guests</label>
           <label>
             <input
               id="white-wine-average"
@@ -59,7 +51,7 @@ export const WhiteWineCalculations = ({
               step="any"
               value={drinks.whiteWine.average}
               onChange={handleWhiteWineAverageChange}
-              className="ml-1 mt-1 border border-emerald-500 p-2 rounded size-[2rem] w-[4rem]"
+              className="ml-1 mt-1 border border-emerald-500 p-2 rounded size-[2rem] w-[3rem]"
             />
             drinks/hour
           </label>
