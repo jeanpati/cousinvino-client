@@ -1,7 +1,4 @@
-export const SliderSelection = ({ setSliderChecked }) => {
-  const handleRadioChange = (e) => {
-    setSliderChecked(e.target.value);
-  };
+export const SliderSelection = ({ handleRadioChange }) => {
   return (
     <section
       id="slider-selection"

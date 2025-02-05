@@ -1,11 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
-import { getTrackBackground, Range } from "react-range";
-import { RedWineCalculations } from "./red-wine-calc";
-import { WhiteWineCalculations } from "./white-wine-calc";
-import { SparklingWineCalculations } from "./sparkling-wine-calc";
-import { BeerCalculations } from "./beer-calc";
-import { SeltzerCalculations } from "./seltzer-calc";
+
 import { SliderSelection } from "./slider-selection";
+import { CombinedSlider } from "./slider-views/combined-slider";
 
 export const PercentageScale = ({
   selectedDrinks,
@@ -104,9 +100,18 @@ export const PercentageScale = ({
     "silver",
   ];
 
+  const handleRadioChange = (e) => {
+    setSliderChecked(e.target.value);
+  };
+
+  const handleBeverageAverageChange = (e, beverage) => {
+    if (e.target.value >= 0) {
+      updateDrink(`${beverage}`, "average", Number(e.target.value));
+    }
+  };
   return (
     <div id="scale-container" className="flex flex-col content-around">
-      <SliderSelection setSliderChecked={setSliderChecked} />
+      <SliderSelection handleRadioChange={handleRadioChange} />
       {sliderChecked === "split" && (
         <section
           id="split-view"
@@ -126,6 +131,7 @@ export const PercentageScale = ({
                     type="number"
                     step="any"
                     value={drinks[beverage].average}
+                    onChange={handleBeverageAverageChange}
                     className="ml-1 mt-1 border border-emerald-500 p-2 rounded size-[2rem] w-[3rem]"
                   />
                   drinks/hour
@@ -135,7 +141,6 @@ export const PercentageScale = ({
                     id={`${beverage}-percentage`}
                     type="number"
                     step="any"
-                    value={drinks[beverage].percentage}
                     className="ml-1 mt-1 border border-emerald-500 p-2 rounded size-[2rem] w-[3rem]"
                   />
                   %
@@ -146,142 +151,16 @@ export const PercentageScale = ({
           })}
         </section>
       )}
-
-      {sliderChecked === "combined" && (
-        <section
-          id="combined-view"
-          className="flex flex-wrap justify-center text-xs mt-10"
-        >
-          <Range
-            key={`${selectedBeverageKeys.join("-")}-track`} //re-renders the track when new thumbs are generated
-            draggableTrack
-            values={calculateThumbValues}
-            step={STEP}
-            min={MIN}
-            max={MAX}
-            onChange={handleThumbChange}
-            renderTrack={({ props, children }) => (
-              <div
-                onMouseDown={props.onMouseDown}
-                onTouchStart={props.onTouchStart}
-                style={{
-                  ...props.style,
-                  height: "2rem",
-                  display: "flex",
-                  width: "100%",
-                }}
-              >
-                <div
-                  ref={props.ref}
-                  style={{
-                    height: "1.5rem",
-                    width: "100%",
-                    borderRadius: "4px",
-                    background: getTrackBackground({
-                      values: calculateThumbValues,
-                      colors: COLORS,
-                      min: MIN,
-                      max: MAX,
-                    }),
-                    alignSelf: "center",
-                  }}
-                >
-                  {children}
-                </div>
-              </div>
-            )}
-            renderThumb={({ props, isDragged, index }) => {
-              const beverage = selectedBeverageKeys[index];
-              const beverageName = drinks[beverage]?.name || "";
-              const percentage =
-                Math.round(drinks[beverage]?.percentage, 2) || 0;
-              const isLastThumb = index === selectedBeverageKeys.length - 1;
-              return (
-                <div
-                  {...props}
-                  key={props.key}
-                  style={{
-                    ...props.style,
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    pointerEvents: isLastThumb ? "none" : "auto",
-                  }}
-                >
-                  <div
-                    key={`${index}-label`}
-                    style={{
-                      display: "flex",
-                      justifyContent: "center",
-                      position: "absolute",
-                      bottom: "1.5rem",
-                      textAlign: "center",
-                      fontSize: "1rem",
-                      color: "#000000",
-                      width: "full",
-                    }}
-                  >
-                    {beverageName} ({percentage}%)
-                  </div>
-                  <div
-                    key={`${index}-arrow`}
-                    style={{
-                      position: "relative",
-                      width: 0,
-                      height: 0,
-                      borderLeft: "5px solid transparent",
-                      borderRight: "5px solid transparent",
-                      borderTop: `8px solid ${isDragged ? COLORS[index] : "#AAA"}`,
-                      transform: "translateY(-1rem)",
-                    }}
-                  />
-                </div>
-              );
-            }}
-          />
-          <div className="bg-blue-50 backdrop-blur-md rounded-full px-4 py-2">
-            <p>drag to adjust percentages</p>
-          </div>
-          <div className="flex flex-col flex-wrap justify-between basis-full justify-center gap-1 md:flex-row">
-            <RedWineCalculations
-              selectedDrinks={selectedDrinks}
-              drinks={drinks}
-              updateDrink={updateDrink}
-              numGuests={numGuests}
-              eventHours={eventHours}
-            />
-            <WhiteWineCalculations
-              selectedDrinks={selectedDrinks}
-              drinks={drinks}
-              updateDrink={updateDrink}
-              numGuests={numGuests}
-              eventHours={eventHours}
-              className="mr-4"
-            />
-            <SparklingWineCalculations
-              selectedDrinks={selectedDrinks}
-              drinks={drinks}
-              updateDrink={updateDrink}
-              numGuests={numGuests}
-              eventHours={eventHours}
-            />
-            <BeerCalculations
-              selectedDrinks={selectedDrinks}
-              drinks={drinks}
-              updateDrink={updateDrink}
-              numGuests={numGuests}
-              eventHours={eventHours}
-            />
-            <SeltzerCalculations
-              selectedDrinks={selectedDrinks}
-              drinks={drinks}
-              updateDrink={updateDrink}
-              numGuests={numGuests}
-              eventHours={eventHours}
-            />
-          </div>
-        </section>
-      )}
+      <CombinedSlider
+        sliderChecked={sliderChecked}
+        updateDrink={updateDrink}
+        numGuests={numGuests}
+        eventHours={eventHours}
+        selectedBeverageKeys={selectedBeverageKeys}
+        drinks={drinks}
+        setDrinks={setDrinks}
+        selectedDrinks={selectedDrinks}
+      />
     </div>
   );
 };
