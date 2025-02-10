@@ -199,7 +199,10 @@ export const PercentageScale = ({
                 id={`${beverage}-percentage`}
                 type="number"
                 step="any"
-                value={drinks[beverage].percentage || 0}
+                value={
+                  Math.round(Number(drinks[beverage].percentage)).toString() ||
+                  0
+                }
                 onChange={(e) =>
                   handlePercentageChange(index, Number(e.target.value))
                 }
@@ -221,7 +224,7 @@ export const PercentageScale = ({
               min={0}
               max={100}
               step={1}
-              value={drinks[beverage].percentage || 0}
+              value={Number(drinks[beverage].percentage).toString() || 0}
               onChange={(e) =>
                 handlePercentageChange(index, Number(e.target.value))
               }
@@ -305,7 +308,7 @@ export const PercentageScale = ({
                       className="ml-1 border border-emerald-500 "
                       name="seltzerPackSize"
                       value="6"
-                      onChange={handleRadioChange}
+                      onChange={(e) => handleRadioChange(e, beverage)}
                     />
                   </label>
                   <label>
@@ -315,7 +318,7 @@ export const PercentageScale = ({
                       className="ml-1 border border-emerald-500 "
                       name="seltzerPackSize"
                       value="8"
-                      onChange={handleRadioChange}
+                      onChange={(e) => handleRadioChange(e, beverage)}
                     />
                   </label>
                   <label>
@@ -325,7 +328,7 @@ export const PercentageScale = ({
                       className="ml-1 border border-emerald-500 "
                       name="seltzerPackSize"
                       value="12"
-                      onChange={handleRadioChange}
+                      onChange={(e) => handleRadioChange(e, beverage)}
                     />
                   </label>
                   <label>
@@ -335,7 +338,7 @@ export const PercentageScale = ({
                       className="ml-1 border border-emerald-500 "
                       name="seltzerPackSize"
                       value="24"
-                      onChange={handleRadioChange}
+                      onChange={(e) => handleRadioChange(e, beverage)}
                     />
                   </label>
                 </div>
