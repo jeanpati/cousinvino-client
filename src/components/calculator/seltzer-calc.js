@@ -62,54 +62,6 @@ export const SeltzerCalculations = ({
             />
             drinks/hour
           </label>
-          <label className="mt-3">
-            Pack size:
-            <div
-              id="pack-options"
-              className="grid grid-rows-2 grid-flow-col gap-2"
-            >
-              <label>
-                6 pack
-                <input
-                  type="radio"
-                  className="ml-1 border border-emerald-500 "
-                  name="seltzerPackSize"
-                  value="6"
-                  onChange={handleRadioChange}
-                />
-              </label>
-              <label>
-                8 pack
-                <input
-                  type="radio"
-                  className="ml-1 border border-emerald-500 "
-                  name="seltzerPackSize"
-                  value="8"
-                  onChange={handleRadioChange}
-                />
-              </label>
-              <label>
-                12 pack
-                <input
-                  type="radio"
-                  className="ml-1 border border-emerald-500 "
-                  name="seltzerPackSize"
-                  value="12"
-                  onChange={handleRadioChange}
-                />
-              </label>
-              <label>
-                24 pack
-                <input
-                  type="radio"
-                  className="ml-1 border border-emerald-500 "
-                  name="seltzerPackSize"
-                  value="24"
-                  onChange={handleRadioChange}
-                />
-              </label>
-            </div>
-          </label>
         </div>
       )}
     </section>

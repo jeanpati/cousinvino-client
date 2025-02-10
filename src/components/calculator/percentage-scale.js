@@ -1,5 +1,9 @@
 import { useEffect, useMemo, useState } from "react";
-import { calculateStillWine750ml } from "../utils/calculations";
+import {
+  calculateCannedBeverages,
+  calculateSparklingWine750ml,
+  calculateStillWine750ml,
+} from "../utils/calculations";
 
 export const PercentageScale = ({
   selectedDrinks,
@@ -24,7 +28,58 @@ export const PercentageScale = ({
       );
       updateDrink("redWine", "needed", redWineNeeded);
     }
-  }, [numGuests, eventHours, drinks.redWine]);
+    if (selectedDrinks.whiteWine) {
+      const whiteWineNeeded = calculateStillWine750ml(
+        drinks.whiteWine.percentage,
+        numGuests,
+        drinks.whiteWine.average,
+        eventHours
+      );
+      updateDrink("whiteWine", "needed", whiteWineNeeded);
+    }
+    if (selectedDrinks.sparklingWine) {
+      const sparklingWineNeeded = calculateSparklingWine750ml(
+        drinks.sparklingWine.percentage,
+        numGuests,
+        drinks.sparklingWine.average,
+        eventHours
+      );
+      updateDrink("sparklingWine", "needed", sparklingWineNeeded);
+    }
+    if (selectedDrinks.beer) {
+      const beerNeeded = calculateCannedBeverages(
+        drinks.beer.percentage,
+        numGuests,
+        drinks.beer.average,
+        eventHours,
+        drinks.beer.packSize
+      );
+      updateDrink("beer", "needed", beerNeeded);
+    }
+    if (selectedDrinks.hardSeltzers) {
+      const hardSeltzerNeeded = calculateCannedBeverages(
+        drinks.hardSeltzers.percentage,
+        numGuests,
+        drinks.hardSeltzers.average,
+        eventHours,
+        drinks.hardSeltzers.packSize
+      );
+      updateDrink("hardSeltzers", "needed", hardSeltzerNeeded);
+    }
+  }, [
+    numGuests,
+    eventHours,
+    drinks.redWine.percentage,
+    drinks.redWine.average,
+    drinks.whiteWine.average,
+    drinks.whiteWine.percentage,
+    drinks.sparklingWine.average,
+    drinks.sparklingWine.percentage,
+    drinks.beer.average,
+    drinks.beer.percentage,
+    drinks.hardSeltzers.percentage,
+    drinks.hardSeltzers.average,
+  ]);
 
   // initialize percentages equally when checkboxes are clicked
   useEffect(() => {
@@ -87,7 +142,10 @@ export const PercentageScale = ({
         const remainingBeverage = unlockedBeverages[0];
         return {
           ...prevDrinks,
-          [remainingBeverage]: { percentage: 100 - lockedTotal },
+          [remainingBeverage]: {
+            ...prevDrinks[remainingBeverage],
+            percentage: 100 - lockedTotal,
+          },
         };
       }
 
@@ -111,6 +169,7 @@ export const PercentageScale = ({
       if (remainingBeverages.length > 0) {
         remainingBeverages.forEach((bev) => {
           updatedDrinks[bev] = {
+            ...updatedDrinks[bev],
             percentage: remainingPercentage / remainingBeverages.length,
           };
         });
@@ -118,6 +177,13 @@ export const PercentageScale = ({
 
       return updatedDrinks;
     });
+  };
+
+  const handleRadioChange = (e, beverage) => {
+    updateDrink(beverage, "packSize", Number(e.target.value));
+  };
+  const handleAverageChange = (e, beverage) => {
+    updateDrink(beverage, "average", Number(e.target.value));
   };
 
   return (
@@ -141,6 +207,15 @@ export const PercentageScale = ({
               />
               %
             </label>
+            <label className="flex items-center ml-2">
+              <input
+                type="checkbox"
+                checked={drinks[beverage]?.locked || false}
+                onChange={() => toggleLock(beverage)}
+                className=""
+              />
+              Lock
+            </label>
             <input
               type="range"
               min={0}
@@ -158,23 +233,114 @@ export const PercentageScale = ({
                 id={`${beverage}-average`}
                 type="number"
                 step="any"
-                value={drinks[beverage].average || 0}
-                onChange={(e) =>
-                  updateDrink(beverage, "average", Number(e.target.value))
-                }
+                value={Number(drinks[beverage].average).toString() || 0}
+                onChange={(e) => handleAverageChange(e, beverage)}
                 className="ml-1 mt-1 border border-emerald-500 p-2 rounded w-[3rem]"
               />
               drinks/hour
             </label>
-            <label className="flex items-center ml-2">
-              <input
-                type="checkbox"
-                checked={drinks[beverage]?.locked || false}
-                onChange={() => toggleLock(beverage)}
-                className=""
-              />
-              Lock
-            </label>
+
+            {beverage === "beer" && (
+              <label className="ml-5">
+                Pack size:
+                <div
+                  id="pack-options"
+                  className="grid grid-rows-2 grid-flow-col gap-2"
+                >
+                  <label>
+                    12 pack
+                    <input
+                      type="radio"
+                      className="ml-1 border border-emerald-500 "
+                      name="beerPackSize"
+                      value="12"
+                      onChange={(e) => handleRadioChange(e, beverage)}
+                    />
+                  </label>
+                  <label>
+                    18 pack
+                    <input
+                      type="radio"
+                      className="ml-1 border border-emerald-500 "
+                      name="beerPackSize"
+                      value="18"
+                      onChange={(e) => handleRadioChange(e, beverage)}
+                    />
+                  </label>
+                  <label>
+                    24 pack
+                    <input
+                      type="radio"
+                      className="ml-1 border border-emerald-500 "
+                      name="beerPackSize"
+                      value="24"
+                      onChange={(e) => handleRadioChange(e, beverage)}
+                    />
+                  </label>
+                  <label>
+                    30 pack
+                    <input
+                      type="radio"
+                      className="ml-1 border border-emerald-500 "
+                      name="beerPackSize"
+                      value="30"
+                      onChange={(e) => handleRadioChange(e, beverage)}
+                    />
+                  </label>
+                </div>
+              </label>
+            )}
+
+            {beverage === "hardSeltzers" && (
+              <label className="ml-5">
+                Pack size:
+                <div
+                  id="pack-options"
+                  className="grid grid-rows-2 grid-flow-col gap-2"
+                >
+                  <label>
+                    6 pack
+                    <input
+                      type="radio"
+                      className="ml-1 border border-emerald-500 "
+                      name="seltzerPackSize"
+                      value="6"
+                      onChange={handleRadioChange}
+                    />
+                  </label>
+                  <label>
+                    8 pack
+                    <input
+                      type="radio"
+                      className="ml-1 border border-emerald-500 "
+                      name="seltzerPackSize"
+                      value="8"
+                      onChange={handleRadioChange}
+                    />
+                  </label>
+                  <label>
+                    12 pack
+                    <input
+                      type="radio"
+                      className="ml-1 border border-emerald-500 "
+                      name="seltzerPackSize"
+                      value="12"
+                      onChange={handleRadioChange}
+                    />
+                  </label>
+                  <label>
+                    24 pack
+                    <input
+                      type="radio"
+                      className="ml-1 border border-emerald-500 "
+                      name="seltzerPackSize"
+                      value="24"
+                      onChange={handleRadioChange}
+                    />
+                  </label>
+                </div>
+              </label>
+            )}
           </fieldset>
         ))}
       </section>
