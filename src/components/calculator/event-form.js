@@ -29,7 +29,7 @@ export const EventForm = ({
           id="event-hours"
           type="number"
           step="any"
-          value={eventHours}
+          value={Number(eventHours).toString()}
           onChange={handleEventHoursChange}
           className="ml-1 mt-1 border border-emerald-500 p-2 rounded size-[2rem] w-[4rem]"
         />
@@ -40,7 +40,7 @@ export const EventForm = ({
           id="num-of-guests"
           type="number"
           step="any"
-          value={numGuests}
+          value={Number(numGuests).toString()}
           onChange={handleNumGuestsChange}
           className="ml-1 mt-1 border border-emerald-500 p-2 rounded size-[2rem] w-[4rem]"
         />
@@ -51,7 +51,7 @@ export const EventForm = ({
           id="avg-drinks"
           type="number"
           step="any"
-          value={avgNumDrinks}
+          value={Number(avgNumDrinks).toString()}
           onChange={handleAveNumDrinksChange}
           className="ml-1 mt-1 border border-emerald-500 p-2 rounded size-[2rem] w-[4rem]"
         />
