@@ -9,8 +9,6 @@ export const PercentageScale = ({
   numGuests,
   eventHours,
 }) => {
-  const [sliderChecked, setSliderChecked] = useState("split");
-
   const selectedBeverageKeys = useMemo(
     () => Object.keys(selectedDrinks).filter((drink) => selectedDrinks[drink]),
     [selectedDrinks]
@@ -26,12 +24,7 @@ export const PercentageScale = ({
       );
       updateDrink("redWine", "needed", redWineNeeded);
     }
-  }, [
-    numGuests,
-    eventHours,
-    drinks.redWine.percentage,
-    drinks.redWine.average,
-  ]);
+  }, [numGuests, eventHours, drinks.redWine]);
 
   // initialize percentages equally when checkboxes are clicked
   useEffect(() => {
