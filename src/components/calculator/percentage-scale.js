@@ -77,8 +77,10 @@ export const PercentageScale = ({
     drinks.sparklingWine.percentage,
     drinks.beer.average,
     drinks.beer.percentage,
+    drinks.beer.packSize,
     drinks.hardSeltzers.percentage,
     drinks.hardSeltzers.average,
+    drinks.hardSeltzers.packSize,
   ]);
 
   // initialize percentages equally when checkboxes are clicked
