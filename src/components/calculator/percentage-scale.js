@@ -246,104 +246,38 @@ export const PercentageScale = ({
             </label>
 
             {beverage === "beer" && (
-              <label className="ml-5">
+              <label className="ml-5 mt-1 ">
                 Pack size:
-                <div
-                  id="pack-options"
-                  className="grid grid-rows-2 grid-flow-col gap-2"
+                <select
+                  className="ml-2 border border-emerald-500 p-1 rounded"
+                  id="beer-packSize"
+                  onChange={(e) => handleRadioChange(e, beverage)}
                 >
-                  <label>
-                    12 pack
-                    <input
-                      type="radio"
-                      className="ml-1 border border-emerald-500 "
-                      name="beerPackSize"
-                      value="12"
-                      onChange={(e) => handleRadioChange(e, beverage)}
-                    />
-                  </label>
-                  <label>
-                    18 pack
-                    <input
-                      type="radio"
-                      className="ml-1 border border-emerald-500 "
-                      name="beerPackSize"
-                      value="18"
-                      onChange={(e) => handleRadioChange(e, beverage)}
-                    />
-                  </label>
-                  <label>
-                    24 pack
-                    <input
-                      type="radio"
-                      className="ml-1 border border-emerald-500 "
-                      name="beerPackSize"
-                      value="24"
-                      onChange={(e) => handleRadioChange(e, beverage)}
-                    />
-                  </label>
-                  <label>
-                    30 pack
-                    <input
-                      type="radio"
-                      className="ml-1 border border-emerald-500 "
-                      name="beerPackSize"
-                      value="30"
-                      onChange={(e) => handleRadioChange(e, beverage)}
-                    />
-                  </label>
-                </div>
+                  <option value="">Select</option>
+                  <option value="6">6 pack</option>
+                  <option value="12">12 pack</option>
+                  <option value="18">18 pack</option>
+                  <option value="24">24 pack</option>
+                  <option value="30">30 pack</option>
+                </select>
               </label>
             )}
 
             {beverage === "hardSeltzers" && (
-              <label className="ml-5">
+              <label className="ml-5 mt-1">
                 Pack size:
-                <div
-                  id="pack-options"
-                  className="grid grid-rows-2 grid-flow-col gap-2"
+                <select
+                  className="ml-2 border border-emerald-500 p-1 rounded"
+                  id="hardSeltzers-packSize"
+                  onChange={(e) => handleRadioChange(e, beverage)}
                 >
-                  <label>
-                    6 pack
-                    <input
-                      type="radio"
-                      className="ml-1 border border-emerald-500 "
-                      name="seltzerPackSize"
-                      value="6"
-                      onChange={(e) => handleRadioChange(e, beverage)}
-                    />
-                  </label>
-                  <label>
-                    8 pack
-                    <input
-                      type="radio"
-                      className="ml-1 border border-emerald-500 "
-                      name="seltzerPackSize"
-                      value="8"
-                      onChange={(e) => handleRadioChange(e, beverage)}
-                    />
-                  </label>
-                  <label>
-                    12 pack
-                    <input
-                      type="radio"
-                      className="ml-1 border border-emerald-500 "
-                      name="seltzerPackSize"
-                      value="12"
-                      onChange={(e) => handleRadioChange(e, beverage)}
-                    />
-                  </label>
-                  <label>
-                    24 pack
-                    <input
-                      type="radio"
-                      className="ml-1 border border-emerald-500 "
-                      name="seltzerPackSize"
-                      value="24"
-                      onChange={(e) => handleRadioChange(e, beverage)}
-                    />
-                  </label>
-                </div>
+                  <option value="">Select</option>
+                  <option value="4">4 pack</option>
+                  <option value="6">6 pack</option>
+                  <option value="8">8 pack</option>
+                  <option value="12">12 pack</option>
+                  <option value="24">24 pack</option>
+                </select>
               </label>
             )}
           </fieldset>
