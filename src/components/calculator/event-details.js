@@ -100,7 +100,7 @@ export const EventDetails = () => {
         >
           <div
             id="event-details-wrapper"
-            className="dot flex content-center p-8"
+            className="circle-bg flex content-center p-8"
           >
             <section id="event-details" className="flex justify-center">
               <div className="flex flex-col ">
@@ -123,12 +123,12 @@ export const EventDetails = () => {
             </section>
           </div>
 
-          <div
-            id="drink-selection-wrapper"
-            className="dot flex content-center "
-          >
-            <section id="drink-selection" className="flex justify-center p-8">
-              {drinksNeeded > 0 && (
+          {drinksNeeded > 0 && (
+            <div
+              id="drink-selection-wrapper"
+              className="circle-bg flex content-center"
+            >
+              <section id="drink-selection" className="flex justify-center p-8">
                 <div>
                   <h4 className="text-xl mb-3">
                     Which beverages would you like to serve?
@@ -137,9 +137,9 @@ export const EventDetails = () => {
                     <DrinkSelections setSelectedDrinks={setSelectedDrinks} />
                   </div>
                 </div>
-              )}
-            </section>
-          </div>
+              </section>
+            </div>
+          )}
         </div>
         <section id="beverage-details" className="flex flex-col">
           {Object.values(selectedDrinks).some((isTrue) => isTrue) && (
