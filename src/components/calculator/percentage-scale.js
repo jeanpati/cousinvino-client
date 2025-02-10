@@ -1,5 +1,4 @@
 import { useEffect, useMemo, useState } from "react";
-
 import { SliderSelection } from "./slider-selection";
 import { CombinedSlider } from "./slider-views/combined-slider";
 
@@ -12,143 +11,170 @@ export const PercentageScale = ({
   eventHours,
 }) => {
   const [sliderChecked, setSliderChecked] = useState("split");
+
   const selectedBeverageKeys = useMemo(
     () => Object.keys(selectedDrinks).filter((drink) => selectedDrinks[drink]),
     [selectedDrinks]
   );
 
+  // initialize percentages equally when checkboxes are clicked
   useEffect(() => {
-    if (selectedBeverageKeys.length === 0) return;
+    if (!selectedBeverageKeys.length) return;
 
-    const equalPercentage =
-      selectedBeverageKeys.length === 1
-        ? 100 // if only 1 beverage is selected, give it 100%
-        : 100 / selectedBeverageKeys.length; // otherwise, divide equally
-
-    setDrinks((drinksCopy) => {
-      let updatedDrinks = { ...drinksCopy };
-
+    const equalPercentage = 100 / selectedBeverageKeys.length;
+    setDrinks((prevDrinks) => {
+      const updatedDrinks = { ...prevDrinks };
       selectedBeverageKeys.forEach((drink) => {
-        if (selectedDrinks[drink]) {
-          updatedDrinks[drink] = {
-            ...updatedDrinks[drink],
-            percentage: equalPercentage,
-          };
-        }
-      });
-
-      Object.keys(drinksCopy).forEach((drink) => {
-        if (!selectedDrinks[drink]) {
-          updatedDrinks[drink] = {
-            ...updatedDrinks[drink],
-            percentage: 0,
-          };
-        }
-      });
-
-      return updatedDrinks;
-    });
-  }, [selectedBeverageKeys.length]);
-
-  if (selectedBeverageKeys.length === 0) return null;
-
-  let sumOfPercentages = 0;
-
-  const calculateThumbValues = selectedBeverageKeys.map((drink) => {
-    sumOfPercentages += drinks[drink]?.percentage || 0;
-    return sumOfPercentages;
-  });
-
-  const handleThumbChange = (newThumbValues) => {
-    setDrinks((drinksCopy) => {
-      let updatedDrinks = { ...drinksCopy };
-      let previousPercentage = 0;
-
-      newThumbValues.forEach((value, index) => {
-        const bev1 = selectedBeverageKeys[index];
-        const bev2 = selectedBeverageKeys[index + 1];
-
-        updatedDrinks[bev1] = {
-          ...updatedDrinks[bev1],
-          percentage: value - previousPercentage,
+        updatedDrinks[drink] = {
+          ...updatedDrinks[drink],
+          percentage: equalPercentage,
         };
-
-        if (index === newThumbValues.length - 1) {
-          updatedDrinks[bev2] = {
-            ...updatedDrinks[bev2],
-            percentage: 100 - value,
-          };
-        }
-
-        previousPercentage = value;
       });
+      Object.keys(prevDrinks).forEach((drink) => {
+        if (!selectedDrinks[drink]) {
+          updatedDrinks[drink] = { ...updatedDrinks[drink], percentage: 0 };
+        }
+      });
+      return updatedDrinks;
+    });
+  }, [selectedBeverageKeys, selectedDrinks, setDrinks]);
+
+  if (!selectedBeverageKeys.length) return null;
+
+  // toggle lock state
+  const toggleLock = (beverage) => {
+    setDrinks((prevDrinks) => ({
+      ...prevDrinks,
+      [beverage]: {
+        ...prevDrinks[beverage],
+        locked: !prevDrinks[beverage]?.locked,
+      },
+    }));
+  };
+
+  const handlePercentageChange = (index, newPercentage) => {
+    setDrinks((prevDrinks) => {
+      // set variables for locked and unlocked beverages
+      const lockedBeverages = selectedBeverageKeys.filter(
+        (drink) => prevDrinks[drink].locked
+      );
+      const unlockedBeverages = selectedBeverageKeys.filter(
+        (drink) => !prevDrinks[drink].locked
+      );
+
+      // if beverages is locked, prevent changes
+      if (lockedBeverages.length === selectedBeverageKeys.length) {
+        return prevDrinks;
+      }
+
+      // loops through locked beverages and add up percentage values
+      const lockedTotal = lockedBeverages.reduce(
+        (acc, drink) => acc + prevDrinks[drink].percentage,
+        0
+      );
+
+      // if two out of three beverages are locked, set percentage of the last unlocked beverage
+      if (lockedBeverages.length === selectedBeverageKeys.length - 1) {
+        const remainingBeverage = unlockedBeverages[0];
+        return {
+          ...prevDrinks,
+          [remainingBeverage]: { percentage: 100 - lockedTotal },
+        };
+      }
+
+      // set min and max limits for available percentage
+      const maxAvailable = 100 - lockedTotal;
+      newPercentage = Math.max(0, Math.min(maxAvailable, newPercentage));
+
+      const updatedDrinks = { ...prevDrinks };
+
+      updatedDrinks[selectedBeverageKeys[index]] = {
+        ...updatedDrinks[selectedBeverageKeys[index]],
+        percentage: newPercentage,
+      };
+
+      // distribute the remaining percentage among other unlocked beverages
+      const remainingPercentage = maxAvailable - newPercentage;
+      const remainingBeverages = unlockedBeverages.filter(
+        (bev) => bev !== selectedBeverageKeys[index]
+      );
+
+      if (remainingBeverages.length > 0) {
+        remainingBeverages.forEach((bev) => {
+          updatedDrinks[bev] = {
+            percentage: remainingPercentage / remainingBeverages.length,
+          };
+        });
+      }
 
       return updatedDrinks;
     });
   };
 
-  const STEP = 1;
-  const MIN = 0;
-  const MAX = 100;
-  const COLORS = [
-    "red",
-    "yellow",
-    "orange",
-    "purple",
-    "green",
-    "pink",
-    "silver",
-  ];
-
-  const handleRadioChange = (e) => {
-    setSliderChecked(e.target.value);
-  };
-
-  const handleBeverageAverageChange = (e, beverage) => {
-    if (e.target.value >= 0) {
-      updateDrink(`${beverage}`, "average", Number(e.target.value));
-    }
-  };
   return (
-    <div id="scale-container" className="flex flex-col content-around">
-      <SliderSelection handleRadioChange={handleRadioChange} />
+    <div id="scale-container" className="flex flex-col">
+      <SliderSelection
+        handleRadioChange={(e) => setSliderChecked(e.target.value)}
+      />
       {sliderChecked === "split" && (
         <section
           id="split-view"
-          className="flex flex-col justify-center text-md mt-10"
+          className="flex flex-col justify-center text-md"
         >
-          {selectedBeverageKeys.map((beverage) => {
-            const beverageName = drinks[beverage]?.name || "";
-            const percentage = Math.round(drinks[beverage]?.percentage, 2) || 0;
-            return (
-              <fieldset key={beverage} className="flex flex-col h-16">
-                <label htmlFor={beverage} className="mr-5">
-                  {beverageName}
-                </label>
-                <label>
-                  <input
-                    id={`${beverage}-average`}
-                    type="number"
-                    step="any"
-                    value={drinks[beverage].average}
-                    onChange={handleBeverageAverageChange}
-                    className="ml-1 mt-1 border border-emerald-500 p-2 rounded size-[2rem] w-[3rem]"
-                  />
-                  drinks/hour
-                </label>
-                <label>
-                  <input
-                    id={`${beverage}-percentage`}
-                    type="number"
-                    step="any"
-                    className="ml-1 mt-1 border border-emerald-500 p-2 rounded size-[2rem] w-[3rem]"
-                  />
-                  %
-                </label>
-                <input type="range" />
-              </fieldset>
-            );
-          })}
+          {selectedBeverageKeys.map((beverage, index) => (
+            <fieldset key={beverage} className="flex flex-wrap m-3">
+              <label htmlFor={beverage} className="mr-5 w-full">
+                {drinks[beverage].name || ""}
+              </label>
+              <label>
+                <input
+                  id={`${beverage}-percentage`}
+                  type="number"
+                  step="any"
+                  value={drinks[beverage].percentage || 0}
+                  onChange={(e) =>
+                    handlePercentageChange(index, Number(e.target.value))
+                  }
+                  className="ml-1 mt-1 border border-emerald-500 p-2 rounded w-[4rem]"
+                />
+                %
+              </label>
+              <input
+                type="range"
+                min={0}
+                max={100}
+                step={1}
+                value={drinks[beverage].percentage || 0}
+                onChange={(e) =>
+                  handlePercentageChange(index, Number(e.target.value))
+                }
+                disabled={drinks[beverage].locked}
+                className="w-full"
+              />
+              <label>
+                <input
+                  id={`${beverage}-average`}
+                  type="number"
+                  step="any"
+                  value={drinks[beverage].average || 0}
+                  onChange={(e) =>
+                    updateDrink(beverage, "average", Number(e.target.value))
+                  }
+                  className="ml-1 mt-1 border border-emerald-500 p-2 rounded w-[3rem]"
+                />
+                drinks/hour
+              </label>
+              <label className="flex items-center ml-2">
+                <input
+                  type="checkbox"
+                  checked={drinks[beverage]?.locked || false}
+                  onChange={() => toggleLock(beverage)}
+                  className=""
+                />
+                Lock
+              </label>
+            </fieldset>
+          ))}
         </section>
       )}
       <CombinedSlider

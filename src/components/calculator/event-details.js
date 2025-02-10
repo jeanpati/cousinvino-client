@@ -18,13 +18,26 @@ export const EventDetails = () => {
   });
 
   const [drinks, setDrinks] = useState({
-    redWine: { name: "Red Wine", percentage: 0, average: 0, needed: 0 },
-    whiteWine: { name: "White Wine", percentage: 0, average: 0, needed: 0 },
+    redWine: {
+      name: "Red Wine",
+      percentage: 0,
+      average: 0,
+      needed: 0,
+      locked: false,
+    },
+    whiteWine: {
+      name: "White Wine",
+      percentage: 0,
+      average: 0,
+      needed: 0,
+      locked: false,
+    },
     sparklingWine: {
       name: "Sparkling Wine",
       percentage: 0,
       average: 0,
       needed: 0,
+      locked: false,
     },
     beer: {
       name: "Beer",
@@ -32,6 +45,7 @@ export const EventDetails = () => {
       average: 0,
       needed: 0,
       packSize: 0,
+      locked: false,
     },
     hardSeltzers: {
       name: "Hard Seltzers",
@@ -39,6 +53,7 @@ export const EventDetails = () => {
       average: 0,
       needed: 0,
       packSize: 0,
+      locked: false,
     },
   });
 
@@ -64,10 +79,10 @@ export const EventDetails = () => {
     (numGuests || 0) * (avgNumDrinks || 0) * (eventHours || 0);
 
   const updateDrink = (drinkType, key, value) => {
-    setDrinks((drinksCopy) => ({
-      ...drinksCopy,
+    setDrinks((prevDrinks) => ({
+      ...prevDrinks,
       [drinkType]: {
-        ...drinksCopy[drinkType],
+        ...prevDrinks[drinkType],
         [key]: value,
       },
     }));

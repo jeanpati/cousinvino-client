@@ -23,8 +23,8 @@ export const CombinedSlider = ({
   });
 
   const handleThumbChange = (newThumbValues) => {
-    setDrinks((drinksCopy) => {
-      let updatedDrinks = { ...drinksCopy };
+    setDrinks((prevDrinks) => {
+      let updatedDrinks = { ...prevDrinks };
       let previousPercentage = 0;
 
       newThumbValues.forEach((value, index) => {
