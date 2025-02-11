@@ -58,6 +58,25 @@ export const EventDetails = () => {
   });
 
   useEffect(() => {
+    // loop through selectedDrinks - if any are false, set to default values
+    Object.keys(selectedDrinks).forEach((drinkType) => {
+      if (!selectedDrinks[drinkType]) {
+        setDrinks((prevDrinks) => {
+          const updatedDrinks = { ...prevDrinks };
+          updatedDrinks[drinkType] = {
+            ...updatedDrinks[drinkType],
+            percentage: 0,
+            needed: 0,
+            packSize: 0,
+            locked: false,
+          };
+          return updatedDrinks;
+        });
+      }
+    });
+  }, [selectedDrinks]);
+
+  useEffect(() => {
     if (avgNumDrinks) {
       setDrinks((prevDrinks) => {
         const updatedDrinks = { ...prevDrinks };
