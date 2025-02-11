@@ -194,7 +194,7 @@ export const PercentageScale = ({
         {selectedBeverageKeys.map((beverage, index) => (
           <fieldset
             key={beverage}
-            className="flex flex-wrap m-3 gap-x-4 rounded-xl p-3 shadow-md outline outline-black/5"
+            className="flex flex-wrap m-3 gap-x-4 rounded-xl p-3 shadow-md outline outline-black/5 bg-rose-50"
           >
             <label htmlFor={beverage} className="mr-5 w-full">
               {drinks[beverage].name || ""}
@@ -214,13 +214,17 @@ export const PercentageScale = ({
                 className="ml-1 mt-1 border border-emerald-500 p-2 rounded w-[4rem]"
               />{" "}
               %
+              <p className="text-xs">
+                (approx.{" "}
+                {Math.round((drinks[beverage].percentage / 100) * numGuests)}{" "}
+                guests)
+              </p>
             </label>
             <label className="flex items-center ml-2">
               <input
                 type="checkbox"
                 checked={drinks[beverage]?.locked || false}
                 onChange={() => toggleLock(beverage)}
-                className=""
               />
               Lock
             </label>
@@ -255,6 +259,7 @@ export const PercentageScale = ({
                   className="ml-2 border border-emerald-500 p-1 rounded"
                   id="beer-packSize"
                   onChange={(e) => handleRadioChange(e, beverage)}
+                  value={drinks.beer?.packSize || 0}
                 >
                   <option value="">Select</option>
                   <option value="6">6 pack</option>
@@ -273,8 +278,9 @@ export const PercentageScale = ({
                   className="ml-2 border border-emerald-500 p-1 rounded"
                   id="hardSeltzers-packSize"
                   onChange={(e) => handleRadioChange(e, beverage)}
+                  value={drinks.hardSeltzers?.packSize || 0}
                 >
-                  <option value="">Select</option>
+                  <option value="0">Select</option>
                   <option value="4">4 pack</option>
                   <option value="6">6 pack</option>
                   <option value="8">8 pack</option>

@@ -1,4 +1,4 @@
-export const DrinkSelections = ({ setSelectedDrinks }) => {
+export const DrinkSelections = ({ setSelectedDrinks, selectedDrinks }) => {
   const handleCheckboxChange = (e) => {
     const { name, checked } = e.target;
     setSelectedDrinks((prevState) => ({ ...prevState, [name]: checked }));
@@ -12,6 +12,7 @@ export const DrinkSelections = ({ setSelectedDrinks }) => {
           className="ml-1 border border-emerald-500 rounded"
           name="redWine"
           onChange={handleCheckboxChange}
+          checked={selectedDrinks.redWine}
         />
       </label>
       <label>
@@ -21,6 +22,7 @@ export const DrinkSelections = ({ setSelectedDrinks }) => {
           className="ml-1 border border-emerald-500 rounded"
           name="whiteWine"
           onChange={handleCheckboxChange}
+          checked={selectedDrinks.whiteWine}
         />
       </label>
       <label>
@@ -30,6 +32,7 @@ export const DrinkSelections = ({ setSelectedDrinks }) => {
           className="ml-1 border border-emerald-500 rounded"
           name="sparklingWine"
           onChange={handleCheckboxChange}
+          checked={selectedDrinks.sparklingWine}
         />
       </label>
       <label>
@@ -39,6 +42,7 @@ export const DrinkSelections = ({ setSelectedDrinks }) => {
           className="ml-1 border border-emerald-500 rounded"
           name="beer"
           onChange={handleCheckboxChange}
+          checked={selectedDrinks.beer}
         />
       </label>
       <label>
@@ -48,6 +52,7 @@ export const DrinkSelections = ({ setSelectedDrinks }) => {
           className="ml-1 border border-emerald-500 rounded"
           name="hardSeltzers"
           onChange={handleCheckboxChange}
+          checked={selectedDrinks.hardSeltzers}
         />
       </label>
     </div>

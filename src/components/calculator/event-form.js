@@ -7,20 +7,26 @@ export const EventForm = ({
   setNumGuests,
 }) => {
   const handleEventHoursChange = (e) => {
-    if (e.target.value >= 0) {
-      setEventHours(Number(e.target.value));
+    const value = e.target.value;
+    if (value === "" || !isNaN(value)) {
+      setEventHours(value);
     }
   };
+
   const handleNumGuestsChange = (e) => {
-    if (e.target.value >= 0) {
-      setNumGuests(Number(e.target.value));
+    const value = e.target.value;
+    if (value === "" || !isNaN(value)) {
+      setNumGuests(value);
     }
   };
+
   const handleAveNumDrinksChange = (e) => {
-    if (e.target.value >= 0) {
-      setAvgNumDrinks(Number(e.target.value));
+    const value = e.target.value;
+    if (value === "" || !isNaN(value)) {
+      setAvgNumDrinks(value);
     }
   };
+
   return (
     <div className="flex flex-col flex-space-between">
       <label htmlFor="event-hours">
@@ -29,7 +35,7 @@ export const EventForm = ({
           id="event-hours"
           type="number"
           step="any"
-          value={Number(eventHours).toString()}
+          value={eventHours || ""}
           onChange={handleEventHoursChange}
           className="ml-1 mt-1 border border-emerald-500 p-2 rounded size-[2rem] w-[4rem]"
         />
@@ -40,7 +46,7 @@ export const EventForm = ({
           id="num-of-guests"
           type="number"
           step="any"
-          value={Number(numGuests).toString()}
+          value={numGuests || ""}
           onChange={handleNumGuestsChange}
           className="ml-1 mt-1 border border-emerald-500 p-2 rounded size-[2rem] w-[4rem]"
         />
@@ -51,7 +57,7 @@ export const EventForm = ({
           id="avg-drinks"
           type="number"
           step="any"
-          value={Number(avgNumDrinks).toString()}
+          value={avgNumDrinks || ""}
           onChange={handleAveNumDrinksChange}
           className="ml-1 mt-1 border border-emerald-500 p-2 rounded size-[2rem] w-[4rem]"
         />
