@@ -194,7 +194,7 @@ export const PercentageScale = ({
         {selectedBeverageKeys.map((beverage, index) => (
           <fieldset
             key={beverage}
-            className="flex flex-wrap m-3 gap-x-4 rounded-xl p-3 shadow-md outline outline-black/5"
+            className="flex flex-wrap m-3 gap-x-4 rounded-xl p-3 shadow-md outline outline-black/5 bg-rose-50"
           >
             <label htmlFor={beverage} className="mr-5 w-full">
               {drinks[beverage].name || ""}

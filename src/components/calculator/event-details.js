@@ -168,13 +168,10 @@ export const EventDetails = () => {
             {Object.values(selectedDrinks).some((isTrue) => isTrue) && (
               <div
                 id="drink-questions-wrapper"
-                className="flex flex-col bg-yellow-100 p-1 mt-1 rounded content-center min-w-[20rem]"
+                className="flex flex-col bg-yellow-100 p-5 mt-1 rounded-2xl content-center min-w-[20rem]"
               >
                 <h4 className="text-xl">Beverage Details</h4>
-                <section
-                  id="drink-questions"
-                  className="flex flex-col bg-emerald-50 p-10 mt-5 rounded-lg"
-                >
+                <section id="drink-questions">
                   <div
                     id="percentage-scale-wrapper"
                     className="align-center max-w-auto"
@@ -205,14 +202,11 @@ export const EventDetails = () => {
                 drinks.hardSeltzers.needed > 0) && (
                 <div
                   id="results-wrapper"
-                  className="flex flex-col bg-red-100  p-10 mt-1 rounded"
+                  className="flex flex-col bg-red-100 p-5 mt-1 rounded-2xl"
                 >
                   <h4 className="text-xl">Results</h4>
 
-                  <section
-                    id="results-list"
-                    className="flex flex-col bg-emerald-50  p-10 mt-1 rounded"
-                  >
+                  <section id="results-list">
                     <Results
                       drinks={drinks}
                       selectedDrinks={selectedDrinks}
