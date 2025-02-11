@@ -214,6 +214,11 @@ export const PercentageScale = ({
                 className="ml-1 mt-1 border border-emerald-500 p-2 rounded w-[4rem]"
               />{" "}
               %
+              <p className="text-xs">
+                (approx.{" "}
+                {Math.round((drinks[beverage].percentage / 100) * numGuests)}{" "}
+                guests)
+              </p>
             </label>
             <label className="flex items-center ml-2">
               <input

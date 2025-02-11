@@ -24,7 +24,7 @@ export default function Home() {
         <EventDetails />
       </main>
       <footer className="mt-3">
-        <div className="text-5xl/loose font-[family-name:var(--playwrite)]">
+        <div className="text-xl/loose font-[family-name:var(--playwrite)]">
           Planning is fun!
         </div>
       </footer>
