@@ -14,63 +14,99 @@ export const Results = ({ selectedDrinks, drinks, drinksNeeded }) => {
   return (
     <div>
       <section id="results">
-        {selectedDrinks.redWine && drinks.redWine.needed > 0 && (
-          <p>
-            You need {drinks.redWine.needed} bottles of red wine! (Serves{" "}
-            {drinks.redWine.needed * 5} glasses)
-          </p>
-        )}
+        <table className="items-center gap-x-4 rounded-xl bg-white p-6 shadow-lg outline outline-black/5">
+          <thead className="bg-amber-100">
+            <tr>
+              <th scope="col">Beverage</th>
+              <th scope="col">Amount Needed</th>
+              <th scope="col">Serves</th>
+            </tr>
+          </thead>
+          <tbody>
+            {selectedDrinks.redWine && drinks.redWine.needed > 0 && (
+              <tr className="hover:bg-sky-100">
+                <th scope="row">Red Wine</th>
+                <td>{drinks.redWine.needed} bottles</td>
+                <td>{drinks.redWine.needed * 5} glasses</td>
+              </tr>
+            )}
 
-        {selectedDrinks.whiteWine && drinks.whiteWine.needed > 0 && (
-          <p>
-            You need {drinks.whiteWine.needed} bottles of white wine! (Serves{" "}
-            {drinks.whiteWine.needed * 5} glasses)
-          </p>
-        )}
+            {selectedDrinks.whiteWine && drinks.whiteWine.needed > 0 && (
+              <tr className="hover:bg-sky-100">
+                <th scope="row">White Wine</th>
+                <td>{drinks.whiteWine.needed} bottles</td>
+                <td>{drinks.whiteWine.needed * 5} glasses</td>
+              </tr>
+            )}
 
-        {selectedDrinks.sparklingWine && drinks.sparklingWine.needed > 0 && (
-          <p>
-            You need {drinks.sparklingWine.needed} bottles of sparkling wine!
-            (Serves {drinks.sparklingWine.needed * 6} glasses)
-          </p>
-        )}
+            {selectedDrinks.sparklingWine &&
+              drinks.sparklingWine.needed > 0 && (
+                <tr className="hover:bg-sky-100">
+                  <th scope="row">Sparkling Wine</th>
+                  <td>{drinks.sparklingWine.needed} bottles</td>
+                  <td>{drinks.sparklingWine.needed * 6} glasses</td>
+                </tr>
+              )}
 
-        {selectedDrinks.beer && drinks.beer?.packSize > 0 ? (
-          <p>
-            You need {drinks.beer.needed} - {drinks.beer.packSize}pks of beer!
-            (That&apos;s {drinks.beer.needed * drinks.beer.packSize} cans)
-          </p>
-        ) : selectedDrinks.beer && drinks.beer?.packSize === 0 ? (
-          <p>Please select beer pack size</p>
-        ) : null}
+            {selectedDrinks.beer && drinks.beer?.packSize === 0 ? (
+              <tr className="bg-yellow-100">
+                <td colSpan="3" className="text-center text-yellow-800">
+                  Please select a beer pack size
+                </td>
+              </tr>
+            ) : selectedDrinks.beer && drinks.beer?.needed > 0 ? (
+              <tr className="hover:bg-sky-100">
+                <th scope="row">Beer - {drinks.beer.packSize}pk</th>
+                <td>{drinks.beer.needed} packs</td>
+                <td>{drinks.beer.needed * drinks.beer.packSize} cans</td>
+              </tr>
+            ) : null}
 
-        {selectedDrinks.hardSeltzers && drinks.hardSeltzers?.packSize > 0 ? (
-          <p>
-            You need {drinks.hardSeltzers.needed} -{" "}
-            {drinks.hardSeltzers.packSize}pks of hard seltzers! (That&apos;s{" "}
-            {drinks.hardSeltzers.needed * drinks.hardSeltzers.packSize} cans)
-          </p>
-        ) : selectedDrinks.hardSeltzers &&
-          drinks.hardSeltzers?.packSize === 0 ? (
-          <p>Please select hard seltzers pack size</p>
-        ) : null}
+            {selectedDrinks.hardSeltzers &&
+            drinks.hardSeltzers?.packSize === 0 ? (
+              <tr className="bg-yellow-100">
+                <td colSpan="3" className="text-center text-yellow-800">
+                  Please select a hard seltzer pack size
+                </td>
+              </tr>
+            ) : selectedDrinks.hardSeltzers &&
+              drinks.hardSeltzers?.needed > 0 ? (
+              <tr className="hover:bg-sky-100">
+                <th scope="row">
+                  Hard Seltzers - {drinks.hardSeltzers.packSize}pk
+                </th>
+                <td>{drinks.hardSeltzers.needed} packs</td>
+                <td>
+                  {drinks.hardSeltzers.needed * drinks.hardSeltzers.packSize}{" "}
+                  cans
+                </td>
+              </tr>
+            ) : null}
 
-        {totalDrinks > drinksNeeded && (
-          <p>
-            You&apos;re in good shape! You have more than enough drinks!{" "}
-            {`You can serve ${totalDrinks} glasses`}
-          </p>
-        )}
-        {totalDrinks === drinksNeeded && (
-          <p>You have just enough! {`You can serve ${totalDrinks} glasses`}</p>
-        )}
+            {totalDrinks > drinksNeeded && (
+              <tr>
+                <th scope="row">TOTAL</th>
+                <td></td>
+                <td>{totalDrinks} drinks</td>
+              </tr>
+            )}
+            {totalDrinks === drinksNeeded && (
+              <tr>
+                <th scope="row">TOTAL</th>
+                <td></td>
+                <td>{totalDrinks} drinks</td>
+              </tr>
+            )}
 
-        {totalDrinks < drinksNeeded && (
-          <p>
-            You&apos;re a little under but that might be okay!{" "}
-            {`You can serve ${totalDrinks} glasses`}
-          </p>
-        )}
+            {totalDrinks < drinksNeeded && (
+              <tr>
+                <th scope="row">TOTAL</th>
+                <td></td>
+                <td>{totalDrinks} drinks</td>
+              </tr>
+            )}
+          </tbody>
+        </table>
       </section>
     </div>
   );

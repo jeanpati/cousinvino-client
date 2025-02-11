@@ -3,7 +3,7 @@ import Head from "next/head";
 
 export default function Home() {
   return (
-    <div className="grid items-center justify-items-center min-h-screen mt-3 ">
+    <div className="grid items-center justify-items-center  mt-3">
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title> Cousin Vino&apos;s drink calculator</title>
@@ -23,7 +23,7 @@ export default function Home() {
         </h3>
         <EventDetails />
       </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
+      <footer className="mt-3">
         <div className="text-5xl/loose font-[family-name:var(--playwrite)]">
           Planning is fun!
         </div>
