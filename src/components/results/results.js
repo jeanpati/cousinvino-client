@@ -12,9 +12,9 @@ export const Results = ({ selectedDrinks, drinks, drinksNeeded }) => {
   }, [drinks]);
 
   return (
-    <div className="mt-3">
+    <div className="">
       <section id="results">
-        <table className="overflow-hidden items-center gap-x-4 rounded-2xl bg-white p-6 shadow-lg outline outline-black/5">
+        <table className="overflow-hidden items-center rounded-2xl bg-white shadow-lg outline outline-black/5">
           <thead className="bg-amber-100">
             <tr>
               <th scope="col">Beverage</th>
