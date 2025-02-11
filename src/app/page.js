@@ -3,7 +3,7 @@ import Head from "next/head";
 
 export default function Home() {
   return (
-    <div className="grid items-center justify-items-center  mt-3">
+    <div className="grid items-center justify-items-center mt-3">
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title> Cousin Vino&apos;s drink calculator</title>
