@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-  --background: #ccf3ce;
+  --background: #faf3f3;
   --foreground: #171717;
 }
 
@@ -11,22 +11,6 @@ body {
   color: var(--foreground);
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
-}
-
-.circle-bg {
-  height: 20rem;
-  width: 30rem;
-  background-color: #fbecc7;
-  border-radius: 50%;
-  display: inline-block;
-}
-
-.circle-bg-small {
-  height: 15rem;
-  width: 18rem;
-  background-color: #fbecc7;
-  border-radius: 35%;
-  display: inline-block;
 }
 
 /* HIDE INPUT ARROWS */
