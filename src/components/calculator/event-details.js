@@ -62,7 +62,7 @@ export const EventDetails = () => {
       setDrinks((prevDrinks) => {
         const updatedDrinks = { ...prevDrinks };
 
-        // Set the average for all beverages to avgNumDrinks
+        // set the average for all beverages to avgNumDrinks
         Object.keys(updatedDrinks).forEach((drinkType) => {
           updatedDrinks[drinkType] = {
             ...updatedDrinks[drinkType],
