@@ -91,7 +91,7 @@ export const EventDetails = () => {
   return (
     <div
       id="main-wrapper"
-      className="grid grid-cols-1  md:grid-rows-2 gap-6 bg-teal-100 opacity-7 p-10 mt-2 rounded font-[family-name:var(--chakra)]"
+      className="flex flex-col gap-6 bg-teal-100 opacity-7 p-10 mt-2 rounded font-[family-name:var(--chakra)] w-full"
     >
       <div>
         <div

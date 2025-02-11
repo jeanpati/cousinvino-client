@@ -16,7 +16,7 @@ body {
 .circle-bg {
   height: 20rem;
   width: 30rem;
-  background-color: #bbb;
+  background-color: #fbecc7;
   border-radius: 50%;
   display: inline-block;
 }
@@ -24,7 +24,7 @@ body {
 .circle-bg-small {
   height: 15rem;
   width: 18rem;
-  background-color: #bbb;
+  background-color: #fbecc7;
   border-radius: 35%;
   display: inline-block;
 }
@@ -40,4 +40,19 @@ input::-webkit-inner-spin-button {
 /* Firefox */
 input[type="number"] {
   -moz-appearance: textfield;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th,
+td {
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #d6eeee;
 }

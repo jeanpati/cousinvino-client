@@ -192,7 +192,10 @@ export const PercentageScale = ({
     <div id="scale-container" className="flex flex-col">
       <section id="split-view" className="flex flex-col justify-center text-md">
         {selectedBeverageKeys.map((beverage, index) => (
-          <fieldset key={beverage} className="flex flex-wrap m-3">
+          <fieldset
+            key={beverage}
+            className="flex flex-wrap m-3 gap-x-4 rounded-xl p-3 shadow-md outline outline-black/5"
+          >
             <label htmlFor={beverage} className="mr-5 w-full">
               {drinks[beverage].name || ""}
             </label>
@@ -209,7 +212,7 @@ export const PercentageScale = ({
                   handlePercentageChange(index, Number(e.target.value))
                 }
                 className="ml-1 mt-1 border border-emerald-500 p-2 rounded w-[4rem]"
-              />
+              />{" "}
               %
             </label>
             <label className="flex items-center ml-2">
@@ -241,12 +244,12 @@ export const PercentageScale = ({
                 value={Number(drinks[beverage].average).toString() || 0}
                 onChange={(e) => handleAverageChange(e, beverage)}
                 className="ml-1 mt-1 border border-emerald-500 p-2 rounded w-[3rem]"
-              />
+              />{" "}
               drinks/hour
             </label>
 
             {beverage === "beer" && (
-              <label className="ml-5 mt-1 ">
+              <label className="ml-5 mt-2.5 ">
                 Pack size:
                 <select
                   className="ml-2 border border-emerald-500 p-1 rounded"
@@ -264,7 +267,7 @@ export const PercentageScale = ({
             )}
 
             {beverage === "hardSeltzers" && (
-              <label className="ml-5 mt-1">
+              <label className="ml-5 mt-2.5">
                 Pack size:
                 <select
                   className="ml-2 border border-emerald-500 p-1 rounded"
