@@ -28,7 +28,7 @@ export const EventForm = ({
   };
 
   return (
-    <div className="flex flex-col flex-space-between">
+    <div className="flex flex-col flex-space-between text-lg">
       <label htmlFor="event-hours">
         Event length (hours):
         <input
