@@ -24,8 +24,7 @@ export default function Home() {
           />
         </div>
         <h2 className="text-xl font-[family-name:var(--chakra)] mr-2 ml-2">
-          A handy dandy calculator to help you figure out how many drinks to
-          buy!
+          Let&apos;s figure out how many drinks to buy!
         </h2>
         <span className=" bg-[url(/images/purpleline.webp)] bg-cover h-[3rem] container bg-center pt-[4rem]"></span>
       </header>

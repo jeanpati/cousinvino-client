@@ -19,7 +19,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={`${cursive.variable}  ${digital.variable}  antialiased`}>
         {children}
-        <SpeedInsights />;
+        <SpeedInsights />
         <Analytics />
       </body>
     </html>
