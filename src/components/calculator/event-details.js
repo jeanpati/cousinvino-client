@@ -237,6 +237,9 @@ export const EventDetails = () => {
                     selectedDrinks={selectedDrinks}
                     drinksNeeded={drinksNeeded}
                   />
+                  <p className="mt-2">
+                    Keep in mind - people drink less as the party goes on
+                  </p>
                 </div>
               )}
             </section>
