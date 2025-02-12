@@ -111,7 +111,7 @@ export const EventDetails = () => {
   return (
     <div
       id="main-wrapper"
-      className="flex flex-col gap-6  opacity-7 p-10 mt-2 rounded font-[family-name:var(--chakra)] w-full"
+      className="flex flex-col p-10 font-[family-name:var(--chakra)] w-full"
     >
       <div>
         <div
@@ -123,7 +123,7 @@ export const EventDetails = () => {
             className="flex justify-center content-center p-8"
           >
             <section id="event-details" className="flex justify-center">
-              <div className="flex flex-col bg-[url(/images/purplesq.webp)] bg-cover h-[25rem] w-[30rem] bg-center pt-[5rem] pl-[2rem]">
+              <div className="flex flex-col justify-center items-center rounded-2xl shadow-lg outline outline-black/5 p-5 min-w-[20rem]">
                 <EventForm
                   eventHours={eventHours}
                   setEventHours={setEventHours}
@@ -134,7 +134,7 @@ export const EventDetails = () => {
                 />
                 {drinksNeeded > 0 && (
                   <div className="flex flex mt-10 ">
-                    <p className="text-2xl items-center">
+                    <p className="text-lg items-center">
                       You need {drinksNeeded} drinks!
                     </p>
                   </div>
@@ -150,10 +150,10 @@ export const EventDetails = () => {
             >
               <section
                 id="drink-selection"
-                className="flex justify-center bg-[url(/images/greensq2.webp)] bg-cover bg-contain h-[25rem] w-[27rem] bg-center p-8 pl-[4rem] pt-[6rem]"
+                className="flex justify-center items-center rounded-2xl shadow-lg outline outline-black/5 p-5 min-w-[20rem]"
               >
                 <div>
-                  <h4 className=" flex text-xl mb-3">
+                  <h4 className=" flex text-lg mb-3">
                     Which beverages would you like to serve?
                   </h4>
                   <div>
