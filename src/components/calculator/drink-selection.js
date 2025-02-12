@@ -6,7 +6,7 @@ export const DrinkSelections = ({ setSelectedDrinks, selectedDrinks }) => {
   return (
     <div
       id="drink-options"
-      className="grid grid-rows-3 grid-flow-col gap-2 text-xl"
+      className="grid grid-rows-3 grid-flow-col gap-2 text-lg"
     >
       <label>
         Red Wine
