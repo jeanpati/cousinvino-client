@@ -220,14 +220,15 @@ export const PercentageScale = ({
                 guests)
               </p>
             </label>
-            <label className="flex items-center ml-2">
+            <div className="flex">
+              <label className="flex items-center ml-1"> Lock</label>
               <input
                 type="checkbox"
                 checked={drinks[beverage]?.locked || false}
                 onChange={() => toggleLock(beverage)}
+                className="ml-1"
               />
-              Lock
-            </label>
+            </div>
             <input
               type="range"
               min={0}
@@ -238,7 +239,7 @@ export const PercentageScale = ({
                 handlePercentageChange(index, Number(e.target.value))
               }
               disabled={drinks[beverage].locked}
-              className="w-full"
+              className="w-full h-[2rem]"
             />
             <label>
               <input
