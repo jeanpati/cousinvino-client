@@ -4,12 +4,15 @@ export const DrinkSelections = ({ setSelectedDrinks, selectedDrinks }) => {
     setSelectedDrinks((prevState) => ({ ...prevState, [name]: checked }));
   };
   return (
-    <div id="drink-options" className="grid grid-rows-3 grid-flow-col gap-2">
+    <div
+      id="drink-options"
+      className="grid grid-rows-3 grid-flow-col gap-2 text-xl"
+    >
       <label>
         Red Wine
         <input
           type="checkbox"
-          className="ml-1 border border-emerald-500 rounded"
+          className="ml-1"
           name="redWine"
           onChange={handleCheckboxChange}
           checked={selectedDrinks.redWine}
@@ -19,7 +22,7 @@ export const DrinkSelections = ({ setSelectedDrinks, selectedDrinks }) => {
         White Wine
         <input
           type="checkbox"
-          className="ml-1 border border-emerald-500 rounded"
+          className="ml-1"
           name="whiteWine"
           onChange={handleCheckboxChange}
           checked={selectedDrinks.whiteWine}
@@ -29,7 +32,7 @@ export const DrinkSelections = ({ setSelectedDrinks, selectedDrinks }) => {
         Sparkling Wine
         <input
           type="checkbox"
-          className="ml-1 border border-emerald-500 rounded"
+          className="ml-1"
           name="sparklingWine"
           onChange={handleCheckboxChange}
           checked={selectedDrinks.sparklingWine}
@@ -39,7 +42,7 @@ export const DrinkSelections = ({ setSelectedDrinks, selectedDrinks }) => {
         Beer
         <input
           type="checkbox"
-          className="ml-1 border border-emerald-500 rounded"
+          className="ml-1"
           name="beer"
           onChange={handleCheckboxChange}
           checked={selectedDrinks.beer}
@@ -49,7 +52,7 @@ export const DrinkSelections = ({ setSelectedDrinks, selectedDrinks }) => {
         Hard Seltzers
         <input
           type="checkbox"
-          className="ml-1 border border-emerald-500 rounded"
+          className="ml-1"
           name="hardSeltzers"
           onChange={handleCheckboxChange}
           checked={selectedDrinks.hardSeltzers}

@@ -120,7 +120,7 @@ export const EventDetails = () => {
         >
           <div
             id="event-details-wrapper"
-            className="circle-bg flex content-center p-8"
+            className="flex justify-center content-center p-8"
           >
             <section id="event-details" className="flex justify-center">
               <div className="flex flex-col bg-[url(/images/purplesq.webp)] bg-cover h-[25rem] w-[30rem] bg-center pt-[5rem] pl-[2rem]">
@@ -133,8 +133,8 @@ export const EventDetails = () => {
                   setNumGuests={setNumGuests}
                 />
                 {drinksNeeded > 0 && (
-                  <div>
-                    <p className="flex mt-10 text-2xl">
+                  <div className="flex flex mt-10 ">
+                    <p className="text-2xl items-center">
                       You need {drinksNeeded} drinks!
                     </p>
                   </div>
@@ -146,11 +146,11 @@ export const EventDetails = () => {
           {drinksNeeded > 0 && (
             <div
               id="drink-selection-wrapper"
-              className="circle-bg flex content-center"
+              className="flex justify-center content-center"
             >
               <section
                 id="drink-selection"
-                className="flex justify-center bg-[url(/images/greensq2.webp)] bg-cover h-[25rem] w-[27rem] bg-center p-8 pt-[6rem]"
+                className="flex justify-center bg-[url(/images/greensq2.webp)] bg-cover bg-contain h-[25rem] w-[27rem] bg-center p-8 pl-[4rem] pt-[6rem]"
               >
                 <div>
                   <h4 className=" flex text-xl mb-3">
@@ -172,23 +172,25 @@ export const EventDetails = () => {
             {Object.values(selectedDrinks).some((isTrue) => isTrue) && (
               <div
                 id="drink-questions-wrapper"
-                className="flex flex-col  p-5 mt-1 rounded-2xl content-center min-w-[20rem]"
+                className="flex justify-center flex-col  p-5 mt-1 rounded-2xl content-center min-w-[20rem]"
               >
-                <div className="flex justify-between">
+                <div className="flex justify-center">
                   <Image
                     src="/images/blueglasses.webp"
                     alt="wine glasses"
                     width={300}
                     height={300}
+                    loading="eager"
                   />
                   <Image
                     src="/images/martini.webp"
                     alt="wine glasses"
                     width={100}
                     height={200}
+                    loading="eager"
                   />
                 </div>
-                <h4 className="text-xl mb-3">Beverage Details</h4>
+                <h4 className="text-2xl mb-3">Beverage Details</h4>
                 <section
                   id="drink-questions"
                   className="flex flex-col bg-yellow-50 p-1 rounded-2xl"
@@ -217,7 +219,7 @@ export const EventDetails = () => {
           {Object.values(selectedDrinks).some((isTrue) => isTrue) && (
             <section
               id="results"
-              className="flex flex-col bg-[url(/images/redsq.webp)] bg-cover h-[38rem] w-[59rem] bg-center pt-[6rem]"
+              className="flex justify-center flex-col w-full bg-center"
             >
               {(drinks.redWine.needed > 0 ||
                 drinks.whiteWine.needed > 0 ||
@@ -225,18 +227,16 @@ export const EventDetails = () => {
                 drinks.beer.needed > 0 ||
                 drinks.hardSeltzers.needed > 0) && (
                 <div
-                  id="results-wrapper"
-                  className="flex flex-col p-10 mt-10 rounded-2xl "
+                  id="results-list-wrapper"
+                  className="flex flex-col justify-end w-full p-8"
                 >
-                  <h4 className="text-xl mb-3">Results</h4>
-
-                  <section id="results-list">
-                    <Results
-                      drinks={drinks}
-                      selectedDrinks={selectedDrinks}
-                      drinksNeeded={drinksNeeded}
-                    />
-                  </section>
+                  <span className=" bg-[url(/images/greenline1.webp)] bg-cover h-[3rem] container bg-center pt-[2rem]"></span>
+                  <h4 className="text-2xl mb-3">Results</h4>
+                  <Results
+                    drinks={drinks}
+                    selectedDrinks={selectedDrinks}
+                    drinksNeeded={drinksNeeded}
+                  />
                 </div>
               )}
             </section>
