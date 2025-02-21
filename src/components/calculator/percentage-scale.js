@@ -189,8 +189,30 @@ export const PercentageScale = ({
   const handleAverageChange = (e, beverage) => {
     updateDrink(beverage, "average", Number(e.target.value));
   };
+
+  //rounds to two decimal places
+  const formatInput = (number) => {
+    return Math.floor(number * 100) / 100;
+  };
+
+  const ozToMl = (oz) => {
+    return oz * 29.5735295625;
+  };
+
   const handleAmountPerDrinkChange = (e, beverage) => {
-    updateDrink(beverage, "amountPerDrink", Number(e.target.value));
+    const amount = Number(e.target.value);
+
+    if (unit === "oz") {
+      const amountInMl = ozToMl(amount);
+      updateDrink(beverage, "amountPerDrink", amountInMl);
+    } else {
+      updateDrink(beverage, "amountPerDrink", amount);
+    }
+  };
+
+  const handleUnitToggle = (e) => {
+    const newUnit = e.target.value;
+    setUnit(newUnit);
   };
 
   return (
@@ -324,8 +346,11 @@ export const PercentageScale = ({
                         type="number"
                         step="any"
                         value={
-                          Number(drinks[beverage]?.amountPerDrink).toString() ||
-                          0
+                          unit === "oz"
+                            ? formatInput(
+                                drinks[beverage]?.amountPerDrink / 29.5735295625
+                              ) || ""
+                            : Math.round(drinks[beverage]?.amountPerDrink) || ""
                         }
                         onChange={(e) =>
                           handleAmountPerDrinkChange(e, beverage)
@@ -339,14 +364,16 @@ export const PercentageScale = ({
                           type="radio"
                           value="oz"
                           checked={unit === "oz"}
+                          onChange={handleUnitToggle}
                         />
                         oz
                       </label>
                       <label>
                         <input
                           type="radio"
-                          value="oz"
+                          value="ml"
                           checked={unit === "ml"}
+                          onChange={handleUnitToggle}
                         />
                         ml
                       </label>
