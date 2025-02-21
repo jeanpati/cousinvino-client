@@ -23,7 +23,7 @@ export default function Home() {
             loading="eager"
           />
         </div>
-        <h2 className="text-xl font-[family-name:var(--chakra)] mr-2 ml-2">
+        <h2 className="text-2xl font-[family-name:var(--zen)] mr-2 ml-2">
           Let&apos;s figure out how many drinks to buy!
         </h2>
         <span className=" bg-[url(/images/purpleline.webp)] bg-cover h-[3rem] container bg-center pt-[4rem]"></span>

@@ -1,17 +1,21 @@
-import { Playwrite_FR_Trad, Chakra_Petch } from "next/font/google";
+import { Playwrite_FR_Trad, Zen_Maru_Gothic } from "next/font/google";
 import "./globals.css";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/react";
 
 const cursive = Playwrite_FR_Trad({
   variable: "--playwrite",
+  weight: "400",
   style: "normal",
+  preload: true,
 });
 
-const digital = Chakra_Petch({
-  variable: "--chakra",
+const digital = Zen_Maru_Gothic({
+  variable: "--zen",
   subsets: ["latin"],
-  weight: "700",
+  weight: "900",
+  style: "normal",
+  preload: true,
 });
 
 export default function RootLayout({ children }) {

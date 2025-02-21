@@ -16,6 +16,11 @@ export const EventDetails = () => {
     sparklingWine: false,
     beer: false,
     hardSeltzers: false,
+    whiskey: false,
+    tequila: false,
+    vodka: false,
+    gin: false,
+    rum: false,
   });
 
   const [drinks, setDrinks] = useState({
@@ -45,7 +50,7 @@ export const EventDetails = () => {
       percentage: 0,
       average: 0,
       needed: 0,
-      packSize: 0,
+      size: 0,
       locked: false,
     },
     hardSeltzers: {
@@ -53,7 +58,57 @@ export const EventDetails = () => {
       percentage: 0,
       average: 0,
       needed: 0,
-      packSize: 0,
+      size: 0,
+      locked: false,
+    },
+    whiskey: {
+      name: "Whiskey",
+      type: "spirit",
+      percentage: 0,
+      average: 0,
+      amountPerDrink: 0,
+      needed: 0,
+      size: 0,
+      locked: false,
+    },
+    tequila: {
+      name: "Tequila",
+      type: "spirit",
+      percentage: 0,
+      average: 0,
+      amountPerDrink: 0,
+      needed: 0,
+      size: 0,
+      locked: false,
+    },
+    vodka: {
+      name: "Vodka",
+      type: "spirit",
+      percentage: 0,
+      average: 0,
+      amountPerDrink: 0,
+      needed: 0,
+      size: 0,
+      locked: false,
+    },
+    gin: {
+      name: "Gin",
+      type: "spirit",
+      percentage: 0,
+      average: 0,
+      amountPerDrink: 0,
+      needed: 0,
+      size: 0,
+      locked: false,
+    },
+    rum: {
+      name: "Rum",
+      type: "spirit",
+      percentage: 0,
+      average: 0,
+      amountPerDrink: 0,
+      needed: 0,
+      size: 0,
       locked: false,
     },
   });
@@ -68,7 +123,7 @@ export const EventDetails = () => {
             ...updatedDrinks[drinkType],
             percentage: 0,
             needed: 0,
-            packSize: 0,
+            size: 0,
             locked: false,
           };
           return updatedDrinks;
@@ -86,7 +141,7 @@ export const EventDetails = () => {
         Object.keys(updatedDrinks).forEach((drinkType) => {
           updatedDrinks[drinkType] = {
             ...updatedDrinks[drinkType],
-            average: avgNumDrinks,
+            average: Number(avgNumDrinks),
           };
         });
 
@@ -111,12 +166,12 @@ export const EventDetails = () => {
   return (
     <div
       id="main-wrapper"
-      className="flex flex-col p-10 font-[family-name:var(--chakra)] w-full"
+      className="flex flex-col p-10 font-[family-name:var(--zen)] w-full"
     >
       <div>
         <div
           id="details-selection-wrapper"
-          className="flex flex-col md:flex-row "
+          className="flex flex-col justify-around md:flex-row "
         >
           <div
             id="event-details-wrapper"
@@ -134,8 +189,8 @@ export const EventDetails = () => {
                 />
                 {drinksNeeded > 0 && (
                   <div className="flex flex mt-10 ">
-                    <p className="text-lg items-center">
-                      You need {drinksNeeded} drinks!
+                    <p className="text-2xl items-center">
+                      You need {drinksNeeded} drinks
                     </p>
                   </div>
                 )}
@@ -153,7 +208,7 @@ export const EventDetails = () => {
                 className="flex justify-center items-center rounded-2xl shadow-lg outline outline-black/5 p-5 min-w-[20rem]"
               >
                 <div>
-                  <h4 className=" flex text-lg mb-3">
+                  <h4 className=" flex text-xl mb-3">
                     Which beverages would you like to serve?
                   </h4>
                   <div>
@@ -225,7 +280,12 @@ export const EventDetails = () => {
                 drinks.whiteWine.needed > 0 ||
                 drinks.sparklingWine.needed > 0 ||
                 drinks.beer.needed > 0 ||
-                drinks.hardSeltzers.needed > 0) && (
+                drinks.hardSeltzers.needed > 0 ||
+                drinks.whiskey.needed > 0 ||
+                drinks.tequila.needed > 0 ||
+                drinks.vodka.needed > 0 ||
+                drinks.gin.needed > 0 ||
+                drinks.rum.needed > 0) && (
                 <div
                   id="results-list-wrapper"
                   className="flex flex-col justify-end w-full p-8"
@@ -237,7 +297,7 @@ export const EventDetails = () => {
                     selectedDrinks={selectedDrinks}
                     drinksNeeded={drinksNeeded}
                   />
-                  <p className="mt-2">
+                  <p className="mt-2 text-lg">
                     Keep in mind - people drink less as the party goes on
                   </p>
                 </div>
