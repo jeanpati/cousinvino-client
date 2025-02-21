@@ -6,7 +6,7 @@ export const DrinkSelections = ({ setSelectedDrinks, selectedDrinks }) => {
   return (
     <div
       id="drink-options"
-      className="grid grid-rows-3 grid-flow-col gap-2 text-xl"
+      className="grid grid-cols-2 grid-flow-row gap-2 text-xl"
     >
       <label>
         Red Wine
@@ -56,6 +56,56 @@ export const DrinkSelections = ({ setSelectedDrinks, selectedDrinks }) => {
           name="hardSeltzers"
           onChange={handleCheckboxChange}
           checked={selectedDrinks.hardSeltzers}
+        />
+      </label>
+      <label>
+        Whiskey
+        <input
+          type="checkbox"
+          className="ml-1"
+          name="whiskey"
+          onChange={handleCheckboxChange}
+          checked={selectedDrinks.whiskey}
+        />
+      </label>
+      <label>
+        Tequila
+        <input
+          type="checkbox"
+          className="ml-1"
+          name="tequila"
+          onChange={handleCheckboxChange}
+          checked={selectedDrinks.tequila}
+        />
+      </label>
+      <label>
+        Vodka
+        <input
+          type="checkbox"
+          className="ml-1"
+          name="vodka"
+          onChange={handleCheckboxChange}
+          checked={selectedDrinks.vodka}
+        />
+      </label>
+      <label>
+        Gin
+        <input
+          type="checkbox"
+          className="ml-1"
+          name="gin"
+          onChange={handleCheckboxChange}
+          checked={selectedDrinks.gin}
+        />
+      </label>
+      <label>
+        Rum
+        <input
+          type="checkbox"
+          className="ml-1"
+          name="rum"
+          onChange={handleCheckboxChange}
+          checked={selectedDrinks.rum}
         />
       </label>
     </div>

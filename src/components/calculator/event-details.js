@@ -16,16 +16,11 @@ export const EventDetails = () => {
     sparklingWine: false,
     beer: false,
     hardSeltzers: false,
-    scotch: false,
-    bourbon: false,
-    blancoTequila: false,
-    reposadoTequila: false,
-    anejoTequila: false,
-    mezcal: false,
+    whiskey: false,
+    tequila: false,
     vodka: false,
     gin: false,
-    lightRum: false,
-    darkRum: false,
+    rum: false,
   });
 
   const [drinks, setDrinks] = useState({
