@@ -25,7 +25,7 @@ export const Results = ({ selectedDrinks, drinks, drinksNeeded }) => {
           <tbody>
             {selectedDrinks.redWine && drinks.redWine.needed > 0 && (
               <tr className="hover:bg-sky-100">
-                <th scope="row">Red Wine</th>
+                <th scope="row">Red Wine - 750ml</th>
                 <td>{drinks.redWine.needed} bottles</td>
                 <td>{drinks.redWine.needed * 5} glasses</td>
               </tr>
@@ -33,7 +33,7 @@ export const Results = ({ selectedDrinks, drinks, drinksNeeded }) => {
 
             {selectedDrinks.whiteWine && drinks.whiteWine.needed > 0 && (
               <tr className="hover:bg-sky-100">
-                <th scope="row">White Wine</th>
+                <th scope="row">White Wine - 750ml</th>
                 <td>{drinks.whiteWine.needed} bottles</td>
                 <td>{drinks.whiteWine.needed * 5} glasses</td>
               </tr>
@@ -42,7 +42,7 @@ export const Results = ({ selectedDrinks, drinks, drinksNeeded }) => {
             {selectedDrinks.sparklingWine &&
               drinks.sparklingWine.needed > 0 && (
                 <tr className="hover:bg-sky-100">
-                  <th scope="row">Sparkling Wine</th>
+                  <th scope="row">Sparkling Wine - 750ml</th>
                   <td>{drinks.sparklingWine.needed} bottles</td>
                   <td>{drinks.sparklingWine.needed * 6} glasses</td>
                 </tr>
