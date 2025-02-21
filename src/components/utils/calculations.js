@@ -40,3 +40,21 @@ export const calculateCannedBeverages = (
   const packsNeeded = Math.ceil(drinksNeeded / packCount);
   return packsNeeded;
 };
+
+export const calculateSpirits = (
+  drinkerPercentage,
+  numGuests,
+  drinkAverage,
+  eventHours,
+  bottleSize,
+  amountPerDrink
+) => {
+  const drinksNeeded = Math.ceil(
+    (drinkerPercentage / 100.0) * numGuests * drinkAverage * eventHours
+  );
+
+  const drinksPerBottle = bottleSize / amountPerDrink;
+
+  const bottlesNeeded = Math.ceil(drinksNeeded / drinksPerBottle);
+  return bottlesNeeded;
+};

@@ -196,7 +196,7 @@ export const PercentageScale = ({
   };
 
   const ozToMl = (oz) => {
-    return oz * 29.5735295625;
+    return oz * 29.573529;
   };
 
   const handleAmountPerDrinkChange = (e, beverage) => {
@@ -348,7 +348,7 @@ export const PercentageScale = ({
                         value={
                           unit === "oz"
                             ? formatInput(
-                                drinks[beverage]?.amountPerDrink / 29.5735295625
+                                drinks[beverage]?.amountPerDrink / 29.573529
                               ) || ""
                             : Math.round(drinks[beverage]?.amountPerDrink) || ""
                         }
