@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo } from "react";
 import {
   calculateCannedBeverages,
   calculateSparklingWine750ml,
@@ -287,6 +287,24 @@ export const PercentageScale = ({
                   <option value="8">8 pack</option>
                   <option value="12">12 pack</option>
                   <option value="24">24 pack</option>
+                </select>
+              </label>
+            )}
+
+            {drinks[beverage]?.type === "spirit" && (
+              <label className="ml-5 mt-2.5 ">
+                Bottle size:
+                <select
+                  className="ml-2 border border-emerald-500 p-1 rounded"
+                  id={`${beverage}-bottleSize`}
+                  onChange={(e) => handleRadioChange(e, beverage)}
+                  value={drinks.beer?.packSize || 0}
+                >
+                  <option value="">Select</option>
+                  <option value="375">375ml</option>
+                  <option value="750">750ml</option>
+                  <option value="1000">1L</option>
+                  <option value="1750">1.75L</option>
                 </select>
               </label>
             )}
