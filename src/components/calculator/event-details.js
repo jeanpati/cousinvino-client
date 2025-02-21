@@ -141,7 +141,7 @@ export const EventDetails = () => {
         Object.keys(updatedDrinks).forEach((drinkType) => {
           updatedDrinks[drinkType] = {
             ...updatedDrinks[drinkType],
-            average: avgNumDrinks,
+            average: Number(avgNumDrinks),
           };
         });
 
@@ -280,7 +280,12 @@ export const EventDetails = () => {
                 drinks.whiteWine.needed > 0 ||
                 drinks.sparklingWine.needed > 0 ||
                 drinks.beer.needed > 0 ||
-                drinks.hardSeltzers.needed > 0) && (
+                drinks.hardSeltzers.needed > 0 ||
+                drinks.whiskey.needed > 0 ||
+                drinks.tequila.needed > 0 ||
+                drinks.vodka.needed > 0 ||
+                drinks.gin.needed > 0 ||
+                drinks.rum.needed > 0) && (
                 <div
                   id="results-list-wrapper"
                   className="flex flex-col justify-end w-full p-8"

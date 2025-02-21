@@ -6,8 +6,26 @@ export const Results = ({ selectedDrinks, drinks, drinksNeeded }) => {
       (drinks?.redWine?.needed * 5 || 0) +
       (drinks?.whiteWine?.needed * 5 || 0) +
       (drinks?.sparklingWine?.needed * 6 || 0) +
-      (drinks?.beer?.needed * drinks.beer.size || 0) +
-      (drinks?.hardSeltzers?.needed * drinks.hardSeltzers.size || 0)
+      (drinks?.beer?.needed * drinks?.beer?.size || 0) +
+      (drinks?.hardSeltzers?.needed * drinks.hardSeltzers.size || 0) +
+      (Math.floor(
+        drinks?.whiskey?.needed *
+          (drinks?.whiskey?.size / drinks?.whiskey?.amountPerDrink)
+      ) || 0) +
+      (Math.floor(
+        drinks?.tequila?.needed *
+          (drinks?.tequila?.size / drinks?.tequila?.amountPerDrink)
+      ) || 0) +
+      (Math.floor(
+        drinks?.vodka?.needed *
+          (drinks?.vodka?.size / drinks?.vodka?.amountPerDrink)
+      ) || 0) +
+      (Math.floor(
+        drinks?.gin?.needed * (drinks?.gin?.size / drinks?.gin?.amountPerDrink)
+      ) || 0) +
+      (Math.floor(
+        drinks?.rum?.needed * (drinks?.rum?.size / drinks?.rum?.amountPerDrink)
+      ) || 0)
     );
   }, [drinks]);
 
@@ -81,28 +99,173 @@ export const Results = ({ selectedDrinks, drinks, drinksNeeded }) => {
               </tr>
             ) : null}
 
-            {totalDrinks > drinksNeeded && (
-              <tr>
-                <th scope="row">TOTAL</th>
-                <td></td>
-                <td>{totalDrinks} drinks</td>
+            {selectedDrinks.whiskey && drinks.whiskey?.size === 0 ? (
+              <tr className="bg-yellow-100">
+                <td colSpan="3" className="text-center text-yellow-800">
+                  Please select a whiskey bottle size
+                </td>
               </tr>
-            )}
-            {totalDrinks === drinksNeeded && (
-              <tr>
-                <th scope="row">TOTAL</th>
-                <td></td>
-                <td>{totalDrinks} drinks</td>
+            ) : selectedDrinks.whiskey &&
+              drinks.whiskey?.amountPerDrink === 0 ? (
+              <tr className="bg-yellow-100">
+                <td colSpan="3" className="text-center text-yellow-800">
+                  Please enter the amount of whiskey per drink
+                </td>
               </tr>
-            )}
+            ) : selectedDrinks.whiskey && drinks.whiskey?.needed > 0 ? (
+              <tr className="hover:bg-rose-50">
+                {drinks.whiskey?.size <= 750 && (
+                  <th scope="row">Whiskey - {drinks.whiskey?.size}ml</th>
+                )}
+                {drinks.whiskey?.size > 750 && (
+                  <th scope="row">Whiskey - {drinks.whiskey?.size / 1000}L</th>
+                )}
 
-            {totalDrinks < drinksNeeded && (
-              <tr>
-                <th scope="row">TOTAL</th>
-                <td></td>
-                <td>{totalDrinks} drinks</td>
+                <td>{drinks.whiskey.needed} bottles</td>
+                <td>
+                  {Math.floor(
+                    drinks.whiskey.needed *
+                      (drinks.whiskey?.size / drinks.whiskey?.amountPerDrink)
+                  )}{" "}
+                  drinks
+                </td>
               </tr>
-            )}
+            ) : null}
+
+            {selectedDrinks.tequila && drinks.tequila?.size === 0 ? (
+              <tr className="bg-yellow-100">
+                <td colSpan="3" className="text-center text-yellow-800">
+                  Please select a tequila bottle size
+                </td>
+              </tr>
+            ) : selectedDrinks.tequila &&
+              drinks.tequila?.amountPerDrink === 0 ? (
+              <tr className="bg-yellow-100">
+                <td colSpan="3" className="text-center text-yellow-800">
+                  Please enter the amount of tequila per drink
+                </td>
+              </tr>
+            ) : selectedDrinks.tequila && drinks.tequila?.needed > 0 ? (
+              <tr className="hover:bg-rose-50">
+                {drinks.tequila?.size <= 750 && (
+                  <th scope="row">Tequila - {drinks.tequila?.size}ml</th>
+                )}
+                {drinks.tequila?.size > 750 && (
+                  <th scope="row">Tequila - {drinks.tequila?.size / 1000}L</th>
+                )}
+
+                <td>{drinks.tequila.needed} bottles</td>
+                <td>
+                  {Math.floor(
+                    drinks.tequila.needed *
+                      (drinks.tequila?.size / drinks.tequila?.amountPerDrink)
+                  )}{" "}
+                  drinks
+                </td>
+              </tr>
+            ) : null}
+
+            {selectedDrinks.vodka && drinks.vodka?.size === 0 ? (
+              <tr className="bg-yellow-100">
+                <td colSpan="3" className="text-center text-yellow-800">
+                  Please select a vodka bottle size
+                </td>
+              </tr>
+            ) : selectedDrinks.vodka && drinks.vodka?.amountPerDrink === 0 ? (
+              <tr className="bg-yellow-100">
+                <td colSpan="3" className="text-center text-yellow-800">
+                  Please enter the amount of vodka per drink
+                </td>
+              </tr>
+            ) : selectedDrinks.vodka && drinks.vodka?.needed > 0 ? (
+              <tr className="hover:bg-rose-50">
+                {drinks.vodka?.size <= 750 && (
+                  <th scope="row">Vodka - {drinks.vodka?.size}ml</th>
+                )}
+                {drinks.vodka?.size > 750 && (
+                  <th scope="row">Vodka - {drinks.vodka?.size / 1000}L</th>
+                )}
+
+                <td>{drinks.vodka.needed} bottles</td>
+                <td>
+                  {Math.floor(
+                    drinks.vodka.needed *
+                      (drinks.vodka?.size / drinks.vodka?.amountPerDrink)
+                  )}{" "}
+                  drinks
+                </td>
+              </tr>
+            ) : null}
+
+            {selectedDrinks.gin && drinks.gin?.size === 0 ? (
+              <tr className="bg-yellow-100">
+                <td colSpan="3" className="text-center text-yellow-800">
+                  Please select a gin bottle size
+                </td>
+              </tr>
+            ) : selectedDrinks.gin && drinks.gin?.amountPerDrink === 0 ? (
+              <tr className="bg-yellow-100">
+                <td colSpan="3" className="text-center text-yellow-800">
+                  Please enter the amount of gin per drink
+                </td>
+              </tr>
+            ) : selectedDrinks.gin && drinks.gin?.needed > 0 ? (
+              <tr className="hover:bg-rose-50">
+                {drinks.gin?.size <= 750 && (
+                  <th scope="row">Gin - {drinks.gin?.size}ml</th>
+                )}
+                {drinks.gin?.size > 750 && (
+                  <th scope="row">Gin - {drinks.gin?.size / 1000}L</th>
+                )}
+
+                <td>{drinks.gin.needed} bottles</td>
+                <td>
+                  {Math.floor(
+                    drinks.gin.needed *
+                      (drinks.gin?.size / drinks.gin?.amountPerDrink)
+                  )}{" "}
+                  drinks
+                </td>
+              </tr>
+            ) : null}
+
+            {selectedDrinks.rum && drinks.rum?.size === 0 ? (
+              <tr className="bg-yellow-100">
+                <td colSpan="3" className="text-center text-yellow-800">
+                  Please select a rum bottle size
+                </td>
+              </tr>
+            ) : selectedDrinks.rum && drinks.rum?.amountPerDrink === 0 ? (
+              <tr className="bg-yellow-100">
+                <td colSpan="3" className="text-center text-yellow-800">
+                  Please enter the amount of rum per drink
+                </td>
+              </tr>
+            ) : selectedDrinks.rum && drinks.rum?.needed > 0 ? (
+              <tr className="hover:bg-rose">
+                {drinks.rum?.size <= 750 && (
+                  <th scope="row">Rum - {drinks.rum?.size}ml</th>
+                )}
+                {drinks.rum?.size > 750 && (
+                  <th scope="row">Rum - {drinks.rum?.size / 1000}L</th>
+                )}
+
+                <td>{drinks.rum.needed} bottles</td>
+                <td>
+                  {Math.floor(
+                    drinks.rum.needed *
+                      (drinks.rum?.size / drinks.rum?.amountPerDrink)
+                  )}{" "}
+                  drinks
+                </td>
+              </tr>
+            ) : null}
+
+            <tr>
+              <th scope="row">TOTAL</th>
+              <td></td>
+              <td>{totalDrinks} drinks</td>
+            </tr>
           </tbody>
         </table>
       </section>

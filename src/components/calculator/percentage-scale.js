@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import {
   calculateCannedBeverages,
   calculateSparklingWine750ml,
+  calculateSpirits,
   calculateStillWine750ml,
 } from "../utils/calculations";
 
@@ -23,50 +24,125 @@ export const PercentageScale = ({
   useEffect(() => {
     if (selectedDrinks.redWine) {
       const redWineNeeded = calculateStillWine750ml(
-        drinks.redWine.percentage,
+        drinks.redWine?.percentage,
         numGuests,
-        drinks.redWine.average,
+        drinks.redWine?.average,
         eventHours
       );
-      updateDrink("redWine", "needed", redWineNeeded);
+      updateDrink("redWine", "needed", redWineNeeded || 0);
     }
     if (selectedDrinks.whiteWine) {
       const whiteWineNeeded = calculateStillWine750ml(
-        drinks.whiteWine.percentage,
+        drinks.whiteWine?.percentage,
         numGuests,
-        drinks.whiteWine.average,
+        drinks.whiteWine?.average,
         eventHours
       );
-      updateDrink("whiteWine", "needed", whiteWineNeeded);
+      updateDrink("whiteWine", "needed", whiteWineNeeded || 0);
     }
     if (selectedDrinks.sparklingWine) {
       const sparklingWineNeeded = calculateSparklingWine750ml(
-        drinks.sparklingWine.percentage,
+        drinks.sparklingWine?.percentage,
         numGuests,
-        drinks.sparklingWine.average,
+        drinks.sparklingWine?.average,
         eventHours
       );
-      updateDrink("sparklingWine", "needed", sparklingWineNeeded);
+      updateDrink("sparklingWine", "needed", sparklingWineNeeded || 0);
     }
-    if (selectedDrinks.beer) {
+    if (selectedDrinks.beer && drinks.beer?.size > 0) {
       const beerNeeded = calculateCannedBeverages(
-        drinks.beer.percentage,
+        drinks.beer?.percentage,
         numGuests,
-        drinks.beer.average,
+        drinks.beer?.average,
         eventHours,
-        drinks.beer.size
+        drinks.beer?.size
       );
-      updateDrink("beer", "needed", beerNeeded);
+      updateDrink("beer", "needed", beerNeeded || 0);
     }
-    if (selectedDrinks.hardSeltzers) {
+    if (selectedDrinks.hardSeltzers && drinks.hardSeltzers?.size > 0) {
       const hardSeltzerNeeded = calculateCannedBeverages(
-        drinks.hardSeltzers.percentage,
+        drinks.hardSeltzers?.percentage,
         numGuests,
-        drinks.hardSeltzers.average,
+        drinks.hardSeltzers?.average,
         eventHours,
-        drinks.hardSeltzers.size
+        drinks.hardSeltzers?.size
       );
-      updateDrink("hardSeltzers", "needed", hardSeltzerNeeded);
+      updateDrink("hardSeltzers", "needed", hardSeltzerNeeded || 0);
+    }
+    if (
+      selectedDrinks.whiskey &&
+      drinks.whiskey?.size > 0 &&
+      drinks.whiskey?.amountPerDrink > 0
+    ) {
+      const whiskeyNeeded = calculateSpirits(
+        drinks.whiskey?.percentage,
+        numGuests,
+        drinks.whiskey?.average,
+        eventHours,
+        drinks.whiskey?.size,
+        drinks.whiskey?.amountPerDrink
+      );
+      updateDrink("whiskey", "needed", whiskeyNeeded || 0);
+    }
+    if (
+      selectedDrinks.tequila &&
+      drinks.tequila?.size > 0 &&
+      drinks.tequila?.amountPerDrink > 0
+    ) {
+      const tequilaNeeded = calculateSpirits(
+        drinks.tequila?.percentage,
+        numGuests,
+        drinks.tequila?.average,
+        eventHours,
+        drinks.tequila?.size,
+        drinks.tequila?.amountPerDrink
+      );
+      updateDrink("tequila", "needed", tequilaNeeded || 0);
+    }
+    if (
+      selectedDrinks.vodka &&
+      drinks.vodka?.size > 0 &&
+      drinks.vodka?.amountPerDrink > 0
+    ) {
+      const vodkaNeeded = calculateSpirits(
+        drinks.vodka?.percentage,
+        numGuests,
+        drinks.vodka?.average,
+        eventHours,
+        drinks.vodka?.size,
+        drinks.vodka?.amountPerDrink
+      );
+      updateDrink("vodka", "needed", vodkaNeeded || 0);
+    }
+    if (
+      selectedDrinks.gin &&
+      drinks.gin?.size > 0 &&
+      drinks.gin?.amountPerDrink > 0
+    ) {
+      const ginNeeded = calculateSpirits(
+        drinks.gin?.percentage,
+        numGuests,
+        drinks.gin?.average,
+        eventHours,
+        drinks.gin?.size,
+        drinks.gin?.amountPerDrink
+      );
+      updateDrink("gin", "needed", ginNeeded || 0);
+    }
+    if (
+      selectedDrinks.rum &&
+      drinks.rum?.size > 0 &&
+      drinks.rum?.amountPerDrink > 0
+    ) {
+      const rumNeeded = calculateSpirits(
+        drinks.rum?.percentage,
+        numGuests,
+        drinks.rum?.average,
+        eventHours,
+        drinks.rum?.size,
+        drinks.rum?.amountPerDrink
+      );
+      updateDrink("rum", "needed", rumNeeded || 0);
     }
   }, [
     numGuests,
@@ -83,6 +159,26 @@ export const PercentageScale = ({
     drinks.hardSeltzers.percentage,
     drinks.hardSeltzers.average,
     drinks.hardSeltzers.size,
+    drinks.whiskey.percentage,
+    drinks.whiskey.average,
+    drinks.whiskey.size,
+    drinks.whiskey.amountPerDrink,
+    drinks.tequila.percentage,
+    drinks.tequila.average,
+    drinks.tequila.size,
+    drinks.tequila.amountPerDrink,
+    drinks.vodka.percentage,
+    drinks.vodka.average,
+    drinks.vodka.size,
+    drinks.vodka.amountPerDrink,
+    drinks.gin.percentage,
+    drinks.gin.average,
+    drinks.gin.size,
+    drinks.gin.amountPerDrink,
+    drinks.rum.percentage,
+    drinks.rum.average,
+    drinks.rum.size,
+    drinks.rum.amountPerDrink,
   ]);
 
   // initialize percentages equally when checkboxes are clicked
@@ -183,7 +279,7 @@ export const PercentageScale = ({
     });
   };
 
-  const handleRadioChange = (e, beverage) => {
+  const handleDropDownChange = (e, beverage) => {
     updateDrink(beverage, "size", Number(e.target.value));
   };
   const handleAverageChange = (e, beverage) => {
@@ -196,17 +292,19 @@ export const PercentageScale = ({
   };
 
   const ozToMl = (oz) => {
-    return oz * 29.573529;
+    return oz * 29.57353;
   };
 
   const handleAmountPerDrinkChange = (e, beverage) => {
-    const amount = Number(e.target.value);
+    if (e.target.value >= 0) {
+      const amount = Number(e.target.value);
 
-    if (unit === "oz") {
-      const amountInMl = ozToMl(amount);
-      updateDrink(beverage, "amountPerDrink", amountInMl);
-    } else {
-      updateDrink(beverage, "amountPerDrink", amount);
+      if (unit === "oz") {
+        const amountInMl = ozToMl(amount);
+        updateDrink(beverage, "amountPerDrink", amountInMl);
+      } else {
+        updateDrink(beverage, "amountPerDrink", amount);
+      }
     }
   };
 
@@ -288,7 +386,7 @@ export const PercentageScale = ({
                   <select
                     className="ml-2 border border-emerald-500 p-1 rounded"
                     id="beer-size"
-                    onChange={(e) => handleRadioChange(e, beverage)}
+                    onChange={(e) => handleDropDownChange(e, beverage)}
                     value={drinks.beer?.size || 0}
                   >
                     <option value="">Select</option>
@@ -307,7 +405,7 @@ export const PercentageScale = ({
                   <select
                     className="ml-2 border border-emerald-500 p-1 rounded"
                     id="hardSeltzers-size"
-                    onChange={(e) => handleRadioChange(e, beverage)}
+                    onChange={(e) => handleDropDownChange(e, beverage)}
                     value={drinks.hardSeltzers?.size || 0}
                   >
                     <option value="0">Select</option>
@@ -327,10 +425,10 @@ export const PercentageScale = ({
                     <select
                       className="ml-2 border border-emerald-500 p-1 rounded"
                       id={`${beverage}-size`}
-                      onChange={(e) => handleRadioChange(e, beverage)}
+                      onChange={(e) => handleDropDownChange(e, beverage)}
                       value={drinks[beverage]?.size || 0}
                     >
-                      <option value="">Select</option>
+                      <option value="0">Select</option>
                       <option value="375">375ml</option>
                       <option value="750">750ml</option>
                       <option value="1000">1L</option>
@@ -344,11 +442,12 @@ export const PercentageScale = ({
                       <input
                         id={`${beverage}-amount-per-drink`}
                         type="number"
+                        min={0}
                         step="any"
                         value={
                           unit === "oz"
                             ? formatInput(
-                                drinks[beverage]?.amountPerDrink / 29.573529
+                                drinks[beverage]?.amountPerDrink / 29.57353
                               ) || ""
                             : Math.round(drinks[beverage]?.amountPerDrink) || ""
                         }
