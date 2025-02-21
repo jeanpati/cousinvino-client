@@ -14,7 +14,7 @@ export const Results = ({ selectedDrinks, drinks, drinksNeeded }) => {
   return (
     <div className="">
       <section id="results">
-        <table className="overflow-hidden items-center rounded-2xl bg-white shadow-lg outline outline-black/5">
+        <table className="overflow-hidden items-center rounded-2xl bg-white shadow-lg outline outline-black/5 text-lg md:text-xl">
           <thead className="bg-amber-100">
             <tr>
               <th scope="col">Beverage</th>
@@ -24,7 +24,7 @@ export const Results = ({ selectedDrinks, drinks, drinksNeeded }) => {
           </thead>
           <tbody>
             {selectedDrinks.redWine && drinks.redWine.needed > 0 && (
-              <tr className="hover:bg-sky-100">
+              <tr className="hover:bg-rose-50">
                 <th scope="row">Red Wine - 750ml</th>
                 <td>{drinks.redWine.needed} bottles</td>
                 <td>{drinks.redWine.needed * 5} glasses</td>
@@ -32,7 +32,7 @@ export const Results = ({ selectedDrinks, drinks, drinksNeeded }) => {
             )}
 
             {selectedDrinks.whiteWine && drinks.whiteWine.needed > 0 && (
-              <tr className="hover:bg-sky-100">
+              <tr className="hover:bg-rose-50">
                 <th scope="row">White Wine - 750ml</th>
                 <td>{drinks.whiteWine.needed} bottles</td>
                 <td>{drinks.whiteWine.needed * 5} glasses</td>
@@ -41,7 +41,7 @@ export const Results = ({ selectedDrinks, drinks, drinksNeeded }) => {
 
             {selectedDrinks.sparklingWine &&
               drinks.sparklingWine.needed > 0 && (
-                <tr className="hover:bg-sky-100">
+                <tr className="hover:bg-rose-50">
                   <th scope="row">Sparkling Wine - 750ml</th>
                   <td>{drinks.sparklingWine.needed} bottles</td>
                   <td>{drinks.sparklingWine.needed * 6} glasses</td>
@@ -55,7 +55,7 @@ export const Results = ({ selectedDrinks, drinks, drinksNeeded }) => {
                 </td>
               </tr>
             ) : selectedDrinks.beer && drinks.beer?.needed > 0 ? (
-              <tr className="hover:bg-sky-100">
+              <tr className="hover:bg-rose-50">
                 <th scope="row">Beer - {drinks.beer.packSize}pk</th>
                 <td>{drinks.beer.needed} packs</td>
                 <td>{drinks.beer.needed * drinks.beer.packSize} cans</td>
@@ -71,7 +71,7 @@ export const Results = ({ selectedDrinks, drinks, drinksNeeded }) => {
               </tr>
             ) : selectedDrinks.hardSeltzers &&
               drinks.hardSeltzers?.needed > 0 ? (
-              <tr className="hover:bg-sky-100">
+              <tr className="hover:bg-rose-50">
                 <th scope="row">
                   Hard Seltzers - {drinks.hardSeltzers.packSize}pk
                 </th>

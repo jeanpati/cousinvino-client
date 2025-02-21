@@ -190,7 +190,7 @@ export const PercentageScale = ({
 
   return (
     <div id="scale-container" className="flex flex-col">
-      <section id="split-view" className="flex flex-col justify-center text-md">
+      <section id="split-view" className="flex flex-col justify-center text-lg">
         {selectedBeverageKeys.map((beverage, index) => (
           <fieldset
             key={beverage}
@@ -211,10 +211,10 @@ export const PercentageScale = ({
                 onChange={(e) =>
                   handlePercentageChange(index, Number(e.target.value))
                 }
-                className="ml-1 mt-1 border border-emerald-500 p-2 rounded w-[4rem]"
+                className="ml-1 mt-1 border border-emerald-500 p-1 rounded w-[4rem]"
               />{" "}
               %
-              <p className="text-xs">
+              <p className="text-sm">
                 (approx.{" "}
                 {Math.round((drinks[beverage].percentage / 100) * numGuests)}{" "}
                 guests)
@@ -248,7 +248,7 @@ export const PercentageScale = ({
                 step="any"
                 value={Number(drinks[beverage].average).toString() || 0}
                 onChange={(e) => handleAverageChange(e, beverage)}
-                className="ml-1 mt-1 border border-emerald-500 p-2 rounded w-[3rem]"
+                className="ml-1 mt-1 border border-emerald-500 p-1 rounded w-[3rem]"
               />{" "}
               drinks/hour
             </label>

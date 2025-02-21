@@ -16,6 +16,16 @@ export const EventDetails = () => {
     sparklingWine: false,
     beer: false,
     hardSeltzers: false,
+    scotch: false,
+    bourbon: false,
+    blancoTequila: false,
+    reposadoTequila: false,
+    anejoTequila: false,
+    mezcal: false,
+    vodka: false,
+    gin: false,
+    lightRum: false,
+    darkRum: false,
   });
 
   const [drinks, setDrinks] = useState({
@@ -111,7 +121,7 @@ export const EventDetails = () => {
   return (
     <div
       id="main-wrapper"
-      className="flex flex-col p-10 font-[family-name:var(--chakra)] w-full"
+      className="flex flex-col p-10 font-[family-name:var(--zen)] w-full"
     >
       <div>
         <div
@@ -134,8 +144,8 @@ export const EventDetails = () => {
                 />
                 {drinksNeeded > 0 && (
                   <div className="flex flex mt-10 ">
-                    <p className="text-lg items-center">
-                      You need {drinksNeeded} drinks!
+                    <p className="text-2xl items-center">
+                      You need {drinksNeeded} drinks
                     </p>
                   </div>
                 )}
@@ -153,7 +163,7 @@ export const EventDetails = () => {
                 className="flex justify-center items-center rounded-2xl shadow-lg outline outline-black/5 p-5 min-w-[20rem]"
               >
                 <div>
-                  <h4 className=" flex text-lg mb-3">
+                  <h4 className=" flex text-xl mb-3">
                     Which beverages would you like to serve?
                   </h4>
                   <div>
@@ -237,7 +247,7 @@ export const EventDetails = () => {
                     selectedDrinks={selectedDrinks}
                     drinksNeeded={drinksNeeded}
                   />
-                  <p className="mt-2">
+                  <p className="mt-2 text-lg">
                     Keep in mind - people drink less as the party goes on
                   </p>
                 </div>
