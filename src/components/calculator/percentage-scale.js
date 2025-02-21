@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   calculateCannedBeverages,
   calculateSparklingWine750ml,
@@ -17,6 +17,8 @@ export const PercentageScale = ({
     () => Object.keys(selectedDrinks).filter((drink) => selectedDrinks[drink]),
     [selectedDrinks]
   );
+
+  const [unit, setUnit] = useState("oz");
 
   useEffect(() => {
     if (selectedDrinks.redWine) {
@@ -187,6 +189,9 @@ export const PercentageScale = ({
   const handleAverageChange = (e, beverage) => {
     updateDrink(beverage, "average", Number(e.target.value));
   };
+  const handleAmountPerDrinkChange = (e, beverage) => {
+    updateDrink(beverage, "amountPerDrink", Number(e.target.value));
+  };
 
   return (
     <div id="scale-container" className="flex flex-col">
@@ -241,73 +246,115 @@ export const PercentageScale = ({
               disabled={drinks[beverage].locked}
               className="w-full h-[2rem]"
             />
-            <label>
-              <input
-                id={`${beverage}-average`}
-                type="number"
-                step="any"
-                value={Number(drinks[beverage].average).toString() || 0}
-                onChange={(e) => handleAverageChange(e, beverage)}
-                className="ml-1 mt-1 border border-emerald-500 p-1 rounded w-[3rem]"
-              />{" "}
-              drinks/hour
-            </label>
 
-            {beverage === "beer" && (
-              <label className="ml-5 mt-2.5 ">
-                Pack size:
-                <select
-                  className="ml-2 border border-emerald-500 p-1 rounded"
-                  id="beer-size"
-                  onChange={(e) => handleRadioChange(e, beverage)}
-                  value={drinks.beer?.size || 0}
-                >
-                  <option value="">Select</option>
-                  <option value="6">6 pack</option>
-                  <option value="12">12 pack</option>
-                  <option value="18">18 pack</option>
-                  <option value="24">24 pack</option>
-                  <option value="30">30 pack</option>
-                </select>
+            <div id="below-range" className="flex">
+              <label>
+                <input
+                  id={`${beverage}-average`}
+                  type="number"
+                  step="any"
+                  value={Number(drinks[beverage].average).toString() || 0}
+                  onChange={(e) => handleAverageChange(e, beverage)}
+                  className="ml-1 mt-1 border border-emerald-500 p-1 rounded w-[3rem]"
+                />{" "}
+                drinks/hour
               </label>
-            )}
 
-            {beverage === "hardSeltzers" && (
-              <label className="ml-5 mt-2.5">
-                Pack size:
-                <select
-                  className="ml-2 border border-emerald-500 p-1 rounded"
-                  id="hardSeltzers-size"
-                  onChange={(e) => handleRadioChange(e, beverage)}
-                  value={drinks.hardSeltzers?.size || 0}
-                >
-                  <option value="0">Select</option>
-                  <option value="4">4 pack</option>
-                  <option value="6">6 pack</option>
-                  <option value="8">8 pack</option>
-                  <option value="12">12 pack</option>
-                  <option value="24">24 pack</option>
-                </select>
-              </label>
-            )}
+              {beverage === "beer" && (
+                <label className="ml-5 mt-1 ">
+                  Pack size:
+                  <select
+                    className="ml-2 border border-emerald-500 p-1 rounded"
+                    id="beer-size"
+                    onChange={(e) => handleRadioChange(e, beverage)}
+                    value={drinks.beer?.size || 0}
+                  >
+                    <option value="">Select</option>
+                    <option value="6">6 pack</option>
+                    <option value="12">12 pack</option>
+                    <option value="18">18 pack</option>
+                    <option value="24">24 pack</option>
+                    <option value="30">30 pack</option>
+                  </select>
+                </label>
+              )}
 
-            {drinks[beverage]?.type === "spirit" && (
-              <label className="ml-5 mt-2.5 ">
-                Bottle size:
-                <select
-                  className="ml-2 border border-emerald-500 p-1 rounded"
-                  id={`${beverage}-size`}
-                  onChange={(e) => handleRadioChange(e, beverage)}
-                  value={drinks.beer?.size || 0}
-                >
-                  <option value="">Select</option>
-                  <option value="375">375ml</option>
-                  <option value="750">750ml</option>
-                  <option value="1000">1L</option>
-                  <option value="1750">1.75L</option>
-                </select>
-              </label>
-            )}
+              {beverage === "hardSeltzers" && (
+                <label className="ml-5 mt-1">
+                  Pack size:
+                  <select
+                    className="ml-2 border border-emerald-500 p-1 rounded"
+                    id="hardSeltzers-size"
+                    onChange={(e) => handleRadioChange(e, beverage)}
+                    value={drinks.hardSeltzers?.size || 0}
+                  >
+                    <option value="0">Select</option>
+                    <option value="4">4 pack</option>
+                    <option value="6">6 pack</option>
+                    <option value="8">8 pack</option>
+                    <option value="12">12 pack</option>
+                    <option value="24">24 pack</option>
+                  </select>
+                </label>
+              )}
+
+              {drinks[beverage]?.type === "spirit" && (
+                <div className="flex">
+                  <label className="ml-8 mt-1">
+                    Bottle size:
+                    <select
+                      className="ml-2 border border-emerald-500 p-1 rounded"
+                      id={`${beverage}-size`}
+                      onChange={(e) => handleRadioChange(e, beverage)}
+                      value={drinks[beverage]?.size || 0}
+                    >
+                      <option value="">Select</option>
+                      <option value="375">375ml</option>
+                      <option value="750">750ml</option>
+                      <option value="1000">1L</option>
+                      <option value="1750">1.75L</option>
+                    </select>
+                  </label>
+
+                  <div className="flex ml-8 mt-1 max-h-auto min-w-[8rem]">
+                    <label>
+                      Amount per drink:
+                      <input
+                        id={`${beverage}-amount-per-drink`}
+                        type="number"
+                        step="any"
+                        value={
+                          Number(drinks[beverage]?.amountPerDrink).toString() ||
+                          0
+                        }
+                        onChange={(e) =>
+                          handleAmountPerDrinkChange(e, beverage)
+                        }
+                        className="ml-1 border border-emerald-500 p-1 rounded w-[3rem]"
+                      />{" "}
+                    </label>
+                    <div className="flex flex-col max-h-auto min-w-[2rem] ml-3">
+                      <label>
+                        <input
+                          type="radio"
+                          value="oz"
+                          checked={unit === "oz"}
+                        />
+                        oz
+                      </label>
+                      <label>
+                        <input
+                          type="radio"
+                          value="oz"
+                          checked={unit === "ml"}
+                        />
+                        ml
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
           </fieldset>
         ))}
       </section>
