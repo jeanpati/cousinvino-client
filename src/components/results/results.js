@@ -6,8 +6,8 @@ export const Results = ({ selectedDrinks, drinks, drinksNeeded }) => {
       (drinks?.redWine?.needed * 5 || 0) +
       (drinks?.whiteWine?.needed * 5 || 0) +
       (drinks?.sparklingWine?.needed * 6 || 0) +
-      (drinks?.beer?.needed * drinks.beer.packSize || 0) +
-      (drinks?.hardSeltzers?.needed * drinks.hardSeltzers.packSize || 0)
+      (drinks?.beer?.needed * drinks.beer.size || 0) +
+      (drinks?.hardSeltzers?.needed * drinks.hardSeltzers.size || 0)
     );
   }, [drinks]);
 
@@ -48,7 +48,7 @@ export const Results = ({ selectedDrinks, drinks, drinksNeeded }) => {
                 </tr>
               )}
 
-            {selectedDrinks.beer && drinks.beer?.packSize === 0 ? (
+            {selectedDrinks.beer && drinks.beer?.size === 0 ? (
               <tr className="bg-yellow-100">
                 <td colSpan="3" className="text-center text-yellow-800">
                   Please select a beer pack size
@@ -56,14 +56,13 @@ export const Results = ({ selectedDrinks, drinks, drinksNeeded }) => {
               </tr>
             ) : selectedDrinks.beer && drinks.beer?.needed > 0 ? (
               <tr className="hover:bg-rose-50">
-                <th scope="row">Beer - {drinks.beer.packSize}pk</th>
+                <th scope="row">Beer - {drinks.beer.size}pk</th>
                 <td>{drinks.beer.needed} packs</td>
-                <td>{drinks.beer.needed * drinks.beer.packSize} cans</td>
+                <td>{drinks.beer.needed * drinks.beer.size} cans</td>
               </tr>
             ) : null}
 
-            {selectedDrinks.hardSeltzers &&
-            drinks.hardSeltzers?.packSize === 0 ? (
+            {selectedDrinks.hardSeltzers && drinks.hardSeltzers?.size === 0 ? (
               <tr className="bg-yellow-100">
                 <td colSpan="3" className="text-center text-yellow-800">
                   Please select a hard seltzer pack size
@@ -73,12 +72,11 @@ export const Results = ({ selectedDrinks, drinks, drinksNeeded }) => {
               drinks.hardSeltzers?.needed > 0 ? (
               <tr className="hover:bg-rose-50">
                 <th scope="row">
-                  Hard Seltzers - {drinks.hardSeltzers.packSize}pk
+                  Hard Seltzers - {drinks.hardSeltzers.size}pk
                 </th>
                 <td>{drinks.hardSeltzers.needed} packs</td>
                 <td>
-                  {drinks.hardSeltzers.needed * drinks.hardSeltzers.packSize}{" "}
-                  cans
+                  {drinks.hardSeltzers.needed * drinks.hardSeltzers.size} cans
                 </td>
               </tr>
             ) : null}

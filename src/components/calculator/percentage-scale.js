@@ -52,7 +52,7 @@ export const PercentageScale = ({
         numGuests,
         drinks.beer.average,
         eventHours,
-        drinks.beer.packSize
+        drinks.beer.size
       );
       updateDrink("beer", "needed", beerNeeded);
     }
@@ -62,7 +62,7 @@ export const PercentageScale = ({
         numGuests,
         drinks.hardSeltzers.average,
         eventHours,
-        drinks.hardSeltzers.packSize
+        drinks.hardSeltzers.size
       );
       updateDrink("hardSeltzers", "needed", hardSeltzerNeeded);
     }
@@ -77,10 +77,10 @@ export const PercentageScale = ({
     drinks.sparklingWine.percentage,
     drinks.beer.average,
     drinks.beer.percentage,
-    drinks.beer.packSize,
+    drinks.beer.size,
     drinks.hardSeltzers.percentage,
     drinks.hardSeltzers.average,
-    drinks.hardSeltzers.packSize,
+    drinks.hardSeltzers.size,
   ]);
 
   // initialize percentages equally when checkboxes are clicked
@@ -182,7 +182,7 @@ export const PercentageScale = ({
   };
 
   const handleRadioChange = (e, beverage) => {
-    updateDrink(beverage, "packSize", Number(e.target.value));
+    updateDrink(beverage, "size", Number(e.target.value));
   };
   const handleAverageChange = (e, beverage) => {
     updateDrink(beverage, "average", Number(e.target.value));
@@ -258,9 +258,9 @@ export const PercentageScale = ({
                 Pack size:
                 <select
                   className="ml-2 border border-emerald-500 p-1 rounded"
-                  id="beer-packSize"
+                  id="beer-size"
                   onChange={(e) => handleRadioChange(e, beverage)}
-                  value={drinks.beer?.packSize || 0}
+                  value={drinks.beer?.size || 0}
                 >
                   <option value="">Select</option>
                   <option value="6">6 pack</option>
@@ -277,9 +277,9 @@ export const PercentageScale = ({
                 Pack size:
                 <select
                   className="ml-2 border border-emerald-500 p-1 rounded"
-                  id="hardSeltzers-packSize"
+                  id="hardSeltzers-size"
                   onChange={(e) => handleRadioChange(e, beverage)}
-                  value={drinks.hardSeltzers?.packSize || 0}
+                  value={drinks.hardSeltzers?.size || 0}
                 >
                   <option value="0">Select</option>
                   <option value="4">4 pack</option>
@@ -296,9 +296,9 @@ export const PercentageScale = ({
                 Bottle size:
                 <select
                   className="ml-2 border border-emerald-500 p-1 rounded"
-                  id={`${beverage}-bottleSize`}
+                  id={`${beverage}-size`}
                   onChange={(e) => handleRadioChange(e, beverage)}
-                  value={drinks.beer?.packSize || 0}
+                  value={drinks.beer?.size || 0}
                 >
                   <option value="">Select</option>
                   <option value="375">375ml</option>

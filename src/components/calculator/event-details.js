@@ -50,7 +50,7 @@ export const EventDetails = () => {
       percentage: 0,
       average: 0,
       needed: 0,
-      packSize: 0,
+      size: 0,
       locked: false,
     },
     hardSeltzers: {
@@ -58,7 +58,7 @@ export const EventDetails = () => {
       percentage: 0,
       average: 0,
       needed: 0,
-      bottleSize: 0,
+      size: 0,
       locked: false,
     },
     whiskey: {
@@ -67,7 +67,7 @@ export const EventDetails = () => {
       percentage: 0,
       average: 0,
       needed: 0,
-      bottleSize: 0,
+      size: 0,
       locked: false,
     },
     tequila: {
@@ -76,7 +76,7 @@ export const EventDetails = () => {
       percentage: 0,
       average: 0,
       needed: 0,
-      bottleSize: 0,
+      size: 0,
       locked: false,
     },
     vodka: {
@@ -85,7 +85,7 @@ export const EventDetails = () => {
       percentage: 0,
       average: 0,
       needed: 0,
-      bottleSize: 0,
+      size: 0,
       locked: false,
     },
     gin: {
@@ -94,7 +94,7 @@ export const EventDetails = () => {
       percentage: 0,
       average: 0,
       needed: 0,
-      bottleSize: 0,
+      size: 0,
       locked: false,
     },
     rum: {
@@ -103,7 +103,7 @@ export const EventDetails = () => {
       percentage: 0,
       average: 0,
       needed: 0,
-      bottleSize: 0,
+      size: 0,
       locked: false,
     },
   });
@@ -118,7 +118,7 @@ export const EventDetails = () => {
             ...updatedDrinks[drinkType],
             percentage: 0,
             needed: 0,
-            packSize: 0,
+            size: 0,
             locked: false,
           };
           return updatedDrinks;
