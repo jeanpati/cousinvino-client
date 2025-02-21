@@ -171,7 +171,7 @@ export const EventDetails = () => {
       <div>
         <div
           id="details-selection-wrapper"
-          className="flex flex-col md:flex-row "
+          className="flex flex-col justify-around md:flex-row "
         >
           <div
             id="event-details-wrapper"
