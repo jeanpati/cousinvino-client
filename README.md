@@ -15,6 +15,7 @@ As a wine shop part-timer, one of our responsibilities is helping folks plan eve
 - Metric and imperial unit toggle.
 - Responsive design for mobile and desktop.
 - Organized results detailing how many bottles of each beverage you need and total servings.
+- Last but not least, my handmade drawings!
 
 ## 🚀 Demo
 Try it live: [https://cousinvino.com]
