@@ -348,7 +348,7 @@ export const PercentageScale = ({
                 guests)
               </p>
             </label>
-            <div className="flex min-w-[6rem] justify-center flex-wrap">
+            <div className="flex min-w-[6rem] justify-center flex-wrap self-end">
               <label className="flex items-center ml-1"> Lock</label>
               <input
                 type="checkbox"
