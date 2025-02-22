@@ -1,36 +1,70 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 🍷 Cousin Vino's Drink Calculator
 
-## Getting Started
+Welcome to **Cousin Vino's Drink Calculator**—a handy dandy tool that helps you plan the perfect event by calculating how many drinks you'll need based on guest preferences, event size, and duration.
 
-First, run the development server:
+# 📖 Story Time
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+As a wine shop part-timer, one of our responsibilities is helping folks plan events. At every shop I've worked at, I've always noticed how long it takes and how confusing it can be to figure out how many bottles to buy. I built this tool to help out my team and other stores in my area, so we can focus on the fun stuff, picking out the drinks! Cheers!
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🎯 Features
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+- Calculate how many drinks you need based on number of guests, event duration, drinks per hour.
+- Beverage selection (wine, beer, spirits, etc.).
+- Adjust drink preferences dynamically with percentage sliders and inputs.
+- Takes bottle size and pack size into consideration.
+- Metric and imperial unit toggle.
+- Responsive design for mobile and desktop.
+- Organized results detailing how many bottles of each beverage you need and total servings.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🚀 Demo
+Try it live: [https://cousinvino.com]
 
-## Learn More
+## 🛠️ Tech Stack
 
-To learn more about Next.js, take a look at the following resources:
+- **Framework:** Next.js
+- **Styling:** Tailwind CSS
+- **Hosting** Vercel
+- **Analytics:** Vercel Speed Insights & Analytics
+- **Fonts:** Google Fonts
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 💻 Installation
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+To run this project locally:
 
-## Deploy on Vercel
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/jeanpati/cousinvino-client.git
+   ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+2. **Navigate to the project folder**
+   ```bash
+   cd cousinvino-client
+   ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+3. **Install dependencies**
+   ```bash
+   npm install
+   ```
+
+4. **Run the development server**
+   ```bash
+   npm run dev
+   ```
+
+5. Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+## 📋 Usage
+
+1. Fill out the first form - # of guests, duration, and drinks/hour.
+2. Pick out what you think your guests will like from the beverage list.
+3. Here's where you can plan for both the party people and the red wine crowd. Customize your selections in the beverage details.
+5. Get an accurate estimate of how many drinks to buy for your event!
+
+## 🙏 Acknowledgments
+
+- [Next.js Documentation](https://nextjs.org/docs)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [Google Fonts](https://fonts.google.com/)
+- [Vercel](https://vercel.com/)
+
+Made with ❤️ by Jean Patimeteeporn. Cheers! 🍾
