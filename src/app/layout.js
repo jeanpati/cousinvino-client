@@ -21,7 +21,9 @@ const digital = Zen_Maru_Gothic({
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${cursive.variable}  ${digital.variable}  antialiased`}>
+      <body
+        className={`${cursive.variable}  ${digital.variable} grid place-items-center`}
+      >
         {children}
         <SpeedInsights />
         <Analytics />

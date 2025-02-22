@@ -315,7 +315,10 @@ export const PercentageScale = ({
 
   return (
     <div id="scale-container" className="flex flex-col">
-      <section id="split-view" className="flex flex-col justify-center text-lg">
+      <section
+        id="range-card-wrapper"
+        className="flex flex-col justify-center text-lg"
+      >
         {selectedBeverageKeys.map((beverage, index) => (
           <fieldset
             key={beverage}
@@ -367,7 +370,7 @@ export const PercentageScale = ({
               className="w-full h-[2rem]"
             />
 
-            <div id="below-range" className="flex">
+            <div id="below-range" className="flex flex-col">
               <label>
                 <input
                   id={`${beverage}-average`}
@@ -375,13 +378,13 @@ export const PercentageScale = ({
                   step="any"
                   value={Number(drinks[beverage].average).toString() || 0}
                   onChange={(e) => handleAverageChange(e, beverage)}
-                  className="ml-1 mt-1 border border-emerald-500 p-1 rounded w-[3rem]"
+                  className="ml-1 mt-1 border border-emerald-500 pl-2 rounded w-[2rem]"
                 />{" "}
                 drinks/hour
               </label>
 
               {beverage === "beer" && (
-                <label className="ml-5 mt-1 ">
+                <label className="mt-1 ">
                   Pack size:
                   <select
                     className="ml-2 border border-emerald-500 p-1 rounded"
@@ -400,7 +403,7 @@ export const PercentageScale = ({
               )}
 
               {beverage === "hardSeltzers" && (
-                <label className="ml-5 mt-1">
+                <label className="mt-1">
                   Pack size:
                   <select
                     className="ml-2 border border-emerald-500 p-1 rounded"
@@ -419,11 +422,11 @@ export const PercentageScale = ({
               )}
 
               {drinks[beverage]?.type === "spirit" && (
-                <div className="flex">
-                  <label className="ml-8 mt-1">
+                <div className="flex gap-8">
+                  <label className="flex flex-col mt-1">
                     Bottle size:
                     <select
-                      className="ml-2 border border-emerald-500 p-1 rounded"
+                      className="border border-emerald-500 p-1 rounded max-w-[5rem]"
                       id={`${beverage}-size`}
                       onChange={(e) => handleDropDownChange(e, beverage)}
                       value={drinks[beverage]?.size || 0}
@@ -436,47 +439,53 @@ export const PercentageScale = ({
                     </select>
                   </label>
 
-                  <div className="flex ml-8 mt-1 max-h-auto min-w-[8rem]">
-                    <label>
-                      Amount per drink:
-                      <input
-                        id={`${beverage}-amount-per-drink`}
-                        type="number"
-                        min={0}
-                        step="any"
-                        value={
-                          unit === "oz"
-                            ? formatInput(
-                                drinks[beverage]?.amountPerDrink / 29.57353
-                              ) || ""
-                            : Math.round(drinks[beverage]?.amountPerDrink) || ""
-                        }
-                        onChange={(e) =>
-                          handleAmountPerDrinkChange(e, beverage)
-                        }
-                        className="ml-1 border border-emerald-500 p-1 rounded w-[3rem]"
-                      />{" "}
+                  <div className="flex">
+                    <label className="mt-1">
+                      Amount/drink:
+                      <div className="flex">
+                        <input
+                          id={`${beverage}-amount-per-drink`}
+                          type="number"
+                          min={0}
+                          step="any"
+                          value={
+                            unit === "oz"
+                              ? formatInput(
+                                  drinks[beverage]?.amountPerDrink / 29.57353
+                                ) || ""
+                              : Math.round(drinks[beverage]?.amountPerDrink) ||
+                                ""
+                          }
+                          onChange={(e) =>
+                            handleAmountPerDrinkChange(e, beverage)
+                          }
+                          className="ml-1 border border-emerald-500 pl-2 rounded w-[3rem]"
+                        />{" "}
+                        <div
+                          id="unit-selection"
+                          className="flex gap-2 max-h-auto ml-2"
+                        >
+                          <label className="flex gap-1">
+                            <input
+                              type="radio"
+                              value="oz"
+                              checked={unit === "oz"}
+                              onChange={handleUnitToggle}
+                            />
+                            oz
+                          </label>
+                          <label className="flex gap-1">
+                            <input
+                              type="radio"
+                              value="ml"
+                              checked={unit === "ml"}
+                              onChange={handleUnitToggle}
+                            />
+                            ml
+                          </label>
+                        </div>
+                      </div>
                     </label>
-                    <div className="flex flex-col max-h-auto min-w-[2rem] ml-3">
-                      <label>
-                        <input
-                          type="radio"
-                          value="oz"
-                          checked={unit === "oz"}
-                          onChange={handleUnitToggle}
-                        />
-                        oz
-                      </label>
-                      <label>
-                        <input
-                          type="radio"
-                          value="ml"
-                          checked={unit === "ml"}
-                          onChange={handleUnitToggle}
-                        />
-                        ml
-                      </label>
-                    </div>
                   </div>
                 </div>
               )}
