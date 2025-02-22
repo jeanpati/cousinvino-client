@@ -166,7 +166,7 @@ export const EventDetails = () => {
   return (
     <div
       id="main-wrapper"
-      className="flex flex-col p-10 font-[family-name:var(--zen)] w-full"
+      className="flex flex-col font-[family-name:var(--zen)] min-w-screen h-auto"
     >
       <div>
         <div
@@ -223,11 +223,11 @@ export const EventDetails = () => {
           )}
         </div>
         {drinksNeeded > 0 && (
-          <section id="beverage-details" className="flex flex-col ">
+          <section id="beverage-details" className="flex flex-col ml-2 mr-2">
             {Object.values(selectedDrinks).some((isTrue) => isTrue) && (
               <div
                 id="drink-questions-wrapper"
-                className="flex justify-center flex-col  p-5 mt-1 rounded-2xl content-center min-w-[20rem]"
+                className="flex justify-center flex-col mt-1 rounded-2xl content-center min-w-full"
               >
                 <div className="flex justify-center">
                   <Image
@@ -288,16 +288,16 @@ export const EventDetails = () => {
                 drinks.rum.needed > 0) && (
                 <div
                   id="results-list-wrapper"
-                  className="flex flex-col justify-end w-full p-8"
+                  className="flex flex-col justify-end w-full"
                 >
-                  <span className=" bg-[url(/images/greenline1.webp)] bg-cover h-[3rem] container bg-center pt-[2rem]"></span>
+                  <span className=" bg-[url(/images/greenline1.webp)] bg-cover h-[3rem] container bg-center mt-[2rem]"></span>
                   <h4 className="text-2xl mb-3">Results</h4>
                   <Results
                     drinks={drinks}
                     selectedDrinks={selectedDrinks}
                     drinksNeeded={drinksNeeded}
                   />
-                  <p className="mt-2 text-lg">
+                  <p className="mt-2  text-md md:text-lg">
                     Keep in mind - people drink less as the party goes on
                   </p>
                 </div>
