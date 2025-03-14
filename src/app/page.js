@@ -23,7 +23,7 @@ export default function Home() {
       </Head>
 
       <header className="flex flex-col items-center pt-4">
-        <h1 className="text-4xl/loose font-[family-name:var(--playwrite)]">
+        <h1 className="text-center text-4xl/loose font-[family-name:var(--playwrite)]">
           Cousin Vino&apos;s drink calculator
         </h1>
 
@@ -33,6 +33,7 @@ export default function Home() {
           width={200}
           height={200}
           loading="eager"
+          priority
         />
 
         <h2 className="text-center max-w-[60rem] text-xl md:text-2xl font-[family-name:var(--zen)] mr-2 ml-2">
