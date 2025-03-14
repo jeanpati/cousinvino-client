@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://www.cousinvino.com
+
+# Sitemaps
+Sitemap: https://www.cousinvino.com/sitemap.xml
