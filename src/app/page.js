@@ -8,18 +8,30 @@ export default function Home() {
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title> Cousin Vino&apos;s drink calculator</title>
+        <meta property="og:title" content="Cousin Vino's Drink Calculator" />
+        <meta
+          property="og:description"
+          content="Easily calculate how many drinks to buy for your event with Cousin Vino's drink calculator. Perfect for parties, weddings, and gatherings!"
+        />
+        <meta property="og:image" content="/images/champagne-1920px.webp" />
+        <meta property="og:url" content="https://www.cousinvino.com" />
+        <meta property="og:type" content="website" />
+        <meta
+          name="keywords"
+          content="drink calculator, event drink calculator, how many drinks to buy, party drinks, wedding drink calculator, drink planning, party planning"
+        />
       </Head>
 
       <header className="flex flex-col items-center pt-4">
         <h1 className="text-4xl/loose font-[family-name:var(--playwrite)]">
           Cousin Vino&apos;s
         </h1>
-        <h1 className="text-4xl/loose font-[family-name:var(--playwrite)]">
+        <h2 className="text-4xl/loose font-[family-name:var(--playwrite)]">
           drink calculator
-        </h1>
+        </h2>
         <Image
-          src="/images/champagne.webp"
-          alt="champagne"
+          src="/images/champagne-1920px.webp"
+          alt="champagne bottle logo"
           width={200}
           height={200}
           loading="eager"
@@ -29,7 +41,7 @@ export default function Home() {
           Let&apos;s figure out how many drinks to buy!
         </h2>
       </header>
-      <span className=" bg-[url(/images/purpleline.webp)] bg-cover h-[2rem] md:h-[4rem]  container bg-center"></span>
+      <span className=" bg-[url(/images/purpleline-2500px.webp)] bg-cover h-[2rem] md:h-[4rem]  container bg-center"></span>
       <main>
         <EventDetails />
       </main>

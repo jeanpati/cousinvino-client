@@ -231,18 +231,18 @@ export const EventDetails = () => {
               >
                 <div className="flex justify-center">
                   <Image
-                    src="/images/blueglasses.webp"
+                    src="/images/blueglasses-1920px.webp"
                     alt="wine glasses"
                     width={300}
                     height={300}
-                    loading="eager"
+                    loading="lazy"
                   />
                   <Image
-                    src="/images/martini.webp"
+                    src="/images/martini-1920px.webp"
                     alt="wine glasses"
                     width={100}
                     height={200}
-                    loading="eager"
+                    loading="lazy"
                   />
                 </div>
                 <h4 className="text-2xl mb-3">Beverage Details</h4>
@@ -290,7 +290,7 @@ export const EventDetails = () => {
                   id="results-list-wrapper"
                   className="flex flex-col justify-end w-full"
                 >
-                  <span className=" bg-[url(/images/greenline1.webp)] bg-cover h-[3rem] container bg-center mt-[2rem]"></span>
+                  <span className=" bg-[url(/images/greenline1-2500px.webp)] bg-cover h-[3rem] container bg-center mt-[2rem]"></span>
                   <h4 className="text-2xl mb-3">Results</h4>
                   <Results
                     drinks={drinks}
