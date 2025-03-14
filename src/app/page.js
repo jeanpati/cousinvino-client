@@ -24,11 +24,9 @@ export default function Home() {
 
       <header className="flex flex-col items-center pt-4">
         <h1 className="text-4xl/loose font-[family-name:var(--playwrite)]">
-          Cousin Vino&apos;s
+          Cousin Vino&apos;s drink calculator
         </h1>
-        <h2 className="text-4xl/loose font-[family-name:var(--playwrite)]">
-          drink calculator
-        </h2>
+
         <Image
           src="/images/champagne-1920px.webp"
           alt="champagne bottle logo"
@@ -37,8 +35,10 @@ export default function Home() {
           loading="eager"
         />
 
-        <h2 className="text-xl md:text-2xl font-[family-name:var(--zen)] mr-2 ml-2">
-          Let&apos;s figure out how many drinks to buy!
+        <h2 className="text-center max-w-[60rem] text-xl md:text-2xl font-[family-name:var(--zen)] mr-2 ml-2">
+          Easily calculate how many drinks to buy for your event with Cousin
+          Vino&apos;s drink calculator. Perfect for parties, weddings, and
+          gatherings!
         </h2>
       </header>
       <span className=" bg-[url(/images/purpleline-2500px.webp)] bg-cover h-[2rem] md:h-[4rem]  container bg-center"></span>
