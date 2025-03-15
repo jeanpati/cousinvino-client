@@ -29,6 +29,7 @@ export default function RootLayout({ children }) {
         <meta property="og:title" content="Cousin Vino's Drink Calculator" />
         <meta
           property="og:description"
+          name="description"
           content="Easily calculate how many drinks to buy for your event with Cousin Vino's drink calculator. Perfect for parties, weddings, and gatherings!"
         />
         <meta property="og:image" content="/images/champagne-1920px.webp" />
