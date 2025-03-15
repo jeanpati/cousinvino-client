@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { EventForm } from "./event-form";
 import { DrinkSelections } from "./drink-selection";
 import { Results } from "../results/results";
@@ -150,8 +150,9 @@ export const EventDetails = () => {
     }
   }, [avgNumDrinks]);
 
-  const drinksNeeded =
-    (numGuests || 0) * (avgNumDrinks || 0) * (eventHours || 0);
+  const drinksNeeded = useMemo(() => {
+    return (numGuests || 0) * (avgNumDrinks || 0) * (eventHours || 0);
+  }, [numGuests, avgNumDrinks, eventHours]);
 
   const updateDrink = (drinkType, key, value) => {
     setDrinks((prevDrinks) => ({
