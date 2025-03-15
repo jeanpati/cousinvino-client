@@ -12,7 +12,7 @@ export default function Home() {
           src="/images/champagne-1920px.webp"
           alt="champagne bottle logo"
           width={200}
-          height={200}
+          height={150}
           loading="eager"
           priority
         />

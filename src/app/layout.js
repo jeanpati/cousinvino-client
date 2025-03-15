@@ -1,6 +1,6 @@
 import "./globals.css";
-import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Playwrite_FR_Trad, Zen_Maru_Gothic } from "next/font/google";
 
 const cursive = Playwrite_FR_Trad({
@@ -40,15 +40,15 @@ export default function RootLayout({ children }) {
           content="drink calculator, event drink calculator, how many drinks to buy, party drinks, wedding drink calculator, drink planning, party planning"
         />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link rel="preconnect" href="https://fonts.gstatic.com" />
       </head>
 
       <body
         className={`${cursive.variable}  ${digital.variable} grid place-items-center`}
       >
         {children}
-        <SpeedInsights />
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
