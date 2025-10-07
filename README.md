@@ -68,4 +68,4 @@ To run this project locally:
 - [Google Fonts](https://fonts.google.com/)
 - [Vercel](https://vercel.com/)
 
-Made with ❤️ by Jean Patimeteeporn. Cheers! 🍾
+Cheers! 🍾
